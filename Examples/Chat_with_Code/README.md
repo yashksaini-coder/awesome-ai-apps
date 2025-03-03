@@ -5,7 +5,7 @@
 **Navigate to the Project Directory:**
 Change to the directory where the `setup.sh`, `main.py`, `requirements.txt`, and `README.md` files are located. For example:
 ```sh
-cd path/to/project/directory
+cd Examples/Chat_with_Code
 ```
 
 ### 1. Run the Setup File

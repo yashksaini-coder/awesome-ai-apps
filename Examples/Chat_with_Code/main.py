@@ -5,6 +5,10 @@ from llama_index.embeddings.nebius import NebiusEmbedding
 from llama_index.llms.nebius import NebiusLLM
 from llama_index.readers.github import GithubRepositoryReader, GithubClient
 import re
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 def parse_github_url(url):
     pattern = r"https?://github\.com/([^/]+)/([^/]+)(?:/tree/([^/]+))?"
