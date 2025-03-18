@@ -67,6 +67,17 @@ def run_rag_completion(query_text: str, docs) -> str:
 
 def main():
     st.set_page_config(page_title="Chat with Code", layout="wide")
+
+    @st.fragment
+    def download_response(response:str) :
+        st.download_button(
+                label="Download message",
+                type="secondary",
+                data=response,
+                file_name="chatbot_response.md",
+                mime="text/plain",
+                icon=":material/download:",
+            )
     
     # Initialize session states
     if "messages" not in st.session_state:
@@ -139,8 +150,10 @@ def main():
                     response = run_rag_completion(prompt, st.session_state.docs)
                     st.markdown(response)
                     st.session_state.messages.append({"role": "assistant", "content": response})
+                    download_response(response)
                 except Exception as e:
                     st.error(f"Error: {str(e)}")
 
 if __name__ == "__main__":
     main()
+
