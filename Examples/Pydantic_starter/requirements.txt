@@ -1,0 +1,3 @@
+pydantic_ai 
+pydantic-ai-slim[duckduckgo]
+python-dotenv

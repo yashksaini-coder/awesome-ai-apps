@@ -1,0 +1,5 @@
+openai
+agno
+python-dotenv
+requests
+pytz
