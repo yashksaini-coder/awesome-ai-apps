@@ -20,8 +20,13 @@ from agents import (
 #     raise ValueError("NEBIUS_API_KEY is not set in the environment variables")
 
 # Load environment variables
+# Load environment variables
 resend.api_key = os.getenv("RESEND_API_KEY")
 api_key = os.getenv("NEBIUS_API_KEY")
+if not resend.api_key:
+    raise ValueError("RESEND_API_KEY is not set in the environment variables")
+if not api_key:
+    raise ValueError("NEBIUS_API_KEY is not set in the environment variables")
 base_url = os.getenv("EXAMPLE_BASE_URL", "https://api.studio.nebius.ai/v1")
 model_name = os.getenv("EXAMPLE_MODEL_NAME", "meta-llama/Meta-Llama-3.1-8B-Instruct")
 
