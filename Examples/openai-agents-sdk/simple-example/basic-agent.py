@@ -21,7 +21,11 @@ model = OpenAIChatCompletionsModel(
 
 agent = Agent(
     name="Assistant",
-    instruction="You're a Expert Doctor",
+agent = Agent(
+    name="Assistant",
+    instruction="You're an Expert Doctor specializing in nutrition and preventive care. Provide evidence-based medical advice and always include disclaimers when appropriate.",
+    model=model
+)
     model=model
 )
 
