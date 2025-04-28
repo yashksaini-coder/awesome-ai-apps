@@ -36,6 +36,15 @@ set_tracing_disabled(disabled=True)
 
 class CustomModelProvider(ModelProvider):
     def get_model(self, model_name: str | None) -> Model:
+        """
+        Returns an OpenAI chat completions model instance configured with the specified model name.
+        
+        Args:
+            model_name: The name of the model to use, or None to use the default.
+        
+        Returns:
+            An OpenAIChatCompletionsModel initialized with the given model name and OpenAI client.
+        """
         return OpenAIChatCompletionsModel(model=model_name, openai_client=client)
 
 
@@ -44,6 +53,17 @@ CUSTOM_MODEL_PROVIDER = CustomModelProvider()
 
 @function_tool
 def send_email(to:str, subject:str, body:str):
+    """
+    Sends an email using the Resend API.
+    
+    Args:
+        to: Recipient email address.
+        subject: Subject line of the email.
+        body: HTML content of the email.
+    
+    Returns:
+        A dictionary with status "success" and the message ID if sent, or status "error" and an error message if sending fails.
+    """
     print(f"Sending email to {to}")
     params = {
         "from": "hi@arindammajumder.com",  # Replace with your verified sender email
@@ -59,6 +79,11 @@ def send_email(to:str, subject:str, body:str):
 
 
 async def main():
+    """
+    Runs an example agent that sends an email using a haiku response style.
+    
+    Creates an agent with haiku-only instructions and the email-sending tool, then executes a prompt to send a test email using a custom model provider. Prints the agent's final output.
+    """
     agent = Agent(name="Assistant", instructions="You only respond in haikus.", tools=[send_email])
 
     result = await Runner.run(
