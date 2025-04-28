@@ -10,9 +10,13 @@ api_key = os.getenv("NEBIUS_API_KEY")
 if not api_key:
     raise ValueError("NEBIUS_API_KEY is not set in the environment variables")
 
+# Get model name and base URL from environment variables with defaults
+model_name = os.getenv("EXAMPLE_MODEL_NAME", "openai/meta-llama/Meta-Llama-3.1-8B-Instruct")
+base_url = os.getenv("EXAMPLE_BASE_URL", "https://api.studio.nebius.ai/v1")
+
 model = OpenAIChatCompletionsModel(
-    model= "openai/meta-llama/Meta-Llama-3.1-8B-Instruct",
-    openai_client=AsyncOpenAI(base_url="https://api.studio.nebius.ai/v1", api_key=api_key)
+    model=model_name,
+    openai_client=AsyncOpenAI(base_url=base_url, api_key=api_key)
 )
 
 agent = Agent(
