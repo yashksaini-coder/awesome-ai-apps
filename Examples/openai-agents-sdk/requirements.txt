@@ -1,0 +1,5 @@
+openai-agents
+pydantic
+asyncio
+resend
+python-dotenv
