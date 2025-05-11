@@ -9,6 +9,7 @@ import shutil
 import base64
 from PyPDF2 import PdfReader
 import io
+import re
 
 # Load environment variables
 load_dotenv()
@@ -55,6 +56,28 @@ def display_pdf_preview(pdf_file):
     except Exception as e:
         st.sidebar.error(f"Error previewing PDF: {str(e)}")
         return False
+
+def format_reasoning_response(thinking_content):
+    """Format assistant content by removing think tags."""
+    return (
+        thinking_content.replace("<think>\n\n</think>", "")
+        .replace("<think>", "")
+        .replace("</think>", "")
+    )
+
+def display_assistant_message(content):
+    """Display assistant message with thinking content if present."""
+    pattern = r"<think>(.*?)</think>"
+    think_match = re.search(pattern, content, re.DOTALL)
+    if think_match:
+        think_content = think_match.group(0)
+        response_content = content.replace(think_content, "")
+        think_content = format_reasoning_response(think_content)
+        with st.expander("Thinking complete!"):
+            st.markdown(think_content)
+        st.markdown(response_content)
+    else:
+        st.markdown(content)
 
 def main():
     st.set_page_config(page_title="Nebius RAG Chat", layout="wide")
@@ -156,7 +179,10 @@ def main():
     # Display chat messages
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+            if message["role"] == "assistant":
+                display_assistant_message(message["content"])
+            else:
+                st.markdown(message["content"])
     
     # Chat input
     if prompt := st.chat_input("Ask about your PDF..."):
@@ -179,8 +205,8 @@ def main():
                         "BAAI/bge-en-icl",  # Fixed embedding model
                         generative_model
                     )
-                    st.markdown(response)
                     st.session_state.messages.append({"role": "assistant", "content": response})
+                    display_assistant_message(response)
                 except Exception as e:
                     st.error(f"Error: {str(e)}")
 
