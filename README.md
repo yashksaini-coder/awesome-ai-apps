@@ -1,15 +1,54 @@
-# Nebius AI CookBook
+# Awesome LLM Apps
 
-This repository contains a collection of practical examples, tutorials, and recipes showcasing how to use **Nebius AI** for various AI-driven tasks. Whether you're a beginner or an advanced user, you'll find useful code snippets and projects to help you leverage the power of **Nebius AI models** effectively.
+A comprehensive collection of practical examples, tutorials, and recipes showcasing how to build powerful LLM-powered applications using various frameworks and tools. 
 
-## 📌 What You'll Find Here
-- **Retrieval-Augmented Generation (RAG)**: Build AI-powered search engines with Nebius AI.
-- **Text Generation**: Create AI-driven text-based applications using different generative models.
-- **Document Embeddings**: Learn how to embed and store documents for efficient retrieval.
-- **Chatbots & Assistants**: Build AI-powered assistants that can handle various user queries.
+From simple chatbots to complex AI systems, this repository serves as your guide to building the next generation of AI applications.
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Git
+- pip (Python package manager)
+
+### Installation Steps
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/Arindam200/awesome-llm-apps.git
+   ```
+
+2. **Navigate to the desired project directory**
+
+   ```bash
+   cd awesome-llm-apps/starter_ai_agents/agno_starter
+   ```
+
+3. **Install the required dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Follow project-specific instructions**
+   - Each project has its own README.md with detailed setup and usage instructions
+   - Make sure to read the project-specific documentation before running the application
 
 ## 🤝 Contributing
-We welcome contributions! If you have an interesting **Nebius AI** recipe, feel free to submit a PR. Let's make this **CookBook** a go-to resource for AI practitioners!
+
+We welcome contributions from the community! Whether you're a beginner or an expert, your examples and tutorials can help others learn and grow. Here's how you can contribute:
+
+1. Submit a Pull Request with your LLM application example
+2. Add detailed documentation and setup instructions
+3. Include requirements.txt or environment.yml
+4. Share your experience and best practices
 
 ## 📜 License
-This repository is licensed under the **MIT License**. Feel free to use and modify the examples.
+
+This repository is licensed under the **MIT License**. Feel free to use and modify the examples for your projects.
+
+## 🌟 Star the Repository
+
+If you find this repository helpful, please give it a star! It helps others discover this resource and encourages more contributions.
