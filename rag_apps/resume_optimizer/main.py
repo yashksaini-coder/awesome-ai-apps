@@ -22,66 +22,69 @@ def run_rag_completion(
     generative_model: str = "Qwen/Qwen3-235B-A22B"
 ) -> str:
     """Run RAG completion using Nebius models for resume optimization."""
-    llm = NebiusLLM(
-        model=generative_model,
-        api_key=os.getenv("NEBIUS_API_KEY")
-    )
+    try:
+        llm = NebiusLLM(
+            model=generative_model,
+            api_key=os.getenv("NEBIUS_API_KEY")
+        )
 
-    embed_model = NebiusEmbedding(
-        model_name=embedding_model,
-        api_key=os.getenv("NEBIUS_API_KEY")
-    )
-    
-    Settings.llm = llm
-    Settings.embed_model = embed_model
-    
-    # Step 1: Analyze the resume
-    analysis_prompt = f"""
-    Analyze this resume in detail. Focus on:
-    1. Key skills and expertise
-    2. Professional experience and achievements
-    3. Education and certifications
-    4. Notable projects or accomplishments
-    5. Career progression and gaps
-    
-    Provide a concise analysis in bullet points.
-    """
-    
-    index = VectorStoreIndex.from_documents(documents)
-    resume_analysis = index.as_query_engine(similarity_top_k=5).query(analysis_prompt)
-    
-    # Step 2: Generate optimization suggestions
-    optimization_prompt = f"""
-    Based on the resume analysis and job requirements, provide specific, actionable improvements.
-    
-    Resume Analysis:
-    {resume_analysis}
-    
-    Job Title: {job_title}
-    Job Description: {job_description}
-    
-    Optimization Request: {query_text}
-    
-    Provide a direct, structured response in this exact format:
+        embed_model = NebiusEmbedding(
+            model_name=embedding_model,
+            api_key=os.getenv("NEBIUS_API_KEY")
+        )
+        
+        Settings.llm = llm
+        Settings.embed_model = embed_model
+        
+        # Step 1: Analyze the resume
+        analysis_prompt = f"""
+        Analyze this resume in detail. Focus on:
+        1. Key skills and expertise
+        2. Professional experience and achievements
+        3. Education and certifications
+        4. Notable projects or accomplishments
+        5. Career progression and gaps
+        
+        Provide a concise analysis in bullet points.
+        """
+        
+        index = VectorStoreIndex.from_documents(documents)
+        resume_analysis = index.as_query_engine(similarity_top_k=5).query(analysis_prompt)
+        
+        # Step 2: Generate optimization suggestions
+        optimization_prompt = f"""
+        Based on the resume analysis and job requirements, provide specific, actionable improvements.
+        
+        Resume Analysis:
+        {resume_analysis}
+        
+        Job Title: {job_title}
+        Job Description: {job_description}
+        
+        Optimization Request: {query_text}
+        
+        Provide a direct, structured response in this exact format:
 
-    ## Key Findings
-    • [2-3 bullet points highlighting main alignment and gaps]
+        ## Key Findings
+        • [2-3 bullet points highlighting main alignment and gaps]
 
-    ## Specific Improvements
-    • [3-5 bullet points with concrete suggestions]
-    • Each bullet should start with a strong action verb
-    • Include specific examples where possible
+        ## Specific Improvements
+        • [3-5 bullet points with concrete suggestions]
+        • Each bullet should start with a strong action verb
+        • Include specific examples where possible
 
-    ## Action Items
-    • [2-3 specific, immediate steps to take]
-    • Each item should be clear and implementable
+        ## Action Items
+        • [2-3 specific, immediate steps to take]
+        • Each item should be clear and implementable
 
-    Keep all points concise and actionable. Do not include any thinking process or analysis.
-    """
-    
-    optimization_suggestions = index.as_query_engine(similarity_top_k=5).query(optimization_prompt)
-    
-    return str(optimization_suggestions)
+        Keep all points concise and actionable. Do not include any thinking process or analysis.
+        """
+        
+        optimization_suggestions = index.as_query_engine(similarity_top_k=5).query(optimization_prompt)
+        
+        return str(optimization_suggestions)
+    except Exception as e:
+        raise
 
 def display_pdf_preview(pdf_file):
     """Display PDF preview in the sidebar."""
@@ -212,6 +215,8 @@ def main():
                         "BAAI/bge-en-icl",
                         generative_model
                     )
+                    # Remove think tags from response
+                    response = response.replace("<think>", "").replace("</think>", "")
                     st.session_state.messages.append({"role": "assistant", "content": response})
                 except Exception as e:
                     st.error(f"Error: {str(e)}")
@@ -221,8 +226,7 @@ def main():
     with col2:
         st.subheader("Optimization Results")
         for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
+            st.markdown(message["content"])
 
 if __name__ == "__main__":
     main()

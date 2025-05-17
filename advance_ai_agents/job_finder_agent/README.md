@@ -40,8 +40,8 @@ pip install -r requirements.txt
 Create a `.env` file in the project root with the following variables:
 
 ```
-BRIGHT_DATA_API_KEY=your_bright_data_api_key
-NEMIUS_API_KEY=your_nemius_api_key
+NEBIUS_API_KEY="Your Nebius API Key"
+BRIGHT_DATA_API_KEY="Your Bright Data API Key"
 ```
 
 ## Usage
