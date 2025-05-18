@@ -2,7 +2,7 @@
 
 ![Banner](/assets/banner.png)
 
-A comprehensive collection of practical examples, tutorials, and recipes showcasing how to build powerful LLM-powered applications using various frameworks and tools. 
+A comprehensive collection of practical examples, tutorials, and recipes showcasing how to build powerful LLM-powered applications using various frameworks and tools.
 
 From simple chatbots to complex AI systems, this repository serves as your guide to building the next generation of AI applications.
 
