@@ -84,7 +84,10 @@ query = st.text_area("Your Query", value=query_template,
 async def run_github_agent(message):
     if not os.getenv("GITHUB_PERSONAL_ACCESS_TOKEN"):
         return "Error: GitHub token not provided"
+    if not api_key:
+        return "Error: Nebius API key not provided"
     
+    # …rest of your implementation…
     try:
         server_params = StdioServerParameters(
             command="docker",
