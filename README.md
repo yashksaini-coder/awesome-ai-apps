@@ -50,7 +50,3 @@ We welcome contributions from the community! Whether you're a beginner or an exp
 ## 📜 License
 
 This repository is licensed under the **MIT License**. Feel free to use and modify the examples for your projects.
-
-## 🌟 Star the Repository
-
-If you find this repository helpful, please give it a star! It helps others discover this resource and encourages more contributions.
