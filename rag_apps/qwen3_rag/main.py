@@ -96,9 +96,9 @@ def main():
     col1, col2 = st.columns([4, 1])
     with col1:
         # Convert images to base64
-        with open("./Qwen.png", "rb") as qwen_file:
+        with open("./assets/Qwen.png", "rb") as qwen_file:
             qwen_base64 = base64.b64encode(qwen_file.read()).decode()
-        with open("./LlamaIndex.png", "rb") as llama_file:
+        with open("./assets/LlamaIndex.png", "rb") as llama_file:
             llama_base64 = base64.b64encode(llama_file.read()).decode()
         
         # Create title with embedded images
@@ -126,7 +126,7 @@ def main():
     
     # Sidebar for configuration
     with st.sidebar:
-        st.image("./Nebius.png", width=150)
+        st.image("./assets/Nebius.png", width=150)
         
         # Model selection
         generative_model = st.selectbox(
