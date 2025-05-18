@@ -15,12 +15,13 @@ load_dotenv()
 # Page config
 st.set_page_config(page_title="GitHub MCP Agent", page_icon="🦑", layout="wide")
 
-with open("./assets/agno.png", "rb") as agno_file:
-        agno_base64 = base64.b64encode(agno_file.read()).decode()     
-
-# Title and description
-with open("./assets/agno.png", "rb") as agno_file:
-    agno_base64 = base64.b64encode(agno_file.read()).decode()     
+# Load logo and prepare title
+try:
+    with open("./assets/agno.png", "rb") as agno_file:
+        agno_base64 = base64.b64encode(agno_file.read()).decode()
+except FileNotFoundError:
+    st.error("Logo file not found. Please check that ./assets/agno.png exists.")
+    agno_base64 = ""
 
 # Title and description
 title_html = f"""
