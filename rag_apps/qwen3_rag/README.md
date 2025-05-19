@@ -18,14 +18,14 @@ A powerful RAG (Retrieval-Augmented Generation) chat application built with Stre
 
 - Python 3.10
 - [Nebius AI Studio](https://studio.nebius.com/) Account
--  Nebius AI [API Keys](https://studio.nebius.com/?modals=create-api-key)
+- Nebius AI [API Keys](https://studio.nebius.com/?modals=create-api-key)
 
 ## Installation
 
 1. Clone the repository
 
 ```bash
-git clone https://github.com/Arindam200/awesome-llm-apps.git
+git clone https://github.com/Arindam200/awesome-ai-apps.git
 cd rag_apps/qwen3_rag
 ```
 

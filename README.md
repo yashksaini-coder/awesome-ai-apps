@@ -1,4 +1,4 @@
-# Awesome LLM Apps
+# Awesome AI Apps
 
 ![Banner](/assets/banner.png)
 
@@ -19,7 +19,7 @@ From simple chatbots to complex AI systems, this repository serves as your guide
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/Arindam200/awesome-llm-apps.git
+   git clone https://github.com/Arindam200/awesome-ai-apps.git
    ```
 
 2. **Navigate to the desired project directory**

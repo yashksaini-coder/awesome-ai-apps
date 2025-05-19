@@ -17,7 +17,7 @@ Before running this project, make sure you have the following:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Arindam200/awesome-llm-apps.git
+git clone https://github.com/Arindam200/awesome-ai-apps.git
 cd advance_ai_agents/job_finder_agent
 ```
 
@@ -33,7 +33,6 @@ source venv/bin/activate  # On Windows, use: venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
-
 
 ## Environment Variables
 

@@ -31,7 +31,7 @@ A powerful AI-powered resume optimization tool that helps job seekers enhance th
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Arindam200/awesome-llm-apps.git
+git clone https://github.com/Arindam200/awesome-ai-apps.git
 cd rag_apps/resume_optimizer
 ```
 

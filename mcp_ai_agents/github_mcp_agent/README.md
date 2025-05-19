@@ -30,7 +30,7 @@ A powerful GitHub repository exploration tool powered by the Model Context Proto
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Arindam200/awesome-llm-apps.git
+git clone https://github.com/Arindam200/awesome-ai-apps.git
 cd mcp_ai_agents/github_mcp_agent
 ```
 
@@ -70,7 +70,7 @@ streamlit run main.py
    - Enter your query or use the predefined templates
    - Click "Run Query"
 
- > Note: if you get errors on pull, you may have an expired token and need to `docker logout ghcr.io`   
+> Note: if you get errors on pull, you may have an expired token and need to `docker logout ghcr.io`
 
 ## Query Types
 

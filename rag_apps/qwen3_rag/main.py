@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 import tempfile
 import shutil
 import base64
-from PyPDF2 import PdfReader
 import io
 import re
 
