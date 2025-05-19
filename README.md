@@ -25,7 +25,7 @@ From simple chatbots to complex AI systems, this repository serves as your guide
 2. **Navigate to the desired project directory**
 
    ```bash
-   cd awesome-llm-apps/starter_ai_agents/agno_starter
+   cd awesome-ai-apps/starter_ai_agents/agno_starter
    ```
 
 3. **Install the required dependencies**
