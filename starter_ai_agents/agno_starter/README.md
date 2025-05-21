@@ -1,124 +1,74 @@
-<div align="center" id="top">
-  <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-    <a href="https://docs.agno.com">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://agno-public.s3.us-east-1.amazonaws.com/assets/logo-dark.svg">
-        <source media="(prefers-color-scheme: light)" srcset="https://agno-public.s3.us-east-1.amazonaws.com/assets/logo-light.svg">
-        <img src="https://agno-public.s3.us-east-1.amazonaws.com/assets/logo-light.svg" alt="Agno" height=40>
-      </picture>
-    </a>
-    <span style="font-size: 24px; font-weight: bold;">X</span>
-    <a href="https://dub.sh/nebius">
-      <picture>
-        <img src="./Nebius.png" alt="Nebius" height=24>
-      </picture>
-    </a>
-  </div>
-</div>
+![Banner](./banner.png)
 
-# Calendar Assistant with Agno
+# HackerNews Analysis Agent
 
-A powerful calendar management assistant built using Agno framework that helps users schedule, manage, and organize their appointments using Cal.com integration.
+A powerful AI agent built with Agno that analyzes and provides insights about HackerNews content. This agent uses the Nebius AI model to deliver intelligent analysis of tech news, trends, and discussions.
 
 ## Features
 
-- Find available time slots
-- Create new bookings
-- Manage existing bookings
-- Reschedule appointments
-- Cancel bookings
-- Automatic timezone handling
+- 🔍 **Intelligent Analysis**: Deep analysis of HackerNews content, including trending topics, user engagement, and tech trends
+- 💡 **Contextual Insights**: Provides meaningful context and connections between stories
+- 📊 **Engagement Analysis**: Tracks user engagement patterns and identifies interesting discussions
+- 🤖 **Interactive Interface**: Easy-to-use command-line interface for natural conversations
+- ⚡ **Real-time Updates**: Get the latest tech news and trends as they happen
 
 ## Prerequisites
 
-- Python 3.x
-- [Cal.com](https://cal.com/) account with API access
-- [Nebius](https://dub.sh/nebius) API key
+- Python 3.10 or higher
+- Nebius API key (get it from [Nebius AI Studio](https://studio.nebius.ai/))
 
 ## Installation
 
-1. Clone the repository
+1. Clone the repository:
 
 ```bash
-  git clone https://github.com/Arindam200/awesome-ai-apps.git
-
-  cd awesome-ai-apps/starter_ai_agents/agno_starter
+git clone https://github.com/Arindam200/awesome-ai-apps.git
+cd starter_ai_agents/agno_starter
 ```
 
-2. Install the required dependencies:
+2. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Environment Setup
+3. Create a `.env` file in the project root and add your Nebius API key:
 
-Create a `.env` file in the project root with the following variables:
-
-```env
-CALCOM_API_KEY="your_calcom_api_key"
-CALCOM_EVENT_TYPE_ID="your_event_type_id"
-NEBIUS_API_KEY="your_nebius_api_key"
 ```
-
-You can obtain these credentials from:
-
-- Cal.com API key: cal.com/settings/developer/api-keys
-- Event Type ID: Your Cal.com event type ID
-- Nebius API key: Your Nebius API credentials
+NEBIUS_API_KEY=your_api_key_here
+```
 
 ## Usage
 
-The calendar assistant can help you with various scheduling tasks:
+Run the agent:
 
-1. **Check Available Slots**
-
-   - Query available time slots between specific dates
-   - Format: YYYY-MM-DD
-
-2. **Create Bookings**
-
-   - Book appointments with specific details
-   - Required information:
-     - Start time (YYYY-MM-DDTHH:MM:SS+TZ format)
-     - Name
-     - Email
-
-3. **Manage Bookings**
-   - View upcoming bookings
-   - Reschedule existing bookings
-   - Cancel bookings
-
-## Example
-
-```python
-# Check available slots
-agent.print_response("""
-Please check available slots between 2024-03-20 and 2024-03-21
-""")
-
-# Book a call
-agent.print_response("""
-Please book a call with these details:
-- Start Time: 2024-03-22T21:30:00+05:30
-- Name: John Doe
-- Email: john@example.com
-""")
+```bash
+python main.py
 ```
 
-## Timezone Support
+The agent will start with a welcome message and show available capabilities. You can interact with it by typing your questions or commands.
 
-The assistant automatically handles timezone conversions. The default timezone is set to "Asia/Kolkata" but can be modified in the code.
+### Example Queries
 
-## Error Handling
+- "What are the most discussed topics on HackerNews today?"
+- "Analyze the engagement patterns in the top stories"
+- "What tech trends are emerging from recent discussions?"
+- "Compare the top stories from this week with last week"
+- "Show me the most controversial stories of the day"
 
-The application includes error handling for:
+## Technical Details
 
-- Missing API keys
-- Invalid date formats
-- Booking conflicts
-- API connection issues
+The agent is built using:
+
+- Agno framework for AI agent development
+- Nebius AI's Qwen/Qwen3-30B-A3B model
+- HackerNews Tool from Agno
 
 ## Contributing
 
-Feel free to submit issues and enhancement requests!
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Acknowledgments
+
+- [Agno Framework](https://www.agno.com/)
+- [Nebius AI](https://studio.nebius.ai/)
