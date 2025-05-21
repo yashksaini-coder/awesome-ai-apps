@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import os
 from agno.agent import Agent
 from agno.models.openai.like import OpenAILike
+from agno.models.nebius import Nebius
 from agno.tools.calcom import CalComTools
 from dotenv import load_dotenv
 
@@ -59,18 +60,16 @@ except Exception as e:
     print(f"Error initializing CalCom tools: {e}")
     exit(1)
 
-# Create the model
-model = OpenAILike(
-    id="meta-llama/Meta-Llama-3.1-70B-Instruct",
-    api_key=os.environ["NEBIUS_API_KEY"],
-    base_url='https://api.studio.nebius.ai/v1',
-)
+
 
 # Create the agent
 agent = Agent(
     name="Calendar Assistant",
     instructions=[INSTRUCTIONS],
-    model=model,
+    model=Nebius(
+        id="Qwen/Qwen3-30B-A3B",
+        api_key=os.getenv("NEBIUS_API_KEY") # Explicitly pass the API key
+    ),
     tools=[calcom_tools],
     show_tool_calls=True,
     tool_choice="auto",
@@ -102,37 +101,3 @@ def book_example_call():
 
 if __name__ == "__main__":
     book_example_call()
-
-
-
-
-
-
-
-
-
-
-# ------- x ------
-
-# import os
-# from agno.agent import Agent, RunResponse
-
-# from dotenv import load_dotenv
-# # from newsapi import NewsApiClient
-# import requests
-
-# # Load environment variables
-# load_dotenv()
-
-# # newsapi = NewsApiClient(api_key=os.environ['NEWSAPI_KEY'])
-
-# agent = Agent(
-#     model=OpenAILike(
-#         id="google/gemma-2-9b-it",
-#         api_key=os.environ["NEBIUS_API_KEY"],
-#         base_url='https://api.studio.nebius.ai/v1',
-#     )
-# )
-
-# #Print the response in the terminal
-# agent.print_response("What is the capital of India")
