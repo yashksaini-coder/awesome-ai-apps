@@ -1,4 +1,3 @@
-
 from crewai import Agent, Task,LLM
 import os
 from dotenv import load_dotenv
@@ -11,7 +10,6 @@ default_llm=LLM(
         base_url="https://api.studio.nebius.com/v1/",
         api_key=os.getenv("NEBIUS_API_KEY")
 ),
-
 
 # Create a researcher agent
 researcher = Agent(
@@ -33,7 +31,6 @@ research_task = Task(
   expected_output='5 paragraphs on the next big AI trend',
   agent=researcher  # Assigning the task to the researcher
 )
-
 
 # Instantiate your crew
 tech_crew = Crew(
