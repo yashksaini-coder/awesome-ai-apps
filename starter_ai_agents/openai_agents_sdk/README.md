@@ -1,4 +1,6 @@
-# OpenAI Agents SDK Example
+
+![banner](./banner.png)
+# OpenAI Agents SDK Starter Agent
 
 A simple demonstration of using OpenAI's Agents SDK with Nebius Studio's API to create an AI assistant that can send emails.
 
@@ -58,6 +60,4 @@ Modify the `main.py` file to:
 - Alter the example query
 - Configure different LLM models
 
-## License
 
-MIT
