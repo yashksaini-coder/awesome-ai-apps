@@ -61,13 +61,23 @@ def get_vector_store(text_chunks, model_name, api_key=None):
 def get_conversational_chain(model_name, vectorstore=None, api_key=None):
     if model_name == "Google AI":
         prompt_template ="""
-        Answer the question as detailed as possible from the provided context , make sure to provide all the relevant information with proper structure if the answer is not available in the provided context just reply that the answer is not available in the context, do not provide wrong answer as you will be primarily reading annual reports of companies listed in Indian stock market do perform financial analysis based on the financial statement provided in the annual report evaluated related party transaction and any financial wrong doings and look at the increas ein the renumeration of the key management personals
+        Answer the question as detailed as possible from the provided context. Make sure to:
+        
+        1. Provide all relevant information with proper structure
+        2. If the answer is not available in the provided context, clearly state that
+        3. Do not provide incorrect information
+        
+        You are primarily analyzing annual reports of companies listed in the Indian stock market. Please:
+        - Perform financial analysis based on the financial statements
+        - Evaluate related party transactions
+        - Identify any potential financial improprieties
+        - Analyze increases in the remuneration of key management personnel
 
         Context:\n {context}?\n
         Question:\n {question}?\n
 
         Answer:
-    """  
+    """
         model = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3, google_api_key=api_key)
         prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
         chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
