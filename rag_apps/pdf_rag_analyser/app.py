@@ -36,8 +36,16 @@ def get_text_chunks(text, model_name):
     return chunks
 
 def get_vector_store(text_chunks, model_name, api_key=None):
+    # Initialize embeddings
+    embeddings = None
+
     if model_name == "Google AI":
         embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key)
+    # Add conditions for other models here
+
+    if embeddings is None:
+        raise ValueError(f"Model '{model_name}' is not supported")
+
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local("faiss_index")
     return vector_store
