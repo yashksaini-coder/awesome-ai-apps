@@ -256,7 +256,15 @@ def main():
         if st.button("Submit & Process"):
             if pdf_docs:
                 with st.spinner("Processing..."):
-                    st.success("Done")
+                    try:
+                        # Validate that PDFs can be processed
+                        test_text = get_pdf_text(pdf_docs[:1])  # Test with first PDF
+                        if not test_text.strip():
+                            st.warning("PDF appears to be empty or contains no extractable text")
+                        else:
+                            st.success("Done")
+                    except Exception as e:
+                        st.error(f"Error processing PDFs: {str(e)}")
             else:
                 st.warning("Please upload PDF files before processing.")
 
