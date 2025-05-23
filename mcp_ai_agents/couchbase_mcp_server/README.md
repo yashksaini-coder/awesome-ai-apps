@@ -103,6 +103,8 @@ This project leverages MCP to allow an AI agent to query and understand data wit
     COUCHBASE_BUCKET_NAME=your_bucket_name # e.g., travel-sample if that's what inventory scope is in
     COUCHBASE_USERNAME=your_couchbase_username
     COUCHBASE_PASSWORD=your_couchbase_password
+    NEBIUS_API_KEY=your_nebius_api_key
+    OPENAI_API_KEY=your_openai_api_key
     # Add any other variables required by mcp-server-couchbase
     ```
 *   The `agents` library and its dependencies must be installed in the Python environment used by the Jupyter notebook.
