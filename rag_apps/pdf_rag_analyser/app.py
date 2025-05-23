@@ -30,8 +30,16 @@ def get_pdf_text(pdf_docs):
     return text
 
 def get_text_chunks(text, model_name):
+    # Default values for text splitter
+    chunk_size = 10000
+    chunk_overlap = 1000
+
     if model_name == "Google AI":
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
+        # Google AI specific settings could go here if needed
+        pass
+    # Add conditions for other models here if needed
+
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     chunks = text_splitter.split_text(text)
     return chunks
 
