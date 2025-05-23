@@ -20,7 +20,7 @@ The Model Context Protocol (MCP) is an open standard designed to standardize how
 *   **Enhanced Context Management:** It helps manage the limited context windows of LLMs efficiently, enabling them to maintain longer, more coherent interactions and leverage historical data.
 *   **Secure Data Access:** MCP emphasizes secure connections, allowing developers to expose data through MCP servers while maintaining control over their infrastructure.
 *   **Tool Use and Actionability:** It enables LLMs to not just retrieve information but also to use external tools and trigger actions in other systems.
-*   **Interoperability:** Fosters an ecosystem where different AI tools, models, and data sources can work together more cohes বাড়.
+*   **Interoperability:** Fosters an ecosystem where different AI tools, models, and data sources can work together more cohesively.
 *   **Client-Server Architecture:** MCP typically involves:
     *   **MCP Hosts/Clients:** Applications (like AI assistants, IDEs, or other AI-powered tools) that want to access data or capabilities.
     *   **MCP Servers:** Lightweight programs that expose specific data sources or tools (e.g., a database, an API) through the standardized MCP.
