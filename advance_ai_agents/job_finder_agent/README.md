@@ -12,6 +12,10 @@ Before running this project, make sure you have the following:
 - A [Bright data](https://brightdata.com/) account and API credentials
 - [Nebius AI Studio](https://studio.nebius.com/) Account
 
+## How it Works
+
+![Gif](./assets/job-search-agent.gif)
+
 ## Installation
 
 1. Clone the repository:
@@ -73,6 +77,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-- Bright Data for providing the data infrastructure
-- Nebius AI Studio for AI capabilities
-- All contributors who have helped shape this project
+- Bright Data 
+- Nebius AI Studio
