@@ -27,19 +27,26 @@ nebius_model = LiteLlm(
 
 # --- Tool 1: Exa Search ---
 def exa_search_ai(_: str) -> dict:
-    results = Exa(api_key=os.getenv("EXA_API_KEY")).search_and_contents(
-        query="Latest AI news OR new LLM models OR AI/Agents advancements",
-        include_domains=["twitter.com", "x.com"],
-        num_results=10,
-        text=True,
-        type="auto",
-        highlights={"highlights_per_url": 2, "num_sentences": 3},
-        start_published_date=(datetime.now() - timedelta(days=30)).isoformat()
-    )
-    return {
-        "type": "exa",
-        "results": [r.__dict__ for r in results.results]
-    }
+    try:
+        results = Exa(api_key=os.getenv("EXA_API_KEY")).search_and_contents(
+            query="Latest AI news OR new LLM models OR AI/Agents advancements",
+            include_domains=["twitter.com", "x.com"],
+            num_results=10,
+            text=True,
+            type="auto",
+            highlights={"highlights_per_url": 2, "num_sentences": 3},
+            start_published_date=(datetime.now() - timedelta(days=30)).isoformat()
+        )
+        return {
+            "type": "exa",
+            "results": [r.__dict__ for r in results.results]
+        }
+    except Exception as e:
+        return {
+            "type": "exa",
+            "error": f"Exa search failed: {str(e)}",
+            "results": []
+        }
 
 # --- Tool 2: Tavily Search ---
 def tavily_search_ai_analysis(_: str) -> dict:
