@@ -22,16 +22,9 @@ Uses a 5-agent sequential pipeline:
 
 ## Installation
 
-1. Install required packages:
+1. Install dependencies:
 ```bash
-# Install ADK and required dependencies
-pip install google-adk
-pip install exa_py
-pip install tavily-python
-pip install firecrawl-py
-
-# Verify ADK installation
-adk --version
+pip install -r requirements.txt
 ```
 
 2. Set up environment variables:
