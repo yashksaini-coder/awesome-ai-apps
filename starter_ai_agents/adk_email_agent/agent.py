@@ -1,9 +1,10 @@
 from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 
 # Load keys
 load_dotenv()
-import os
+import resend
 import resend
 from google.adk.agents import Agent
 from google.adk.models.lite_llm import LiteLlm
