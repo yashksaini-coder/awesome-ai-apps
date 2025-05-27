@@ -22,17 +22,23 @@ Uses a 5-agent sequential pipeline:
 
 ## Installation
 
-1. Install dependencies:
+1. Clone the Repo
+```bash
+git clone https://github.com/Arindam200/awesome-ai-apps.git
+cd advance_ai_agents/trend_analyzer_agent
+```
+
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Set up environment variables:
+3. Set up environment variables:
 ```bash
 cp .env.example .env
 ```
 
-3. Edit the `.env` file with your API keys:
+4. Edit the `.env` file with your API keys:
 ```
 NEBIUS_API_KEY="your_nebius_api_key_here"
 NEBIUS_API_BASE="https://api.studio.nebius.ai/v1"
