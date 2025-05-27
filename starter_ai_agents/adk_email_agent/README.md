@@ -17,11 +17,9 @@ Uses a single agent with a specialized tool:
 
 ## Installation
 
-1. Install required packages:
+1. Install dependencies:
 ```bash
-# Install ADK and required dependencies
-pip install google-adk
-pip install resend
+pip install -r requirements.txt
 
 # Verify ADK installation
 adk --version
