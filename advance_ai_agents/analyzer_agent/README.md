@@ -1,6 +1,6 @@
 # Analyzer Agent (AI Trends Analysis Pipeline)
 
-A comprehensive AI analysis pipeline that analyzes AI news, benchmarks, and trends. Built using Google's Agent Development Kit (ADK) framework. Full explainer video is available on [YouTube](https://www.youtube.com/watch?v=FYhKah8FpAg)
+A comprehensive AI analysis pipeline that analyzes AI news, benchmarks, and trends. Built using Google's Agent Development Kit (ADK) framework. Full explainer video is available on [YouTube](https://www.youtube.com/watch?v=FYhKah8FpAg). Find more Agent demos built with ADK [here](https://github.com/Astrodevil/ADK-Agent-Examples)
 
 ## Overview
 
