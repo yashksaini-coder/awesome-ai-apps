@@ -3,7 +3,7 @@ import os
 import os
 
 # Load keys
-load_dotenv()
+# Load keys
 load_dotenv()
 import resend
 from google.adk.agents import Agent
