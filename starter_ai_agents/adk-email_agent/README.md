@@ -1,6 +1,6 @@
 # Email Agent (Communication Demo)
 
-A simple agent demonstrating email integration with ADK. Built using Google's Agent Development Kit (ADK) framework.
+A simple agent demonstrating email integration with ADK. Built using Google's Agent Development Kit (ADK) framework. Find more Agent demos built with ADK [here](https://github.com/Astrodevil/ADK-Agent-Examples)
 
 ## Overview
 
