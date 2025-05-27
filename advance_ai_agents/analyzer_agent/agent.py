@@ -50,17 +50,24 @@ def exa_search_ai(_: str) -> dict:
 
 # --- Tool 2: Tavily Search ---
 def tavily_search_ai_analysis(_: str) -> dict:
-    client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
-    response = client.search(
-        query="AI benchmarks OR AI/LLM statistics OR AI providers analysis",
-        search_depth="advanced",  # search depth for more comprehensive results
-        time_range="week",        # time range one week
-        include_domains=["artificialanalysis.ai"]  # Replace with relevant websites
-    )
-    return {
-        "type": "tavily",
-        "results": response.get("results", [])
-    }
+    try:
+        client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
+        response = client.search(
+            query="AI benchmarks OR AI/LLM statistics OR AI providers analysis",
+            search_depth="advanced",  # search depth for more comprehensive results
+            time_range="week",        # time range one week
+            include_domains=["artificialanalysis.ai"]  # Replace with relevant websites
+        )
+        return {
+            "type": "tavily",
+            "results": response.get("results", [])
+        }
+    except Exception as e:
+        return {
+            "type": "tavily",
+            "error": f"Tavily search failed: {str(e)}",
+            "results": []
+        }
 
 # --- Tool 3: Firecrawl scrapper ---
 def firecrawl_scrape_nebius(_: str) -> dict:
