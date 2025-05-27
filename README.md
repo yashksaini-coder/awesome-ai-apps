@@ -13,9 +13,9 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 - [Google Agent Development Kit (ADK)](https://github.com/google/agent-development-kit)
 - [LangChain](https://python.langchain.com/)
 - [LlamaIndex](https://www.llamaindex.ai/)
-- [Agno](https://github.com/agno-ai/agno)
-- [CrewAI](https://github.com/joaomdmoura/crewAI)
-- [Pydantic AI](https://github.com/arindammajumder/pydantic-ai)
+- [Agno](https://github.com/agno-agi/agno)
+- [CrewAI](https://github.com/crewAIInc/crewAI)
+- [Pydantic AI](https://github.com/pydantic/pydantic-ai)
 
 ## 🛠️ Featured Tools & APIs
 
