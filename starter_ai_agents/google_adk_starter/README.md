@@ -1,4 +1,6 @@
-# Email Agent (Communication Demo)
+![banner](./banner.png)
+
+# Google ADK Starter Agent
 
 A simple agent demonstrating email integration with ADK. Built using Google's Agent Development Kit (ADK) framework.
 
