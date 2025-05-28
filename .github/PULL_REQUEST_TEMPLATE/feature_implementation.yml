@@ -1,0 +1,119 @@
+name: Feature Implementation
+description: Implement a new feature in an existing project
+title: "[FEATURE] "
+labels: [feature]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for implementing a new feature!
+        Please provide as much detail as possible about the feature and your implementation.
+
+  - type: input
+    id: project-name
+    attributes:
+      label: Project Name
+      description: Name of the project where the feature is being added
+      placeholder: "e.g., job_searching_agent"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: project-directory
+    attributes:
+      label: Project Directory
+      description: Select the directory where the feature is being added
+      options:
+        - advance_ai_agents
+        - mcp_ai_agents
+        - rag_apps
+        - starter_ai_agents
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: Provide a clear and concise description of the feature
+      placeholder: "Describe the feature in detail..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation-details
+    attributes:
+      label: Implementation Details
+      description: Describe how you implemented the feature
+      placeholder: "How did you implement this feature?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-changes
+    attributes:
+      label: Technical Changes
+      description: List the technical changes made
+      placeholder: |
+        - Changes to existing code:
+        - New files added:
+        - Dependencies added/removed:
+    validations:
+      required: true
+
+  - type: textarea
+    id: testing-done
+    attributes:
+      label: Testing Done
+      description: Describe how you tested the feature
+      placeholder: "What tests did you run to verify the feature?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected-files
+    attributes:
+      label: Affected Files
+      description: List the files that were modified or added
+      placeholder: |
+        - file1.py
+        - file2.py
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots/Demo
+      description: Add screenshots or GIFs of the feature in action
+      placeholder: "Add screenshots here..."
+
+  - type: checkboxes
+    id: implementation-checklist
+    attributes:
+      label: Implementation Checklist
+      description: Please check all that apply
+      options:
+        - label: Feature design is documented
+          required: true
+        - label: Code follows project conventions
+          required: true
+        - label: Tests added for new functionality
+          required: true
+        - label: Documentation updated
+          required: true
+        - label: README updated (if necessary)
+          required: true
+        - label: Dependencies properly listed
+          required: true
+        - label: Code is properly formatted and linted
+          required: true
+        - label: No breaking changes introduced
+          required: true
+
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: Additional Notes
+      description: Any other information that might be helpful
+      placeholder: "Any additional context or information..."

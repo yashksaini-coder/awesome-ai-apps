@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Project Addition
+    url: .github/PULL_REQUEST_TEMPLATE/project_addition.yml
+    about: Add a new project to the repository
+  - name: Bug Fix
+    url: .github/PULL_REQUEST_TEMPLATE/bug_fix.yml
+    about: Fix a bug in an existing project
+  - name: Feature Implementation
+    url: .github/PULL_REQUEST_TEMPLATE/feature_implementation.yml
+    about: Implement a new feature in an existing project
