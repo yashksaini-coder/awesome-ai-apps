@@ -23,11 +23,12 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 - [Exa](https://exa.ai/)
 - [Tavily](https://tavily.com/)
 - [Firecrawl](https://firecrawl.dev/)
-- [Resend](https://resend.com/) 
-- [Cal.com](https://cal.com/) 
-- [DuckDuckGo](https://duckduckgo.com/) 
-- [YFinance](https://pypi.org/project/yfinance/) 
-- [HackerNews](https://news.ycombinator.com/) 
+- [BrightData](https://brightdata.com/)
+- [Resend](https://resend.com/)
+- [Cal.com](https://cal.com/)
+- [DuckDuckGo](https://duckduckgo.com/)
+- [YFinance](https://pypi.org/project/yfinance/)
+- [HackerNews](https://news.ycombinator.com/)
 
 ## 🤖 Featured LLM Models
 
@@ -37,7 +38,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 - [Llama-3.1-Nemotron-Ultra-253B](https://dub.sh/AIStudio)
 - [Qwen/Qwen3-30B-A3B](https://dub.sh/AIStudio)
 
-## 📺 Playlist of Demo Videos & Tutorials 
+## 📺 Playlist of Demo Videos & Tutorials
 
 - [Build with MCP](https://www.youtube.com/playlist?list=PLMZM1DAlf0Lolxax4L2HS54Me8gn1gkz4)
 - [Build AI Agents](https://www.youtube.com/playlist?list=PLMZM1DAlf0LqixhAG9BDk4O_FjqnaogK8)
@@ -47,7 +48,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.10 or higher
 - Git
 - pip (Python package manager)
 
@@ -86,4 +87,4 @@ We welcome contributions from the community! Whether you're a beginner or an exp
 
 ## 📜 License
 
-This repository is licensed under the **MIT License**. Feel free to use and modify the examples for your projects.
+This repository is licensed under the [MIT License](./LICENSE). Feel free to use and modify the examples for your projects.
