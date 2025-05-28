@@ -11,6 +11,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 ## 🚀 Featured AI Agent Frameworks
 
 - [Google Agent Development Kit (ADK)](https://github.com/google/agent-development-kit)
+- [OpenAi Agents SDK](https://openai.github.io/openai-agents-python/)
 - [LangChain](https://python.langchain.com/)
 - [LlamaIndex](https://www.llamaindex.ai/)
 - [Agno](https://github.com/agno-agi/agno)
