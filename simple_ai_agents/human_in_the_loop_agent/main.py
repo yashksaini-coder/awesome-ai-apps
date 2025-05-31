@@ -32,7 +32,7 @@ def pre_hook(fc: FunctionCall):
 
     if choice == "n":
         console.print("❌ [red]Operation cancelled by user.[/red]")
-        raise StopAgentRun("Cancelled by user", agent_message="User denied permission.")
+        raise StopAgentRun("Cancelled by user", agent_message="I don't have any tool calls to make.")
 
     if choice == "retry":
         retry_counter["count"] += 1
@@ -75,6 +75,8 @@ agent = Agent(
     3. For jokes, start with "Here's a joke: " followed by the tool's output
 
     Ask the user before sharing, and retry only if they say so. Stop after 3 retries.
+
+    If you have no tools to use, you should say "I don't have any tools to use."
     """,
     tools=[get_fact, get_quote, get_joke],
     markdown=True,

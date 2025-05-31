@@ -4,6 +4,12 @@ A Python-based AI agent that demonstrates human-in-the-loop interaction, allowin
 
 This agent is designed to share fun content (facts, quotes, and jokes) while maintaining human oversight. It implements a pre-execution hook system that requires user approval before any action is taken, ensuring safe and controlled AI operations.
 
+## What is Human-in-the-Loop?
+
+![hitl](./human_in_the_loop.gif)
+
+Human-in-the-Loop (HITL) workflows integrate human judgment and oversight into automated processes. These workflows pause at critical points for human review, validation, or decision-making before proceeding. This approach combines the efficiency of automation with human expertise and oversight where it matters most.
+
 ## Features
 
 - **Human Verification**: Every action requires explicit user approval
