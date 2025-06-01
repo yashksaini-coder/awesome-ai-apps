@@ -21,7 +21,7 @@ async def initialize_mcp_server():
                 "args": ["-y", "@brightdata/mcp"],
                 "env": {
                     "API_TOKEN": os.environ["BRIGHT_DATA_API_KEY"],
-                    "WEB_UNLOCKER_ZONE": "mcp_unlocker1",
+                    "WEB_UNLOCKER_ZONE": "mcp_unlocker",
                     "BROWSER_AUTH": os.environ["BROWSER_AUTH"],
                 }
             }
