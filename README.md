@@ -14,9 +14,9 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 - [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)
 - [LangChain](https://python.langchain.com/)
 - [LlamaIndex](https://www.llamaindex.ai/)
-- [Agno](https://github.com/agno-agi/agno)
-- [CrewAI](https://github.com/crewAIInc/crewAI)
-- [Pydantic AI](https://github.com/pydantic/pydantic-ai)
+- [Agno](https://www.agno.com/)
+- [CrewAI](https://www.crewai.com/)
+- [Pydantic AI](https://ai.pydantic.dev/)
 
 ## 🛠️ Featured Tools & APIs
 
@@ -88,3 +88,7 @@ We welcome contributions from the community! Whether you're a beginner or an exp
 ## 📜 License
 
 This repository is licensed under the [MIT License](./LICENSE). Feel free to use and modify the examples for your projects.
+
+## Thank You for the Support! 🙏
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Arindam200/awesome-ai-apps&type=Date)](https://www.star-history.com/#Arindam200/awesome-ai-apps&Date)
