@@ -9,8 +9,8 @@
     <img src="https://img.shields.io/badge/Built%20With-Streamlit-%23FF4B4B?style=for-the-badge" alt="Streamlit">
   </a>
   <a href="https://studio.nebius.com/" target="_blank">
-    <img src="https://img.shields.io/badge/AI%20Model-DeepSeek-blueviolet?style=for-the-badge" alt="DeepSeek">
-  </a>
+  <img src="https://img.shields.io/badge/Built%20With-Nebius-%230073e6?style=for-the-badge" alt="Nebius">
+</a>
   <a href="https://agno.com" target="_blank">
     <img src="https://img.shields.io/badge/Agno-Agent%20Framework-orange?style=for-the-badge" alt="Agno">
   </a>
@@ -39,7 +39,7 @@
   No fluff. Only data-backed, AI-generated expert-level assessments.
 
 - ✅ **Powered by Agents**  
-  Uses Agno’s agent framework with DeepSeek + GitHubTools + ExaTools.
+  Uses Agno’s agent framework with Nebius + GitHubTools + ExaTools.
 
 ---
 
@@ -48,7 +48,7 @@
 | Component         | Tool/Library                        |
 |-------------------|-------------------------------------|
 | **UI**            | 🧼 Streamlit                        |
-| **AI Model**      | 🧠 DeepSeek via Nebius                   |
+| **AI Model** | 🧠 DeepSeek via Nebius |
 | **Agent Framework** | 🧠 Agno Agents                    |
 | **GitHub Analysis**| 🛠️ GitHubTools                    |
 | **LinkedIn Parsing**| 🔎 ExaTools                       |
@@ -138,21 +138,12 @@ Agent(
 - Reasons like an expert hiring manager (📈)
 - Provides a final score with strict justification (✅❌)
 
----
 
-
-
-## 💬 Questions / Feedback
-
-Have suggestions or found a bug?  
-Open an [issue](../../issues) or start a [discussion](../../discussions).
-
----
 
 ## 🔗 Links
 
 - [Agno Documentation](https://docs.agno.ai)
-- [Nebius AI Studio](https://studio.nebius.com)
+- [Nebius](Nebius.com)
 - [Exa Search](https://exa.ai)
 - [GitHubTools Docs](https://github.com/features/copilot)
 
