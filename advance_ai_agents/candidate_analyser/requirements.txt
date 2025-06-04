@@ -3,5 +3,3 @@ agno
 openai
 pandas
 exa_py
-pydantic
-pyyaml
