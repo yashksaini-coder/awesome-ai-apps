@@ -122,7 +122,7 @@ Candilyzer builds a smart agent with:
 
 ```python
 Agent(
-  model=DeepSeek(...),
+  model=Nebius(...),
   tools=[
     GithubTools(...),
     ExaTools(...),
