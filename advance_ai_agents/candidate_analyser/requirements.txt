@@ -3,6 +3,5 @@ agno
 openai
 pandas
 exa_py
-groq
 pydantic
 pyyaml
