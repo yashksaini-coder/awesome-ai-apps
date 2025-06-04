@@ -4,7 +4,7 @@ Candilyzer: AI-powered candidate analyzer for elite technical hiring.
 This Streamlit application leverages the Agno AI Agent Orchestration Framework to conduct
 forensic-level multi-candidate and single-candidate analysis using verified GitHub and LinkedIn data.
 
-Agents are powered by DeepSeek and enhanced with Agno’s GitHubTools, ExaTools, ThinkingTools,
+Agents are powered by Nebius and enhanced with Agno’s GitHubTools, ExaTools, ThinkingTools,
 and ReasoningTools — enabling strict, professional-grade hiring decisions with full traceability.
 """
 
@@ -13,7 +13,7 @@ import yaml
 import streamlit as st
 
 from agno.agent import Agent
-from agno.models.deepseek import DeepSeek
+from agno.models.openai.like import OpenAILike
 from agno.tools.github import GithubTools
 from agno.tools.exa import ExaTools
 from agno.tools.thinking import ThinkingTools
@@ -49,19 +49,21 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# API Key Session State
-for key in ["deepseek_api_key", "github_api_key", "exa_api_key"]:
+# Session state init
+for key in ["Nebius_api_key", "base_url", "model_id", "github_api_key", "exa_api_key"]:
     if key not in st.session_state:
         st.session_state[key] = ""
 
 # Sidebar
 st.sidebar.title("🔑 API Keys & Navigation")
 st.sidebar.markdown("### Enter API Keys")
-st.session_state.deepseek_api_key = st.sidebar.text_input("DeepSeek API Key", value=st.session_state.deepseek_api_key, type="password")
+st.session_state.Nebius_api_key = st.sidebar.text_input("Nebius API Key", value=st.session_state.Nebius_api_key, type="password")
+st.session_state.base_url = st.sidebar.text_input("Nebius Base URL", value=st.session_state.base_url)
+st.session_state.model_id = st.sidebar.text_input("Model ID", value=st.session_state.model_id)
 st.session_state.github_api_key = st.sidebar.text_input("GitHub API Key", value=st.session_state.github_api_key, type="password")
 st.session_state.exa_api_key = st.sidebar.text_input("Exa API Key", value=st.session_state.exa_api_key, type="password")
 st.sidebar.markdown("---")
-page = st.sidebar.radio("Select Page", ("Multi-Candidate Analyzer", "Single Candidate Analyzer"), horizontal=True)
+page = st.sidebar.radio("Select Page", ("Multi-Candidate Analyzer", "Single Candidate Analyzer"))
 
 # ---------------- Multi-Candidate Analyzer ---------------- #
 if page == "Multi-Candidate Analyzer":
@@ -76,8 +78,8 @@ if page == "Multi-Candidate Analyzer":
     if submit:
         if not github_usernames or not job_role:
             st.error("❌ Please enter both usernames and job role.")
-        elif not all([st.session_state.deepseek_api_key, st.session_state.github_api_key, st.session_state.exa_api_key]):
-            st.error("❌ Please enter all API keys in the sidebar.")
+        elif not all([st.session_state.Nebius_api_key, st.session_state.github_api_key, st.session_state.exa_api_key, st.session_state.model_id, st.session_state.base_url]):
+            st.error("❌ Please enter all API keys and model info in the sidebar.")
         else:
             usernames = [u.strip() for u in github_usernames.split("\n") if u.strip()]
             if not usernames:
@@ -86,7 +88,12 @@ if page == "Multi-Candidate Analyzer":
                 agent = Agent(
                     description=description_multi,
                     instructions=instructions_multi,
-                    model=DeepSeek(id="deepseek-coder", api_key=st.session_state.deepseek_api_key),
+                    model=OpenAILike(
+                        id=st.session_state.model_id,
+                        _tool_choice="none",
+                        api_key=st.session_state.Nebius_api_key,
+                        base_url=st.session_state.base_url
+                    ),
                     name="StrictCandidateEvaluator",
                     tools=[
                         ThinkingTools(think=True, instructions="Strict GitHub candidate evaluation"),
@@ -127,12 +134,17 @@ elif page == "Single Candidate Analyzer":
     if submit_button:
         if not github_username or not job_role:
             st.error("GitHub username and job role are required.")
-        elif not all([st.session_state.deepseek_api_key, st.session_state.github_api_key, st.session_state.exa_api_key]):
-            st.error("❌ Please enter all API keys.")
+        elif not all([st.session_state.Nebius_api_key, st.session_state.github_api_key, st.session_state.exa_api_key, st.session_state.model_id, st.session_state.base_url]):
+            st.error("❌ Please enter all API keys and model info.")
         else:
             try:
                 agent = Agent(
-                    model=DeepSeek(id="deepseek-chat", api_key=st.session_state.deepseek_api_key),
+                    model=OpenAILike(
+                        _tool_choice="none",
+                        id=st.session_state.model_id,
+                        api_key=st.session_state.Nebius_api_key,
+                        base_url=st.session_state.base_url
+                    ),
                     name="Candilyzer",
                     tools=[
                         ThinkingTools(add_instructions=True),
@@ -171,7 +183,7 @@ elif page == "Single Candidate Analyzer":
                             full_response += chunk.content
                             placeholder.markdown(full_response, unsafe_allow_html=True)
 
-                    match = re.search(r"(\d{1,3})/100", full_response)
+                    match = re.search(r"\b([1-9]?\d|100)/100\b", full_response)
                     if match:
                         score = int(match.group(1))
                         st.success(f"🎯 Candidate Score: {score}/100")
