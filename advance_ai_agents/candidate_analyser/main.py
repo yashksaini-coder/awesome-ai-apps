@@ -13,7 +13,7 @@ import yaml
 import streamlit as st
 
 from agno.agent import Agent
-from agno.models.openai.like import OpenAILike
+from agno.models.nebius import Nebius
 from agno.tools.github import GithubTools
 from agno.tools.exa import ExaTools
 from agno.tools.thinking import ThinkingTools
@@ -50,7 +50,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Session state init
-for key in ["Nebius_api_key", "base_url", "model_id", "github_api_key", "exa_api_key"]:
+for key in ["Nebius_api_key",  "model_id", "github_api_key", "exa_api_key"]:
     if key not in st.session_state:
         st.session_state[key] = ""
 
@@ -58,7 +58,6 @@ for key in ["Nebius_api_key", "base_url", "model_id", "github_api_key", "exa_api
 st.sidebar.title("🔑 API Keys & Navigation")
 st.sidebar.markdown("### Enter API Keys")
 st.session_state.Nebius_api_key = st.sidebar.text_input("Nebius API Key", value=st.session_state.Nebius_api_key, type="password")
-st.session_state.base_url = st.sidebar.text_input("Nebius Base URL", value=st.session_state.base_url)
 st.session_state.model_id = st.sidebar.text_input("Model ID", value=st.session_state.model_id)
 st.session_state.github_api_key = st.sidebar.text_input("GitHub API Key", value=st.session_state.github_api_key, type="password")
 st.session_state.exa_api_key = st.sidebar.text_input("Exa API Key", value=st.session_state.exa_api_key, type="password")
@@ -78,7 +77,7 @@ if page == "Multi-Candidate Analyzer":
     if submit:
         if not github_usernames or not job_role:
             st.error("❌ Please enter both usernames and job role.")
-        elif not all([st.session_state.Nebius_api_key, st.session_state.github_api_key, st.session_state.exa_api_key, st.session_state.model_id, st.session_state.base_url]):
+        elif not all([st.session_state.Nebius_api_key, st.session_state.github_api_key, st.session_state.exa_api_key, st.session_state.model_id]):
             st.error("❌ Please enter all API keys and model info in the sidebar.")
         else:
             usernames = [u.strip() for u in github_usernames.split("\n") if u.strip()]
@@ -88,11 +87,9 @@ if page == "Multi-Candidate Analyzer":
                 agent = Agent(
                     description=description_multi,
                     instructions=instructions_multi,
-                    model=OpenAILike(
+                    model=Nebius(
                         id=st.session_state.model_id,
-                        _tool_choice="none",
                         api_key=st.session_state.Nebius_api_key,
-                        base_url=st.session_state.base_url
                     ),
                     name="StrictCandidateEvaluator",
                     tools=[
@@ -134,16 +131,14 @@ elif page == "Single Candidate Analyzer":
     if submit_button:
         if not github_username or not job_role:
             st.error("GitHub username and job role are required.")
-        elif not all([st.session_state.Nebius_api_key, st.session_state.github_api_key, st.session_state.exa_api_key, st.session_state.model_id, st.session_state.base_url]):
+        elif not all([st.session_state.Nebius_api_key, st.session_state.github_api_key, st.session_state.exa_api_key, st.session_state.model_id]):
             st.error("❌ Please enter all API keys and model info.")
         else:
             try:
                 agent = Agent(
-                    model=OpenAILike(
-                        _tool_choice="none",
+                    model=Nebius(
                         id=st.session_state.model_id,
                         api_key=st.session_state.Nebius_api_key,
-                        base_url=st.session_state.base_url
                     ),
                     name="Candilyzer",
                     tools=[
@@ -194,4 +189,3 @@ elif page == "Single Candidate Analyzer":
                 st.error("❌ Unexpected error occurred.")
                 st.exception(e)
 
-    st.markdown("[📘 Documentation](https://github.com/Toufiqqureshi/Candilyzer)")
