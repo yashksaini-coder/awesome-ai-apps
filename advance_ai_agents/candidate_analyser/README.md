@@ -61,8 +61,8 @@
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Toufiqqureshi/Candilyzer.git
-cd Candilyzer
+git clone https://github.com/Arindam200/awesome-ai-apps.git
+cd advance_ai_agents/candidate_analyser
 ```
 
 ### 2. Install Requirements
