@@ -152,7 +152,7 @@ Open an [issue](../../issues) or start a [discussion](../../discussions).
 ## 🔗 Links
 
 - [Agno Documentation](https://docs.agno.ai)
-- [DeepSeek](https://deepseek.com)
+- [Nebius AI Studio](https://studio.nebius.com)
 - [Exa Search](https://exa.ai)
 - [GitHubTools Docs](https://github.com/features/copilot)
 
