@@ -48,7 +48,7 @@
 | Component         | Tool/Library                        |
 |-------------------|-------------------------------------|
 | **UI**            | 🧼 Streamlit                        |
-| **AI Model**      | 🧠 DeepSeek                         |
+| **AI Model**      | 🧠 DeepSeek via Nebius                   |
 | **Agent Framework** | 🧠 Agno Agents                    |
 | **GitHub Analysis**| 🛠️ GitHubTools                    |
 | **LinkedIn Parsing**| 🔎 ExaTools                       |
