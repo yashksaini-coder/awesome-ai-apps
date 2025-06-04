@@ -82,7 +82,7 @@ You'll need:
 ### 4. Launch App
 
 ```bash
-streamlit run Main.py
+streamlit run main.py
 ```
 
 ---
