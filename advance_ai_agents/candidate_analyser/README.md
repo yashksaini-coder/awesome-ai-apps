@@ -8,7 +8,7 @@
   <a href="https://streamlit.io" target="_blank">
     <img src="https://img.shields.io/badge/Built%20With-Streamlit-%23FF4B4B?style=for-the-badge" alt="Streamlit">
   </a>
-  <a href="https://api-docs.deepseek.com" target="_blank">
+  <a href="https://studio.nebius.com/" target="_blank">
     <img src="https://img.shields.io/badge/AI%20Model-DeepSeek-blueviolet?style=for-the-badge" alt="DeepSeek">
   </a>
   <a href="https://agno.com" target="_blank">
