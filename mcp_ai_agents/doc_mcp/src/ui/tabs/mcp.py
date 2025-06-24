@@ -2,7 +2,7 @@
 
 import asyncio
 import logging
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any, Union
 
 import gradio as gr
 
@@ -158,7 +158,7 @@ class MCPTab:
         repo_name: str,
         file_extensions: Optional[List[str]] = None,
         branch: Optional[str] = None,
-    ) -> List[str]:
+    ) ->  Union[List[str], Dict[str, str]]:
         """
         List files in a repository with optional filtering by extensions and branch.
         Parameters:
@@ -223,7 +223,7 @@ class MCPTab:
 
     def get_multi_file_content_from_repo(
         self, repo_name: str, file_paths: List[str], branch: Optional[str] = None
-    ) -> List[Dict[str, str]]:
+    ) ->  Union[List[str], Dict[str, str]]:
         """
         Get content of multiple files in a repository.
 
@@ -273,7 +273,7 @@ class MCPTab:
         query: str,
         mode: Optional[str] = "default",
         top_k: Optional[int] = None,
-    ) -> Dict[str, any]:
+    ) -> Dict[str, Any]:
         """
         Execute a query against the repository documents.
 

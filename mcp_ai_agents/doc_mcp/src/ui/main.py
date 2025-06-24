@@ -27,8 +27,8 @@ class DocMCPApp:
     def __init__(self):
         self.ingestion_tab = IngestionTab()
         self.query_tab = QueryTab()
-        self.management_tab = None
         self.mcp_tab = MCPTab()
+        self.management_tab = None
         self.update_tab = None
 
     def create_interface(self) -> gr.Blocks:

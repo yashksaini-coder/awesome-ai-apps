@@ -64,7 +64,7 @@ class GitHubClient:
             owner, repo = parse_github_url(repo_url)
             repo_name = f"{owner}/{repo}"
         except Exception as e:
-            raise GitHubError(f"Invalid repository URL: {e}")
+            raise GitHubError(f"Invalid repository URL: {e}") from e
 
         api_url = build_github_api_url(owner, repo, branch=branch)
 
@@ -100,9 +100,9 @@ class GitHubClient:
         except requests.exceptions.Timeout:
             raise GitHubError(
                 f"Request timeout after {settings.github_timeout} seconds"
-            )
+            ) from None
         except requests.exceptions.RequestException as e:
-            raise GitHubError(f"Network error: {str(e)}")
+            raise GitHubError(f"Network error: {str(e)}") from e
 
     async def get_file_content(
         self, repo_url: str, file_path: str, branch: str = "main"
@@ -112,7 +112,7 @@ class GitHubClient:
         try:
             owner, repo = parse_github_url(repo_url)
         except Exception as e:
-            raise GitHubError(f"Invalid repository URL: {e}")
+            raise GitHubError(f"Invalid repository URL: {e}") from e
 
         api_url = build_github_api_url(owner, repo, file_path, branch)
 
@@ -169,9 +169,9 @@ class GitHubClient:
             except asyncio.TimeoutError:
                 raise GitHubError(
                     f"Request timeout after {settings.github_timeout} seconds"
-                )
+                ) from None
             except aiohttp.ClientError as e:
-                raise GitHubError(f"Network error: {str(e)}")
+                raise GitHubError(f"Network error: {str(e)}") from e
 
     async def get_multiple_files(
         self,

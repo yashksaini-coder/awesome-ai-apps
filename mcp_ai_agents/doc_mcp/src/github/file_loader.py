@@ -76,7 +76,7 @@ async def load_files_from_github(
         owner, repo = parse_github_url(repo_url)
         repo_name = f"{owner}/{repo}"
     except Exception as e:
-        raise GitHubError(f"Invalid repository URL: {e}")
+        raise GitHubError(f"Invalid repository URL: {e}") from e
 
     logger.info(f"Loading {len(file_paths)} files from {repo_name}")
 

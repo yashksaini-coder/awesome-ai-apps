@@ -24,11 +24,11 @@ class QueryRetriever:
         # Configure LlamaIndex settings
         Settings.llm = NebiusLLM(
             api_key=settings.nebius_api_key,
-            model="meta-llama/Llama-3.3-70B-Instruct-fast",
+            model=settings.nebius_llm_model,
         )
         Settings.embed_model = NebiusEmbedding(
             api_key=settings.nebius_api_key,
-            model_name="BAAI/bge-en-icl",
+            model_name=settings.nebius_embedding_model,
             embed_batch_size=25,
         )
 

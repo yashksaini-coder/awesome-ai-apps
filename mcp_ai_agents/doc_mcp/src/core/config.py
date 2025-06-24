@@ -15,7 +15,11 @@ class Settings(BaseSettings):
 
     # API Keys
     github_api_key: Optional[str] = Field(default=None, env="GITHUB_API_KEY")
+
+    # Nebius
     nebius_api_key: str = Field(..., env="NEBIUS_API_KEY")
+    nebius_llm_model: Optional[str] = Field(default="meta-llama/Llama-3.3-70B-Instruct-fast", env="NEBIUS_LLM_MODEL")
+    nebius_embedding_model: Optional[str] = Field(default="BAAI/bge-en-icl", env="NEBIUS_EMBEDDING_MODEL")
 
     # Database
     mongodb_uri: str = Field(..., env="MONGODB_URI")

@@ -31,7 +31,7 @@ class MongoDBClient:
                 logger.info("Successfully connected to MongoDB")
             except Exception as e:
                 logger.error(f"Failed to connect to MongoDB: {e}")
-                raise VectorStoreError(f"Failed to connect to MongoDB: {e}")
+                raise VectorStoreError(f"Failed to connect to MongoDB: {e}") from e
         return self._client
 
     @property
