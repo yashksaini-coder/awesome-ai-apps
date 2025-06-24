@@ -122,7 +122,7 @@ class DocumentIngestionPipeline:
                 )
             )
 
-            raise IngestionError(f"Document ingestion failed: {e}")
+            raise IngestionError(f"Document ingestion failed: {e}") from e
 
 
 async def ingest_documents_async(
