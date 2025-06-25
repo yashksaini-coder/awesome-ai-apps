@@ -17,7 +17,7 @@ researcher = Agent(
   goal='Discover groundbreaking technologies',
   verbose=True,
   llm=LLM(
-        mmodel="nebius/Qwen/Qwen3-235B-A22B",
+        model="nebius/Qwen/Qwen3-235B-A22B",
         base_url="https://api.studio.nebius.com/v1/",
         api_key=os.getenv("NEBIUS_API_KEY")
 ),
