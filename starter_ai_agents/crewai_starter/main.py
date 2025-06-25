@@ -6,7 +6,7 @@ from crewai import Crew, Process
 load_dotenv()
 
 default_llm=LLM(
-        model="openai/meta-llama/Meta-Llama-3.1-70B-Instruct",
+        model="nebius/Qwen/Qwen3-235B-A22B",
         base_url="https://api.studio.nebius.com/v1/",
         api_key=os.getenv("NEBIUS_API_KEY")
 ),
@@ -17,7 +17,7 @@ researcher = Agent(
   goal='Discover groundbreaking technologies',
   verbose=True,
   llm=LLM(
-        model="openai/meta-llama/Meta-Llama-3.1-70B-Instruct",
+        mmodel="nebius/Qwen/Qwen3-235B-A22B",
         base_url="https://api.studio.nebius.com/v1/",
         api_key=os.getenv("NEBIUS_API_KEY")
 ),
