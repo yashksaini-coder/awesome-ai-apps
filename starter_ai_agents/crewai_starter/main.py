@@ -5,12 +5,6 @@ from crewai import Crew, Process
 
 load_dotenv()
 
-default_llm=LLM(
-        model="nebius/Qwen/Qwen3-235B-A22B",
-        base_url="https://api.studio.nebius.com/v1/",
-        api_key=os.getenv("NEBIUS_API_KEY")
-),
-
 # Create a researcher agent
 researcher = Agent(
   role='Senior Researcher',
@@ -18,10 +12,8 @@ researcher = Agent(
   verbose=True,
   llm=LLM(
         model="nebius/Qwen/Qwen3-235B-A22B",
-        base_url="https://api.studio.nebius.com/v1/",
         api_key=os.getenv("NEBIUS_API_KEY")
-),
-
+  ),
   backstory='A curious mind fascinated by cutting-edge innovation and the potential to change the world, you know everything about tech.'
 )
 
