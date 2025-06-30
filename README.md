@@ -1,4 +1,4 @@
-# Awesome AI Apps
+# Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 ![Banner](/assets/banner.png)
 
