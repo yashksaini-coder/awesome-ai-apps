@@ -37,6 +37,47 @@ A FastAPI REST API server built using FastAPI and Agno AI. The server configurat
 
 ---
 
+## Deployment
+
+The backend server can be locally deployed using Docker. Use the following command to build and run the server:
+
+- **Build the Docker image**
+
+```bash
+docker-compose build
+```
+
+- **Run the Docker container**
+
+```bash
+docker-compose up
+```
+
+- **Access the server**
+
+```bash
+http://localhost:8000/
+```
+
+### API Documentation
+
+The API documentation is available at the following URL:
+
+```bash
+http://localhost:8000/docs
+```
+### Environment Variables
+The following environment variables are required to run the server:
+
+```bash
+NEWS_API_KEY: Your News API key for fetching news articles.
+REDIS_URL: The URL of the Redis server for caching.
+GEMINI_API_KEY: Your Gemini API key for making predictions.
+GROQ_API_KEY: Your Groq API key for making predictions.
+```
+
+---
+
 
 <h2>Developers</h2>
 <div align="center">    
