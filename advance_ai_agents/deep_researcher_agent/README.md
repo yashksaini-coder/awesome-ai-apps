@@ -4,7 +4,6 @@
 
 A multi-stage AI-powered research workflow agent that automates comprehensive web research, analysis, and report generation using Agno, Scrapegraph, and Nebius AI.
 
----
 
 ## Features
 
@@ -15,9 +14,9 @@ A multi-stage AI-powered research workflow agent that automates comprehensive we
 - **MCP Server**: Model Context Protocol server for integration
 - **Command-Line Support**: Run research tasks directly from the terminal
 
----
-
 ## How It Works
+
+![Workflow](./assets/workflow.gif)
 
 1. **Searcher**: Finds and extracts high-quality, up-to-date information from the web using Scrapegraph and Nebius AI.
 2. **Analyst**: Synthesizes, interprets, and organizes the research findings, highlighting key insights and trends.
@@ -29,7 +28,6 @@ A multi-stage AI-powered research workflow agent that automates comprehensive we
 > - The agent orchestrates web search, analysis, and report writing in sequence
 > - Results are presented in a user-friendly format (web or CLI)
 
----
 
 ## Prerequisites
 
@@ -37,14 +35,7 @@ A multi-stage AI-powered research workflow agent that automates comprehensive we
 - [uv](https://github.com/astral-sh/uv) for dependency management
 - API keys for [Nebius AI](https://dub.sh/nebius) and [Scrapegraph](https://dub.sh/scrapegraphai)
 
----
 
-## Installation
-
-
-Here’s that section rewritten cleanly for `README.md`:
-
----
 
 ## Installation
 
@@ -74,8 +65,6 @@ Follow these steps to set up the **Deep Researcher Agent** on your machine:
    uv sync
    ```
 
-
-
 ## Environment Setup
 
 Create a `.env` file in the project root with your API keys:
@@ -87,6 +76,8 @@ SGAI_API_KEY=your_scrapegraph_api_key_here
 
 
 ## Usage
+
+![usage](./assets/usage.gif)
 
 You can use the Deep Researcher Agent in three ways. Each method below includes a demo image so you know what to expect.
 
