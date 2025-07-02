@@ -9,26 +9,12 @@ from agno.agent import RunResponse, Agent
 from agno.models.nebius import Nebius
 from controllers.agents import multi_ai
 import dotenv
+from controllers.stockAgent import chat_agent
 
 router = APIRouter()
 
 dotenv.load_dotenv()
 templates = Jinja2Templates(directory="templates")
-
-NEBIUS_API_KEY = os.getenv("NEBIUS_API_KEY")
-
-if not NEBIUS_API_KEY:
-    raise ValueError("Please provide a NEBIUS API key")
-
-# Create a simple chat agent for the /chat endpoint
-chat_agent = Agent(
-    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
-    instructions=[
-        "You are an AI investment assistant.",
-        "Provide clear and helpful investment advice."
-    ],
-    markdown=True
-)
 
 @router.get("/health", response_class=HTMLResponse)
 async def health_check(request: Request):
