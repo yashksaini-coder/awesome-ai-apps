@@ -1,25 +1,23 @@
-import groq
 import os
 from dotenv import load_dotenv
 
 # AI assistant imports
 from agno.agent import Agent
-from agno.models.groq import Groq
+from agno.models.nebius import Nebius
 from agno.tools.yfinance import YFinanceTools
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.agent import Agent, RunResponse
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-groq_client = groq.Client(api_key=GROQ_API_KEY)
+NEBIUS_API_KEY = os.getenv("NEBIUS_API_KEY")
 
-if not GROQ_API_KEY:
-    raise ValueError("Please provide a GROQ API key")
+if not NEBIUS_API_KEY:
+    raise ValueError("Please provide a NEBIUS API key")
 
 
 web_search_agent = Agent(
     name="web_agent",
     role="search the web for information based on the user given input",
-    model=Groq(id="deepseek-r1-distill-llama-70b",api_key=GROQ_API_KEY),
+    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
     tools=[
         DuckDuckGoTools(search=True, news=True),
 
@@ -34,7 +32,7 @@ web_search_agent = Agent(
 financial_agent = Agent(
     name="financial_agent",
     role="get financial information",
-    model=Groq(id="deepseek-r1-distill-llama-70b",api_key=GROQ_API_KEY),
+    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
     tools=[
         YFinanceTools(stock_price=True,
                     analyst_recommendations=True,
@@ -56,6 +54,6 @@ financial_agent = Agent(
 
 multi_ai = Agent(
     team=[web_search_agent, financial_agent],
-    model=Groq(id="deepseek-r1-distill-llama-70b",api_key=GROQ_API_KEY),
+    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
     markdown=True,
 )

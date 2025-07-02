@@ -2,11 +2,11 @@ import os
 import datetime
 import json
 import requests
-import groq
 from fastapi import FastAPI, APIRouter, Request, Query
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
-from agno.agent import RunResponse
+from agno.agent import RunResponse, Agent
+from agno.models.nebius import Nebius
 from controllers.agents import multi_ai
 import dotenv
 
@@ -15,13 +15,20 @@ router = APIRouter()
 dotenv.load_dotenv()
 templates = Jinja2Templates(directory="templates")
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-groq_client = groq.Client(api_key=GROQ_API_KEY)
+NEBIUS_API_KEY = os.getenv("NEBIUS_API_KEY")
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not NEBIUS_API_KEY:
+    raise ValueError("Please provide a NEBIUS API key")
 
-if not GROQ_API_KEY:
-    raise ValueError("Please provide a GROQ API key")
+# Create a simple chat agent for the /chat endpoint
+chat_agent = Agent(
+    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
+    instructions=[
+        "You are an AI investment assistant.",
+        "Provide clear and helpful investment advice."
+    ],
+    markdown=True
+)
 
 @router.get("/health", response_class=HTMLResponse)
 async def health_check(request: Request):
@@ -32,8 +39,7 @@ async def health_check(request: Request):
             "timestamp": datetime.datetime.now().isoformat(),
             "uptime": "OK",
             "api": {
-                "groq_api": "connected" if GROQ_API_KEY else "not configured",
-                "gemini_api": "connected" if GEMINI_API_KEY else "not configured",
+                "nebius_api": "connected" if NEBIUS_API_KEY else "not configured",
             },
             "ip": requests.get('https://api.ipify.org').text,
             "services": {
@@ -116,7 +122,7 @@ def chat(request: Request, query: str = None):
                 "route_path": "/chat",
                 "method": "GET",
                 "full_path": str(request.url).split("?")[0],
-                "description": "Chat endpoint that uses Groq's LLaMa model to answer investment questions.",
+                "description": "Chat endpoint that uses Nebius's LLaMa model to answer investment questions.",
                 "parameters": [
                     {"name": "query", "type": "string", "description": "The investment question to ask"},
                     {"name": "format", "type": "string", "description": "Response format (html or json)"}
@@ -132,13 +138,8 @@ def chat(request: Request, query: str = None):
         return JSONResponse(content={"error": "Query parameter is required"})
     
     try:
-        response = groq_client.chat.completions.create(
-            model="llama-3.3-70b-versatile", 
-            messages=[{"role": "system", "content": "You are an AI investment assistant."},
-                      {"role": "user", "content": query}]
-        )
-        
-        answer = response.choices[0].message.content
+        response = chat_agent.run(query)
+        answer = response.content
         return JSONResponse(content={"question": query, "answer": answer})
     
     except Exception as e:

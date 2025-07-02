@@ -2,14 +2,17 @@ from fastapi import FastAPI, Query, HTTPException
 from fastapi.responses import JSONResponse
 from agno.agent import Agent, RunResponse
 from agno.tools.yfinance import YFinanceTools
-from agno.models.google import Gemini
+from agno.models.nebius import Nebius
 import json
 import re
 import os
 import dotenv
 
 dotenv.load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+NEBIUS_API_KEY = os.getenv("NEBIUS_API_KEY")
+
+if not NEBIUS_API_KEY:
+    raise ValueError("Please provide a NEBIUS API key")
 
 app = FastAPI(
     title="Stock Analysis API",
@@ -55,7 +58,7 @@ detailed_instructions = [
 
 # Initialize the agent with YFinance tools
 stock_analyzer_agent = Agent(
-    model=Gemini(id="gemini-2.0-flash", api_key=GEMINI_API_KEY),
+    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
     markdown=True,
     tools=[YFinanceTools(
         stock_price=True,
