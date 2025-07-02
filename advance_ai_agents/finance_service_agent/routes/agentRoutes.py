@@ -14,6 +14,7 @@ from controllers.ask import chat_agent
 router = APIRouter()
 
 dotenv.load_dotenv()
+NEBIUS_API_KEY = os.getenv("NEBIUS_API_KEY")
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/health", response_class=HTMLResponse)
