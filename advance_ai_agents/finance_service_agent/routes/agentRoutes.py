@@ -9,7 +9,7 @@ from agno.agent import RunResponse, Agent
 from agno.models.nebius import Nebius
 from controllers.agents import multi_ai
 import dotenv
-from controllers.stockAgent import chat_agent
+from controllers.ask import chat_agent
 
 router = APIRouter()
 
