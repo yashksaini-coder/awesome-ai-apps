@@ -58,7 +58,7 @@ detailed_instructions = [
 
 # Initialize the agent with YFinance tools
 stock_analyzer_agent = Agent(
-    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
+    model=Nebius(id="deepseek-ai/DeepSeek-R1-0528", api_key=NEBIUS_API_KEY),
     markdown=True,
     tools=[YFinanceTools(
         stock_price=True,

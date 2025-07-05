@@ -17,7 +17,7 @@ if not NEBIUS_API_KEY:
 web_search_agent = Agent(
     name="web_agent",
     role="search the web for information based on the user given input",
-    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
+    model=Nebius(id="deepseek-ai/DeepSeek-R1-0528", api_key=NEBIUS_API_KEY),
     tools=[
         DuckDuckGoTools(search=True, news=True),
 
@@ -32,7 +32,7 @@ web_search_agent = Agent(
 financial_agent = Agent(
     name="financial_agent",
     role="get financial information",
-    model=Nebius(id="meta-llama/Llama-3.3-70B-Instruct", api_key=NEBIUS_API_KEY),
+    model=Nebius(id="Qwen/Qwen3-32B", api_key=NEBIUS_API_KEY),
     tools=[
         YFinanceTools(stock_price=True,
                     analyst_recommendations=True,

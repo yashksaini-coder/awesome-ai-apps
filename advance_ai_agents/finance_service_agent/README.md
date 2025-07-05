@@ -72,8 +72,7 @@ The following environment variables are required to run the server:
 ```bash
 NEWS_API_KEY: Your News API key for fetching news articles.
 REDIS_URL: The URL of the Redis server for caching.
-GEMINI_API_KEY: Your Gemini API key for making predictions.
-GROQ_API_KEY: Your Groq API key for making predictions.
+NEBIUS_API_KEY: Your Nebius model API key for AI predictions.
 ```
 
 ---
