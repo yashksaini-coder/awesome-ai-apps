@@ -41,6 +41,9 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 * [Agno UI Example](simple_ai_agents/agno_ui_agent) - UI for web & finance agents.
 * [Mastra Weather Bot](simple_ai_agents/mastra_ai_weather_agent) - Weather updates with Mastra AI.
 * [Calendar Assistant](simple_ai_agents/cal_scheduling_agent) - Calendar scheduling with Cal.com.
+* [Memory Agent](simple_ai_agents/memory_agent) - Simple Memory Agent implementation with .
+* [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
+
 
 ## 🗂️ MCP Agents
 
