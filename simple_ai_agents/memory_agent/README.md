@@ -23,7 +23,7 @@ A demonstration of AI agents with persistent memory capabilities using the Agno 
 
 ```bash
 git clone https://github.com/Arindam200/awesome-ai-apps.git
-cd simple_ai_agents/memory_agents
+cd simple_ai_agents/memory_agent
 ```
 
 2. Install dependencies:
