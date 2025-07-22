@@ -16,6 +16,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 - [<img src="https://avatars.githubusercontent.com/u/130722866?s=200&v=4" alt="Llamaindex logo" width="20" height="20"> LlamaIndex](https://www.llamaindex.ai/)
 - [<img src="https://avatars.githubusercontent.com/u/104874993?s=48&v=4" alt="Agno logo" width="20" height="20"> Agno](https://www.agno.com/)
 -  [<img src="https://cdn.prod.website-files.com/66cf2bfc3ed15b02da0ca770/66d07240057721394308addd_Logo%20(1).svg" alt="CrewAI logo" width="35" height="25"> CrewAI](https://www.crewai.com/)
+- [<img src="https://avatars.githubusercontent.com/u/209155962?s=200&v=4" alt="AWS Strands Agents logo" width="20" height="20"> AWS Strands Agent](https://strandsagents.com/)
 - [<img src="https://avatars.githubusercontent.com/u/110818415?s=200&v=4" alt="Pydantic AI logo" width="20" height="20"> Pydantic AI](https://ai.pydantic.dev/)
 
 
@@ -29,6 +30,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 * [CrewAI Research Crew](starter_ai_agents/crewai_starter) - Multi-agent research team.
 * [PydanticAI Weather Bot](starter_ai_agents/pydantic_starter) - Real-time weather info.
 * [LangChain-LangGraph Starter](starter_ai_agents/langchain_langgraph_starter) - LangChain + LangGraph starter.
+* [AWS Strands Agent Starter](starter_ai_agents/aws_strands_starter) - Weather report Agent.
 
 ## 🪶 Simple Agents
 
