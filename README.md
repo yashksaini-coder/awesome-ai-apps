@@ -65,6 +65,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 * [PDF RAG Analyzer](rag_apps/pdf_rag_analyser) - Chat with multiple PDFs.
 * [Qwen3 RAG Chat](rag_apps/qwen3_rag) - PDF chatbot with Streamlit.
 * [Chat with Code](rag_apps/chat_with_code) - Conversational code explorer.
+* [Gemma3 OCR](rag_apps/gemma_ocr/) - OCR-based document and image processor using Gemma3
 
 
 ## 🔬 Advanced Agents
