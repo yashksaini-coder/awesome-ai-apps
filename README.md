@@ -55,6 +55,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 * [LangGraph MCP Agent](mcp_ai_agents/langchain_langgraph_mcp_agent) - LangChain ReAct agent with Couchbase.
 * [GitHub MCP Agent](mcp_ai_agents/github_mcp_agent) - Repo insights via MCP.
 * [MCP Starter](mcp_ai_agents/mcp_starter) - GitHub repo analyzer starter.
+* [Talk to your Docs](mcp_ai_agents/docs_qna_agent) - Documentation QnA Agent
 
 ## 📚 RAG Applications
 
