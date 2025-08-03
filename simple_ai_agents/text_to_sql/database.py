@@ -2,16 +2,6 @@ import streamlit as st
 import pymysql
 from urllib.parse import urlparse
 
-# Default database connection configuration
-DEFAULT_DB_CONFIG = {
-    "host": "mysql-assembly.gibsonai.com",
-    "user": "us_mg9LCdMy78FJuGzxeoW",
-    "password": "n2tywV7qGJpUSf9t5dRkQsO6hsrXpWxw",
-    "database": "db_mg9LCdMy78FJuGzxeoW",
-    "port": 3306,
-    "ssl": {"ssl": {}},
-}
-
 
 def parse_connection_string(connection_string):
     """Parse MySQL connection string and return database config"""
@@ -43,7 +33,7 @@ def get_database_config():
     """Get database configuration from session state or default"""
     if "db_config" in st.session_state:
         return st.session_state.db_config
-    return DEFAULT_DB_CONFIG
+    return None
 
 
 def get_database_connection():

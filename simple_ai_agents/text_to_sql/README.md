@@ -78,11 +78,6 @@ The application supports MySQL databases. Enter your connection string in the fo
 mysql://username:password@host/database
 ```
 
-Example:
-```
-mysql://us_mg9LCdMy78FJuGzxeoW:n2tywV7qGJpUSf9t5dRkQsO6hsrXpWxw@mysql-assembly.gibsonai.com/db_mg9LCdMy78FJuGzxeoW
-```
-
 ## Supported Database Operations 📊
 
 ### Query Types
