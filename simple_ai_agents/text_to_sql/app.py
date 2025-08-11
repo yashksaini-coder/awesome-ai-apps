@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 # Import functionality from separate modules
 from database import parse_connection_string, execute_query
 from ai_services import translate_to_sql, explain_results, generate_insert_sql_from_csv
-import pandas as pd
 
 # Load environment variables
 load_dotenv()
@@ -60,18 +59,7 @@ def main():
             else:
                 st.error("❌ Invalid connection string format")
         else:
-            # Use default config
-            from database import DEFAULT_DB_CONFIG
-
-            st.session_state.db_config = DEFAULT_DB_CONFIG
-
-        st.markdown("---")
-        st.markdown("### Database Info")
-        # st.info(f"Connected to: GibsonAI Ecommerce Database (MySQL)")
-        # st.markdown(
-        #     "**Tables:** category, product, product_category, user, order, order_item"
-        # )
-        st.markdown("**Note:** Uses MySQL syntax with backticks for identifiers")
+            st.warning("Please enter your database connection string")
 
         st.markdown("---")
         st.markdown("### 📁 File Upload")
@@ -228,19 +216,6 @@ def main():
             "results_count": len(df),
         }
         st.session_state.query_history.append(history_item)
-
-    # Query History
-    if st.session_state.query_history:
-        st.markdown("---")
-        st.header("📚 Query History")
-
-        for i, item in enumerate(reversed(st.session_state.query_history)):
-            with st.expander(
-                f"Query {len(st.session_state.query_history) - i}: {item['question'][:50]}..."
-            ):
-                st.write(f"**Question:** {item['question']}")
-                st.code(item["sql"], language="sql")
-                st.write(f"**Results:** {item['results_count']} rows")
 
 
 if __name__ == "__main__":
