@@ -46,6 +46,8 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 * [Memory Agent](simple_ai_agents/memory_agent) - Simple Memory Agent implementation with .
 * [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
 
+* [Talk to Your DB](simple_ai_agents/talk_to_db) - Talk to your Database with GibsonAI & Langchain
+
 
 ## 🗂️ MCP Agents
 
