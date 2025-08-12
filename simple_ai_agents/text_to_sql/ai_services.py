@@ -38,23 +38,11 @@ def get_llm():
     )
 
 
-def translate_to_sql(natural_question, uploaded_data=None):
+def translate_to_sql(natural_question):
     """Translate natural language question to SQL using Qwen from Nebius"""
     try:
         # Initialize Qwen from Nebius
         llm = get_llm()
-
-        # Prepare uploaded data context if available
-        uploaded_context = ""
-        if uploaded_data:
-            sample_data = uploaded_data[:3]  # Show first 3 rows as example
-            uploaded_context = f"""
-Uploaded Data Context:
-The user has uploaded a CSV file with {len(uploaded_data)} rows of data.
-Sample data: {sample_data}
-
-When generating INSERT statements, use the exact column names from the uploaded data.
-"""
 
         # Create the prompt template
         prompt = ChatPromptTemplate.from_messages(
@@ -66,16 +54,13 @@ When generating INSERT statements, use the exact column names from the uploaded 
 Database Schema:
 {db_schema}
 
-{uploaded_context}
-
 Rules:
 1. For SELECT queries: Use appropriate JOINs when needed, use meaningful column aliases for clarity, include LIMIT 100 for large result sets
-2. For INSERT queries: Generate proper INSERT statements with UUID() function for uuid field, use the exact data from uploaded CSV
-3. Use proper MySQL syntax with backticks for table and column names
-4. Use MySQL-specific functions and syntax
-5. Return ONLY the SQL query, no explanations, no "SQL:" prefix
-6. Do NOT include any thinking, reflection, or reasoning in your response
-7. Do NOT use <think> tags or any other markup
+2. Use proper MySQL syntax with backticks for table and column names
+3. Use MySQL-specific functions and syntax
+4. Return ONLY the SQL query, no explanations, no "SQL:" prefix
+5. Do NOT include any thinking, reflection, or reasoning in your response
+6. Do NOT use <think> tags or any other markup
 
 Example SELECT queries:
 Question: "What are the product categories we have?"
@@ -89,13 +74,6 @@ SELECT COUNT(*) as total_orders FROM `order`;
 
 Question: "What are the top 5 most expensive products?"
 SELECT `id`, `name`, `price` FROM `product` ORDER BY `price` DESC LIMIT 5;
-
-Example INSERT query (when CSV data is uploaded):
-Question: "Generate SQL to insert the uploaded CSV data into the user table"
-INSERT INTO `user` (`uuid`, `name`, `email`, `address`) VALUES
-(UUID(), 'John Smith', 'john.smith@email.com', '123 Main St, New York, NY 10001'),
-(UUID(), 'Sarah Johnson', 'sarah.johnson@email.com', '456 Oak Ave, Los Angeles, CA 90210'),
-(UUID(), 'Michael Brown', 'michael.brown@email.com', '789 Pine Rd, Chicago, IL 60601');
 
 IMPORTANT: Return ONLY the SQL query without any prefix like "SQL:" or explanations. Do not include any thinking process or reflection.
 """,
@@ -112,7 +90,6 @@ IMPORTANT: Return ONLY the SQL query without any prefix like "SQL:" or explanati
             {
                 "db_schema": DB_SCHEMA,
                 "question": natural_question,
-                "uploaded_context": uploaded_context,
             }
         )
 
@@ -135,40 +112,6 @@ IMPORTANT: Return ONLY the SQL query without any prefix like "SQL:" or explanati
 
     except Exception as e:
         return f"Error translating to SQL: {str(e)}"
-
-
-def generate_insert_sql_from_csv(uploaded_data, table_name="user"):
-    """Generate INSERT SQL from uploaded CSV data"""
-    try:
-        if not uploaded_data:
-            return "Error: No uploaded data found"
-
-        # Generate INSERT statement
-        sql_lines = []
-        sql_lines.append(
-            f"INSERT INTO `{table_name}` (`uuid`, `name`, `email`, `address`) VALUES"
-        )
-
-        for i, row in enumerate(uploaded_data):
-            # Escape single quotes in the data
-            name = str(row.get("name", "")).replace("'", "''")
-            email = str(row.get("email", "")).replace("'", "''")
-            address = str(row.get("address", "")).replace("'", "''")
-
-            sql_line = f"(UUID(), '{name}', '{email}', '{address}')"
-
-            # Add comma if not the last row
-            if i < len(uploaded_data) - 1:
-                sql_line += ","
-
-            sql_lines.append(sql_line)
-
-        sql_lines.append(";")
-
-        return "\n".join(sql_lines)
-
-    except Exception as e:
-        return f"Error generating INSERT SQL: {str(e)}"
 
 
 def explain_results(results, original_question):

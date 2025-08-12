@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 # Import functionality from separate modules
 from database import parse_connection_string, execute_query
-from ai_services import translate_to_sql, explain_results, generate_insert_sql_from_csv
+from ai_services import translate_to_sql, explain_results
 
 # Load environment variables
 load_dotenv()
@@ -62,51 +62,6 @@ def main():
             st.warning("Please enter your database connection string")
 
         st.markdown("---")
-        st.markdown("### 📁 File Upload")
-        uploaded_file = st.file_uploader(
-            "Upload CSV file for data insertion",
-            type=["csv"],
-            help="Upload a CSV file with columns: name, email, address",
-        )
-
-        if uploaded_file:
-            try:
-                # Read and preview the CSV
-                df = pd.read_csv(uploaded_file)
-                st.success(f"✅ File uploaded: {uploaded_file.name}")
-                st.info(f"📊 File contains {len(df)} rows")
-
-                # Show preview
-                st.markdown("**File Preview:**")
-                st.dataframe(df.head(), use_container_width=True)
-
-                # Store the uploaded file data in session state
-                st.session_state.uploaded_data = df.to_dict("records")
-                st.session_state.uploaded_filename = uploaded_file.name
-
-                # Show required columns info
-                required_cols = ["name", "email", "address"]
-                missing_cols = [col for col in required_cols if col not in df.columns]
-
-                if missing_cols:
-                    st.error(f"❌ Missing required columns: {', '.join(missing_cols)}")
-                    st.info("Required columns: name, email, address")
-                else:
-                    st.success("✅ All required columns present")
-
-                    # Add button to generate INSERT SQL
-                    if st.button("🔧 Generate INSERT SQL", type="secondary"):
-                        insert_sql = generate_insert_sql_from_csv(
-                            st.session_state.uploaded_data
-                        )
-                        st.session_state.generated_insert_sql = insert_sql
-                        st.success("✅ INSERT SQL generated!")
-                        st.code(insert_sql, language="sql")
-
-            except Exception as e:
-                st.error(f"Error reading file: {str(e)}")
-
-        st.markdown("---")
         st.markdown("### Example Questions")
         st.markdown(
             """
@@ -114,7 +69,6 @@ def main():
         - "Show me all products with their prices"
         - "How many orders do we have?"
         - "What are the top 5 most expensive products?"
-        - "Generate SQL to insert the uploaded CSV data into the user table"
         """
         )
 
@@ -138,10 +92,7 @@ def main():
             return
 
         with st.spinner("Translating your question to SQL..."):
-            # Get uploaded data if available
-            uploaded_data = st.session_state.get("uploaded_data", None)
-
-            sql_query = translate_to_sql(question, uploaded_data)
+            sql_query = translate_to_sql(question)
 
             if sql_query and not sql_query.startswith("Error"):
                 st.session_state.generated_sql = sql_query
@@ -166,24 +117,6 @@ def main():
                     st.session_state.query_results = results
                     st.session_state.query_error = None
                     st.success("Query executed successfully!")
-
-    # Generated INSERT SQL section (from uploaded file)
-    if "generated_insert_sql" in st.session_state:
-        st.markdown("---")
-        st.header("📋 Generated INSERT SQL")
-        st.code(st.session_state.generated_insert_sql, language="sql")
-
-        if st.button("▶️ Execute INSERT Query", type="secondary"):
-            with st.spinner("Executing INSERT query..."):
-                results, error = execute_query(st.session_state.generated_insert_sql)
-
-                if error:
-                    st.error(error)
-                else:
-                    st.success("✅ Data inserted successfully!")
-                    st.info(
-                        f"Inserted {len(st.session_state.uploaded_data)} rows into the user table"
-                    )
 
     # Results section
     if (
