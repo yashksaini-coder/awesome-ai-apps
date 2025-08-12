@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import pandas as pd
 from dotenv import load_dotenv
+import base64
 
 # Import functionality from separate modules
 from database import parse_connection_string, execute_query
@@ -12,21 +13,40 @@ load_dotenv()
 
 # Page configuration
 st.set_page_config(
-    page_title="Natural Language Database Query", page_icon="🗄️", layout="wide"
+    page_title="Talk to Database", page_icon="🗄️", layout="wide"
 )
 
 # Initialize session state
 if "query_history" not in st.session_state:
     st.session_state.query_history = []
 
+with open("./assets/langchain.png", "rb") as langchain_file:
+    langchain_base64 = base64.b64encode(langchain_file.read()).decode()
+
+with open("./assets/gibson.svg", "r", encoding="utf-8") as gibson_file:
+    gibson_svg = gibson_file.read().replace('\n', '').replace('\r', '').replace('  ', '').replace('"', "'")
+
+gibson_svg_inline = f'<span style="height:80px; width:200px; display:inline-block; vertical-align:middle; margin-left:8px;margin-top:20px;margin-right:8px;">{gibson_svg}</span>'
+
+# Create title with embedded images (SVG and PNG in one line)
+title_html = f"""
+<div style='display:flex; align-items:center; width:100%; padding:24px 0;'>
+  <h1 style='margin:0; padding:0; font-size:2.5rem; font-weight:bold; display:flex; align-items:center;'>
+    <span style='font-size:3rem;'>🗄️ </span> Talk to Database with {gibson_svg_inline} &
+    <img src='data:image/png;base64,{langchain_base64}' style='height:72px; margin-left:8px; margin-right:8px; vertical-align:middle;'/>
+    Langchain
+  </h1>
+</div>
+"""
 
 def main():
-    st.title("🗄️ Natural Language Database Query")
+    st.markdown(title_html, unsafe_allow_html=True)
     st.markdown("Ask questions about your ecommerce database in plain English!")
 
     # Sidebar for configuration
     with st.sidebar:
-        st.header("⚙️ Configuration")
+        st.image("./assets/nebius.png", width=150)
+ 
 
         # Nebius API Key input
         nebius_key = st.text_input(
@@ -72,8 +92,6 @@ def main():
         """
         )
 
-    # Main content area
-    st.header("💬 Ask Your Question")
 
     # Question input
     question = st.text_area(

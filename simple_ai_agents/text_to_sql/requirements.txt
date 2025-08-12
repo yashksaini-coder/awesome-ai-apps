@@ -1,8 +1,0 @@
-streamlit
-langchain
-langchain-nebius
-pymysql
-cryptography
-python-dotenv
-pandas
-numpy<2 

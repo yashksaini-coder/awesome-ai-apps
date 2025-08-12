@@ -1,4 +1,6 @@
-# Natural Language Database Query 🤖
+![demo](./assets/demo.png)
+
+# Talk to your Database 🤖
 
 A powerful AI-powered database query tool that translates natural language questions into SQL queries using Nebius AI. This application allows users to interact with their MySQL databases using plain English, making database operations accessible to non-technical users.
 
@@ -24,30 +26,30 @@ A powerful AI-powered database query tool that translates natural language quest
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/Arindam200/awesome-ai-apps.git
-cd text_to_sql
-```
+   ```bash
+   git clone https://github.com/Arindam200/awesome-ai-apps.git
+   cd simple_ai_agents/talk_to_db
+   ```
 
 2. Install the required dependencies:
 
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   uv sync
+   ```
 
 3. Create a `.env` file in the project root and add your API key:
 
-```env
-NEBIUS_API_KEY=your_nebius_api_key
-```
+   ```env
+   NEBIUS_API_KEY=your_nebius_api_key
+   ```
 
 ## Usage 🚀
 
 1. Start the Streamlit application:
 
-```bash
-streamlit run app.py
-```
+   ```bash
+   uv run streamlit run app.py
+   ```
 
 2. Open your web browser and navigate to the provided local URL (typically http://localhost:8501)
 
@@ -81,6 +83,7 @@ mysql://username:password@host/database
 ## Supported Database Operations 📊
 
 ### Query Types
+
 - **SELECT queries**: Data retrieval and analysis
 - **Complex JOINs**: Multi-table queries
 - **Aggregations**: COUNT, SUM, AVG operations
@@ -89,6 +92,7 @@ mysql://username:password@host/database
 - **Limiting**: LIMIT clauses for large datasets
 
 ### Example Queries
+
 - "Show me all users who made orders"
 - "What's the total revenue from completed orders?"
 - "Which products are out of stock?"
@@ -102,11 +106,13 @@ mysql://username:password@host/database
 ## Architecture 🏗️
 
 ### Modular Design
+
 - **UI Layer** (`app.py`): Streamlit interface and user interactions
 - **Database Layer** (`database.py`): Connection management and query execution
 - **AI Layer** (`ai_services.py`): Natural language processing and SQL generation
 
 ### Key Components
+
 - **Connection String Parser**: Safely parses MySQL connection strings
 - **SQL Translator**: Converts natural language to SQL using Nebius AI
 - **Result Explainer**: Provides business insights from query results
@@ -128,4 +134,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License 📄
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
