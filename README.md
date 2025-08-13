@@ -45,7 +45,6 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 * [Calendar Assistant](simple_ai_agents/cal_scheduling_agent) - Calendar scheduling with Cal.com.
 * [Memory Agent](simple_ai_agents/memory_agent) - Simple Memory Agent implementation with .
 * [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
-
 * [Talk to Your DB](simple_ai_agents/talk_to_db) - Talk to your Database with GibsonAI & Langchain
 
 
@@ -63,6 +62,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 
 **Retrieve-augmented generation examples:**
 
+* [Agentic RAG](rag_apps/agentic_rag) - Agentic RAG with Agno & GPT 5.
 * [Resume Optimizer](rag_apps/resume_optimizer) - Boost resumes with AI.
 * [LlamaIndex RAG Starter](rag_apps/llamaIndex_starter) - LlamaIndex + Nebius RAG starter.
 * [PDF RAG Analyzer](rag_apps/pdf_rag_analyser) - Chat with multiple PDFs.
