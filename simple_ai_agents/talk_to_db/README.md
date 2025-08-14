@@ -19,7 +19,8 @@ A powerful AI-powered database query tool that translates natural language quest
 ## Prerequisites 🛠️
 
 - Python 3.10+
-- [Nebius AI API key](https://studio.nebius.com/?modals=create-api-key)
+- [Nebius AI API key](https://dub.sh/AIStudio)
+- [GibsonAI DB connection](https://www.gibsonai.com)
 - MySQL database access
 
 ## Installation 📥
@@ -56,7 +57,7 @@ A powerful AI-powered database query tool that translates natural language quest
 3. Configure your settings in the sidebar:
 
    - **Nebius API Key**: Enter your Nebius AI API key
-   - **Database Connection String**: Enter your MySQL connection string
+   - **Database Connection String**: Enter your MySQL connection string from [GibsonAI](https://www.gibsonai.com)
 
 4. Ask questions in plain English:
 
@@ -101,7 +102,7 @@ mysql://username:password@host/database
 
 ## API Keys 🔑
 
-- **Nebius AI API Key**: Get your API key from [https://studio.nebius.com/?modals=create-api-key](https://studio.nebius.com/?modals=create-api-key)
+- **Nebius AI API Key**: Get your API key from [https://studio.nebius.com/](https://dub.sh/AIStudio)
 
 ## Architecture 🏗️
 
