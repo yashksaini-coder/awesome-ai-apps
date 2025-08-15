@@ -50,7 +50,7 @@ From simple chatbots and MCP examples to advance AI Agents, this repository serv
 
 ## 🗂️ MCP Agents
 
-**Examples using Managed Compute Providers:**
+**Examples using Model Context Protocol:**
 
 * [Doc-MCP](mcp_ai_agents/doc_mcp) - Semantic RAG docs & Q\&A.
 * [LangGraph MCP Agent](mcp_ai_agents/langchain_langgraph_mcp_agent) - LangChain ReAct agent with Couchbase.
