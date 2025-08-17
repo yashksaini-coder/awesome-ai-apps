@@ -10,3 +10,4 @@ tmp/
 # Virtual environments
 .venv
 *.env
+uv.lock
