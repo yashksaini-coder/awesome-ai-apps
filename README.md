@@ -16,6 +16,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [<img src="https://cdn.prod.website-files.com/66cf2bfc3ed15b02da0ca770/66d07240057721394308addd_Logo%20(1).svg" alt="CrewAI logo" width="35" height="25"> CrewAI](https://www.crewai.com/)
 - [<img src="https://avatars.githubusercontent.com/u/209155962?s=200&v=4" alt="AWS Strands Agents logo" width="20" height="20"> AWS Strands Agent](https://strandsagents.com/)
 - [<img src="https://avatars.githubusercontent.com/u/110818415?s=200&v=4" alt="Pydantic AI logo" width="20" height="20"> Pydantic AI](https://ai.pydantic.dev/)
+- [<img src="https://avatars.githubusercontent.com/u/134388954?s=200&v=4" alt="Camel AI logo" width="20" height="20"> CAMEL‑AI](https://www.camel-ai.org/)
 
 ## 🧩 Starter Agents
 
@@ -28,6 +29,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [PydanticAI Weather Bot](starter_ai_agents/pydantic_starter) - Real-time weather info.
 - [LangChain-LangGraph Starter](starter_ai_agents/langchain_langgraph_starter) - LangChain + LangGraph starter.
 - [AWS Strands Agent Starter](starter_ai_agents/aws_strands_starter) - Weather report Agent.
+- [Camel AI Starter](starter_ai_agents/camel_ai_starter) - Performance benchmarking tool that compares the performance of various AI models.
 
 ## 🪶 Simple Agents
 
