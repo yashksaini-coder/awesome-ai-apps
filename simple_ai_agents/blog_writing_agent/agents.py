@@ -7,7 +7,7 @@ Agent functions for:
 
 Requirements:
 - pip install streamlit pypdf python-docx openai python-dotenv
-- Set agent_endpoint and agent_access_key in environment or .env file
+- Set DIGITAL_OCEAN_ENDPOINT and DIGITAL_OCEAN_AGENT_ACCESS_KEY in environment or .env file
 """
 
 import os
@@ -30,25 +30,25 @@ from memori import Memori, create_memory_tool
 load_dotenv()
 
 # Check for required Digital Ocean credentials
-agent_endpoint = os.getenv("agent_endpoint")
-agent_access_key = os.getenv("agent_access_key")
+DIGITAL_OCEAN_ENDPOINT = os.getenv("DIGITAL_OCEAN_ENDPOINT")
+DIGITAL_OCEAN_AGENT_ACCESS_KEY = os.getenv("DIGITAL_OCEAN_AGENT_ACCESS_KEY")
 
-if not agent_endpoint or not agent_access_key:
+if not DIGITAL_OCEAN_ENDPOINT or not DIGITAL_OCEAN_AGENT_ACCESS_KEY:
     raise ValueError("Digital Ocean AI credentials not found in environment variables")
 
 print("🤖 Setting up Digital Ocean AI client...")
 
 # Configure Digital Ocean AI endpoint
 base_url = (
-    agent_endpoint
-    if agent_endpoint.endswith("/api/v1/")
-    else f"{agent_endpoint}/api/v1/"
+    DIGITAL_OCEAN_ENDPOINT
+    if DIGITAL_OCEAN_ENDPOINT.endswith("/api/v1/")
+    else f"{DIGITAL_OCEAN_ENDPOINT}/api/v1/"
 )
 
 # Initialize Digital Ocean AI client
 client = openai.OpenAI(
     base_url=base_url,
-    api_key=agent_access_key,
+    api_key=DIGITAL_OCEAN_AGENT_ACCESS_KEY,
 )
 
 
@@ -225,8 +225,11 @@ def generate_blog_with_style(memory_tool, topic: str) -> str:
         except Exception:
             pass  # Continue without context if search fails
 
-        # Simple, direct prompt that should work
-        prompt = f"Write a blog post about {topic}. {writing_style_context}"
+        # Create appropriate prompt based on whether we have writing style
+        if writing_style_context:
+            prompt = f"Write a blog post about {topic}. Use this writing style: {writing_style_context}"
+        else:
+            prompt = f"Write a professional and engaging blog post about {topic}. Make it informative, well-structured, and easy to read."
 
         response = client.chat.completions.create(
             model="n/a",

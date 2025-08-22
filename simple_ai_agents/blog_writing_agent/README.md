@@ -38,8 +38,8 @@ uv sync
 Create a `.env` file in the project root and add your API credentials:
 
 ```env
-agent_endpoint=your_digital_ocean_agent_endpoint
-agent_access_key=your_digital_ocean_api_key
+DIGITAL_OCEAN_ENDPOINT=your_digital_ocean_agent_endpoint
+DIGITAL_OCEAN_AGENT_ACCESS_KEY=your_digital_ocean_api_key
 ```
 
 ## Usage 🚀
@@ -76,8 +76,7 @@ Open your web browser and navigate to the provided local URL (typically http://l
 ## Supported Document Formats 📄
 
 - **PDF**: Portable Document Format files
-- **DOCX**: Microsoft Word documents
-- **TXT**: Plain text files
+
 
 ## Writing Style Analysis 📊
 

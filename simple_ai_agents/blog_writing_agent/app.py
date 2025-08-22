@@ -10,6 +10,7 @@ This file contains the Streamlit interface while the agent logic is in agents.py
 
 import streamlit as st
 import base64
+import os
 from agents import (
     initialize_memori,
     create_memory_tool_instance,
@@ -34,10 +35,10 @@ st.set_page_config(
 # Initialize session state
 if "query_history" not in st.session_state:
     st.session_state.query_history = []
-
-# Load and encode images
-with open("./assets/digital_ocean.png", "rb") as digital_ocean_file:
-    digital_ocean_base64 = base64.b64encode(digital_ocean_file.read()).decode()
+if "style_analysis" not in st.session_state:
+    st.session_state.style_analysis = None
+if "text_content" not in st.session_state:
+    st.session_state.text_content = None
 
 with open("./assets/gibson.svg", "r", encoding="utf-8") as gibson_file:
     gibson_svg = (
@@ -54,8 +55,7 @@ gibson_svg_inline = f'<span style="height:80px; width:200px; display:inline-bloc
 title_html = f"""
 <div style='display:flex; align-items:center; width:100%; padding:24px 0;'>
   <h1 style='margin:0; padding:0; font-size:2.5rem; font-weight:bold; display:flex; align-items:center;'>
-    <span style='font-size:3rem;'>✍️ </span>Blog Writing Agent with {gibson_svg_inline} &
-    <img src='data:image/png;base64,{digital_ocean_base64}' style='height:40px; margin-left:8px; margin-right:8px; vertical-align:middle;'/>
+    Blog Writing Agent with {gibson_svg_inline} Memori
   </h1>
 </div>
 """
@@ -80,6 +80,32 @@ if memory_system is None:
 
 # Create memory tool
 memory_tool = create_memory_tool_instance(memory_system)
+
+with st.sidebar:
+    st.image("./assets/digital_ocean.png", width=250)
+
+    digital_ocean_endpoint = st.text_input(
+        "Digital Ocean Endpoint",
+        value=os.getenv("DIGITAL_OCEAN_ENDPOINT", ""),
+        type="password",
+        help="Your Digital Ocean endpoint URL",
+    )
+
+    digital_ocean_key = st.text_input(
+        "Digital Ocean Agent Access Key",
+        value=os.getenv("DIGITAL_OCEAN_AGENT_ACCESS_KEY", ""),
+        type="password",
+        help="Your Digital Ocean agent access key",
+    )
+
+    if st.button("Save Digital Ocean Config", use_container_width=True):
+        if digital_ocean_endpoint:
+            os.environ["DIGITAL_OCEAN_ENDPOINT"] = digital_ocean_endpoint
+        if digital_ocean_key:
+            os.environ["DIGITAL_OCEAN_AGENT_ACCESS_KEY"] = digital_ocean_key
+        st.success("Digital Ocean configuration saved successfully!")
+
+    st.markdown("---")
 
 
 def knowledge_agent_sidebar():
@@ -114,18 +140,7 @@ def knowledge_agent_sidebar():
             return
 
         if text_content:
-            # Text preview in sidebar
-            st.sidebar.subheader("📖 Text Preview")
-            st.sidebar.text_area(
-                "Content",
-                (
-                    text_content[:500] + "..."
-                    if len(text_content) > 500
-                    else text_content
-                ),
-                height=150,
-                disabled=True,
-            )
+            # Text preview removed - not needed
 
             # Analyze button
             if st.sidebar.button("🔍 Analyze Writing Style", type="primary"):
@@ -177,16 +192,16 @@ def knowledge_agent_sidebar():
     st.sidebar.markdown("---")
     st.sidebar.subheader("📊 Current Status")
 
-    try:
-        stored_style = get_stored_writing_style(memory_tool)
-        if stored_style:
-            st.sidebar.success("✅ Writing style profile found")
-            st.sidebar.info("You can now generate content using the Writing Agent!")
-        else:
-            st.sidebar.warning("⚠️ No writing style profile")
-            st.sidebar.info("Upload a document to get started")
-    except Exception as e:
-        st.sidebar.error(f"Error: {e}")
+    # Only show writing style as found if we have it in session state (after analysis)
+    if "style_analysis" in st.session_state and st.session_state.style_analysis:
+        st.sidebar.success("✅ Writing style profile found")
+        st.sidebar.info("You can now generate content using the Writing Agent!")
+
+    else:
+        st.sidebar.warning("⚠️ No writing style profile")
+        st.sidebar.info(
+            "Upload a document and click 'Analyze Writing Style' to get started"
+        )
 
 
 def writing_agent_main():
@@ -194,93 +209,87 @@ def writing_agent_main():
     # Display custom HTML title with embedded logos
     st.markdown(title_html, unsafe_allow_html=True)
 
-    st.markdown("**Generate new blog posts using your stored writing style**")
+    st.markdown(
+        "**Generate new blog posts - with or without your personal writing style**"
+    )
 
-    # Check if we have stored writing style
-    try:
-        stored_style = get_stored_writing_style(memory_tool)
+    # Chat input for blog generation
+    topic = st.chat_input(
+        "What topic would you like me to write about? (e.g., The benefits of artificial intelligence in healthcare)"
+    )
 
-        if stored_style:
-            # st.success("✅ Found your stored writing style profile!")
+    if topic:
+        # Check if we have writing style to enhance the generation
+        has_writing_style = (
+            "style_analysis" in st.session_state and st.session_state.style_analysis
+        )
 
-            # Blog generation
-            # st.subheader("📝 Generate New Blog Post")
-
-            # Topic input using chat_input for cleaner interface
-            topic = st.chat_input(
-                "What topic would you like me to write about? (e.g., The benefits of artificial intelligence in healthcare)"
+        if has_writing_style:
+            spinner_text = (
+                "Still editing your blog post using your unique writing style..."
             )
-
-            if topic:
-                with st.spinner(
-                    "Still editing your blog post using your unique writing style..."
-                ):
-                    try:
-                        # Generate content using stored style
-                        blog_content = generate_blog_with_style(memory_tool, topic)
-
-                        if blog_content:
-                            # st.subheader("📝 Generated Blog Post")
-
-                            # Display the blog content
-                            st.markdown(blog_content)
-
-                            # Action buttons
-                            col1, col2, col3 = st.columns([1, 1, 2])
-
-                            with col1:
-                                # Download as text
-                                st.download_button(
-                                    label="📄 Download TXT",
-                                    data=blog_content,
-                                    file_name=f"blog_post_{topic.replace(' ', '_')[:30]}.txt",
-                                    mime="text/plain",
-                                    use_container_width=True,
-                                )
-
-                            with col2:
-                                # Copy to clipboard
-                                if st.button(
-                                    "📋 Copy to Clipboard", use_container_width=True
-                                ):
-                                    st.write("Content copied to clipboard!")
-
-                            with col3:
-                                # Store the generated content
-                                try:
-                                    save_generated_blog(
-                                        memory_system, topic, blog_content
-                                    )
-                                    st.success("💾 Blog post saved to memory!")
-                                except Exception as e:
-                                    st.warning(f"Note: Could not save to memory: {e}")
-                        else:
-                            st.error("❌ Failed to generate blog post")
-                    except Exception as e:
-                        st.error(f"❌ Error generating blog: {e}")
-
         else:
-            st.warning("⚠️ No writing style profile found in memory")
-            st.info(
-                "Please use the Knowledge Agent in the sidebar to upload and analyze your writing style first."
-            )
+            spinner_text = "Generating your blog post..."
 
-            # # Show what to do next
-            # st.markdown(
-            #     """
-            #     **Next Steps:**
-            #     1. **📚 Use the Knowledge Agent** (in the sidebar)
-            #     2. **📄 Upload one of your previous articles**
-            #     3. **🔍 Let the agent analyze your writing style**
-            #     4. **💾 Store your style profile in memory**
-            #     5. **✍️ Come back here to generate new content!**
-            #     """
-            # )
+        with st.spinner(spinner_text):
+            try:
+                # Generate content (with or without writing style)
+                blog_content = generate_blog_with_style(memory_tool, topic)
 
-    except Exception as e:
-        st.error(f"Error accessing memory: {e}")
-        st.info(
-            "Please use the Knowledge Agent in the sidebar to store your writing style profile."
+                if blog_content:
+                    # st.subheader("📝 Generated Blog Post")
+
+                    # Display the blog content
+                    st.markdown(blog_content)
+
+                    # Action buttons
+                    col1, col2, col3 = st.columns([1, 1, 2])
+
+                    with col1:
+                        # Download as text
+                        st.download_button(
+                            label="📄 Download TXT",
+                            data=blog_content,
+                            file_name=f"blog_post_{topic.replace(' ', '_')[:30]}.txt",
+                            mime="text/plain",
+                            use_container_width=True,
+                        )
+
+                    with col2:
+                        # Copy to clipboard
+                        if st.button("📋 Copy to Clipboard", use_container_width=True):
+                            st.write("Content copied to clipboard!")
+
+                    with col3:
+                        # Store the generated content
+                        try:
+                            save_generated_blog(memory_system, topic, blog_content)
+                            st.success("💾 Blog post saved to memory!")
+                        except Exception as e:
+                            st.warning(f"Note: Could not save to memory: {e}")
+                else:
+                    st.error("❌ Failed to generate blog post")
+            except Exception as e:
+                st.error(f"❌ Error generating blog: {e}")
+
+    # Only show About section when no topic is being processed
+    if not topic:
+        st.markdown("### About this application")
+        st.markdown(
+            "This application is powered by Memori and Digital Ocean Gradient to help you create blog in your own style."
+        )
+        st.markdown("**It features:**")
+        st.markdown(
+            "• **Smart Content Generation**: AI-powered blog writing with customizable topics"
+        )
+        st.markdown(
+            "• **Writing Style Analysis**: Upload your documents to analyze and replicate your unique writing style"
+        )
+        st.markdown(
+            "• **Memory Integration**: Uses Memori to remember your preferences and improve content quality"
+        )
+        st.markdown(
+            "• **Flexible Workflow**: Generate blogs immediately or generate them with your personal writing style"
         )
 
 
