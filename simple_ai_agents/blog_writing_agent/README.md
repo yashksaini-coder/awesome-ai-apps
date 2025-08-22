@@ -18,16 +18,15 @@ A powerful AI-powered blog writing tool that analyzes your writing style and gen
 
 - Python 3.10+
 - Digital Ocean AI API credentials
-- GibsonAI integration
-- Memori memory system
+- GibsonAI's Memori integration
 
 ## Installation 📥
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/ai-blog-writing-agent.git
-cd ai-blog-writing-agent
+git clone https://github.com/Arindam200/awesome-ai-apps.git
+cd simple_ai_agent/blog_writing_agent
 ```
 
 Install the required dependencies using uv:
