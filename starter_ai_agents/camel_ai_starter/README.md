@@ -20,7 +20,7 @@ A benchmarking tool built with the CAMEL framework that compares the performance
 1. Clone the repository:
 
 ```bash
-git clone [https://github.com/Arindam200/awesome-ai-apps.git](https://github.com/Arindam200/awesome-ai-apps.git)
+git clone https://github.com/Arindam200/awesome-ai-apps.git
 cd starter_ai_agents/camel_ai_starter
 ```
 
