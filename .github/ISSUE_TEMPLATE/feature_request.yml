@@ -24,8 +24,6 @@ body:
       label: Target Project
       description: Name of the project where the feature will be added
       placeholder: "e.g., job_searching_agent"
-    validations:
-      required: true
 
   - type: dropdown
     id: project-directory
@@ -37,6 +35,7 @@ body:
         - mcp_ai_agents
         - rag_apps
         - starter_ai_agents
+        - simple_ai_agents
     validations:
       required: true
 
@@ -46,8 +45,6 @@ body:
       label: Motivation
       description: Explain why this feature is needed and what problem it solves
       placeholder: "Why do you want this feature? What problem does it solve?"
-    validations:
-      required: true
 
   - type: textarea
     id: proposed-solution
@@ -55,8 +52,7 @@ body:
       label: Proposed Solution
       description: Describe your proposed solution in detail
       placeholder: "How would you implement this feature?"
-    validations:
-      required: true
+
 
   - type: textarea
     id: user-impact
@@ -64,8 +60,6 @@ body:
       label: User Impact
       description: Describe how this feature will benefit users
       placeholder: "How will this feature improve the user experience?"
-    validations:
-      required: true
 
   - type: textarea
     id: alternatives
