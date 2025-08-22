@@ -4,7 +4,6 @@
 
 An advanced AI-powered price monitoring and alert system that tracks product prices and availability from e-commerce websites, detects significant changes, and instantly sends alerts via SMS/WhatsApp. Built with ScrapeGraph AI, CrewAI, Nebius AI, Twilio, and Streamlit.
 
-
 ## 🚀 Features
 
 - **Automated Price Tracking**: Real-time monitoring of product prices & stock availability
@@ -15,7 +14,6 @@ An advanced AI-powered price monitoring and alert system that tracks product pri
 - **Scheduled Monitoring**: APScheduler runs checks at user-defined intervals
 - **Data Persistence**: Product data stored in JSON for historical comparison
 - **User-Friendly Dashboard**: Streamlit interface to add and manage products
-
 
 ## 🛠️ Tech Stack
 
@@ -28,7 +26,6 @@ An advanced AI-powered price monitoring and alert system that tracks product pri
 - **APScheduler**: Scheduled task automation
 - **JSON**: Lightweight database for product data
 
-
 ## 📦 Getting Started
 
 ### Prerequisites
@@ -37,7 +34,7 @@ An advanced AI-powered price monitoring and alert system that tracks product pri
 - [uv](https://github.com/astral-sh/uv) package manager (used instead of pip)
 - [ScrapeGraph](https://dub.sh/scrapegraphai) Account
 - A [Twilio account](https://dub.sh/twilio) with a phone number that can send SMS/WhatsApp messages
-- [Nebius](https://dub.sh/twilio) Account & API keys
+- [Nebius](https://dub.sh/nebius) Account & API keys
 
 ### Environment Variables
 
@@ -81,7 +78,6 @@ CLIENT_PHONE_NO="your_whatsapp_number"
      ```bash
      .venv\Scripts\activate
      ```
-
 
 ## ⚙️ Usage
 
