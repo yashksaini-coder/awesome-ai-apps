@@ -80,6 +80,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Conference Talk Generator](advance_ai_agents/conference_talk_abstract_generator) - Draft talk abstracts with Google ADK & Couchbase.
 - [Finance Service Agent](advance_ai_agents/finance_service_agent) - FastAPI server for stock data and predictions with Agno.
 - [Price Monitoring Agent](advance_ai_agents/price_monitoring_agent) - Price monitoring and alerting Agent powered by CrewAi, Twilio & Nebius.
+- [Startup Idea Validator Agent](advance_ai_agents/startup_idea_validator_agent) - Agentic Workflow to validate and analyze startup ideas.
 <!-- * [YouTube to Blog](advance_ai_agents/youtube_to_blog_agent) - Auto-blog from YouTube videos. -->
 
 ## 📺 Playlist of Demo Videos & Tutorials
