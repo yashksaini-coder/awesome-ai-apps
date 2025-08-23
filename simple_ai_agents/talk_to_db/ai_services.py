@@ -31,7 +31,7 @@ Note: All tables use MySQL syntax with backticks for identifiers.
 def get_llm():
     """Get the Nebius LLM instance"""
     return ChatNebius(
-        model="Qwen/Qwen3-14B",
+        model="zai-org/GLM-4.5-Air",
         temperature=0.1,
         top_p=0.95,
         api_key=os.getenv("NEBIUS_API_KEY"),
