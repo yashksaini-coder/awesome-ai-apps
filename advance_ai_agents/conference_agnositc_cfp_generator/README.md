@@ -81,8 +81,9 @@ CB_CONNECTION_STRING=couchbases://your-cluster.cloud.couchbase.com
 CB_USERNAME=your_username
 CB_PASSWORD=your_secure_password
 CB_BUCKET=conferences
-CB_SEARCH_INDEX=conferences-talks-index
-```
+CB_SEARCH_INDEX_PATTERN=vector_search_talks_{conference_id}
+# Note: Collections are created dynamically per conference (e.g., talks_kubecon2024)
+# Note: Per-conference vector search index; ensure index dimensions match EMBEDDING_MODEL
 
 ### Supported LLM Models
 
