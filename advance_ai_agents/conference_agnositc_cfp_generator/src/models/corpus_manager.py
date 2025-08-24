@@ -293,10 +293,10 @@ class ConferenceCorpusManager:
                 if url_id and url_id != 'event':
                     return f"talk_{url_id}"
         
-        title = talk.get('title', 'unknown')
-        title_hash = abs(hash(title)) % 10000
-        return f"talk_{index}_{title_hash}"
-    
+        import hashlib
+        title = (talk.get('title') or talk.get('url') or f'unknown_{index}').encode('utf-8', 'ignore')
+        digest = hashlib.blake2b(title, digest_size=8).hexdigest()
+        return f"talk_{index}_{digest}"
     def _create_embedding_text(self, talk: Dict[str, Any]) -> str:
         """Create text for embedding generation"""
         parts = []
