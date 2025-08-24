@@ -31,10 +31,14 @@ class ConferenceDetector:
         """Auto-detect conference platform"""
         
         # Step 1: Domain-based detection
+        parsed = urlparse(url)
+        host = parsed.netloc.lower()
+        # Normalize to strip leading 'www.'
+        if host.startswith("www."):
+            host = host[4:]
         for platform, signatures in self.PLATFORM_SIGNATURES.items():
-            if any(domain in url.lower() for domain in signatures['domains']):
+            if any(host == d or host.endswith(f".{d}") for d in signatures["domains"]):
                 return platform
-        
         # Step 2: HTML structure analysis for unknown domains
         try:
             async with aiohttp.ClientSession() as session:
