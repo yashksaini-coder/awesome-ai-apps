@@ -28,10 +28,10 @@ def create_talk_proposal_prompt(
     # Prepare historical context in the structured format
     if similar_talks:
         historical_context = "\n\n".join([
-            f"Title: {talk['title']}\n"
-            f"Description: {talk['description']}\n"
-            f"Category: {talk['category']}\n"
-            f"Speaker: {talk['speaker']}\n"
+            f"Title: {talk.get('title', 'N/A')}\n"
+            f"Description: {talk.get('description', 'N/A')}\n"
+            f"Category: {talk.get('category', 'N/A')}\n"
+            f"Speaker: {talk.get('speaker', 'N/A')}\n"
             f"Relevance Score: {talk.get('score', 0):.3f}"
             for talk in similar_talks
         ])
