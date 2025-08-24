@@ -370,11 +370,17 @@ class ConferenceTalkApp:
                     with st.expander("📚 Similar Conference Talks"):
                         if similar_talks:
                             for i, talk in enumerate(similar_talks, 1):
-                                st.markdown(f"**{i}. {talk['title']}**")
-                                st.caption(f"Speaker: {talk['speaker']} | Category: {talk['category']}")
-                                st.markdown(f"*Score: {talk.get('score', 'N/A'):.3f}*")
-                                with st.expander(f"Description"):
-                                    st.markdown(talk['description'][:500] + "..." if len(talk['description']) > 500 else talk['description'])
+                                title = talk.get("title", "Untitled")
+                                speaker = talk.get("speaker", "Unknown")
+                                category = talk.get("category", "Uncategorized")
+                                score = talk.get("score")
+                                score_str = f"{score:.3f}" if isinstance(score, (int, float)) else "N/A"
+                                description = talk.get("description", "")
+                                st.markdown(f"**{i}. {title}**")
+                                st.caption(f"Speaker: {speaker} | Category: {category}")
+                                st.markdown(f"*Score: {score_str}*")
+                                with st.expander("Description"):
+                                    st.markdown(description[:500] + "..." if len(description) > 500 else description)
                                 st.markdown("---")
                         else:
                             st.info("No similar talks found in conference corpus")
