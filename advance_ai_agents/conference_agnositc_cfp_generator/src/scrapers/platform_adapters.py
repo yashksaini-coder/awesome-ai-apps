@@ -217,21 +217,22 @@ class SchedAdapter(BaseConferenceAdapter):
 class SessionizeAdapter(BaseConferenceAdapter):
     """Adapter for Sessionize.com platforms"""
     
-    async def extract_talk_urls(self) -> List[str]:
-        """Extract talks from Sessionize API or web scraping"""
-        
-        # Try to find sessionize ID from URL
-        sessionize_id = self._extract_sessionize_id()
-        
-        if sessionize_id:
-            # Try API first
-            talks_data = await self._fetch_from_api(sessionize_id)
-            if talks_data:
-                return talks_data  # Return talk data directly for API
-        
-        # Fallback to web scraping
-        return await self._scrape_sessionize_web()
-    
+from typing import List, Union, Dict, Any
+
+     async def extract_talk_urls(self) -> List[Union[str, Dict[str, Any]]]:
+         """Extract talks from Sessionize API or web scraping"""
+         
+         # Try to find sessionize ID from URL
+         sessionize_id = self._extract_sessionize_id()
+         
+         if sessionize_id:
+             # Try API first
+             talks_data = await self._fetch_from_api(sessionize_id)
+             if talks_data:
+                 return talks_data  # Return talk data directly for API
+         
+         # Fallback to web scraping
+         return await self._scrape_sessionize_web()
     def _extract_sessionize_id(self) -> Optional[str]:
         """Extract Sessionize event ID from URL"""
         # Sessionize URLs often have format: https://sessionize.com/event-name/
