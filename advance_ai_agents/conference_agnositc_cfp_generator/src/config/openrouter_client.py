@@ -12,19 +12,22 @@ load_dotenv()
 class OpenRouterClient:
     def __init__(self):
         # OpenRouter client for chat completions (Grok-4)
+        openrouter_api_key = os.getenv("OPENROUTER_API_KEY")
+        if not openrouter_api_key:
+            raise ValueError("OPENROUTER_API_KEY is not set")
         self.openrouter_client = OpenAI(
             base_url=os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"),
-            api_key=os.getenv("OPENROUTER_API_KEY")
+            api_key=openrouter_api_key,
         )
-        
+
         # Together AI client for embeddings
-        self.together_client = Together(
-            api_key=os.getenv("TOGETHER_API_KEY")
-        )
-        
+        together_api_key = os.getenv("TOGETHER_API_KEY")
+        if not together_api_key:
+            raise ValueError("TOGETHER_API_KEY is not set")
+        self.together_client = Together(api_key=together_api_key)
+
         self.chat_model = os.getenv("GROK_MODEL", "x-ai/grok-4:online")
         self.embedding_model = os.getenv("EMBEDDING_MODEL", "BAAI/bge-large-en-v1.5")
-    
     def generate_embedding(self, text: str) -> List[float]:
         """Generate embedding using Together AI (BGE-Large)"""
         try:
