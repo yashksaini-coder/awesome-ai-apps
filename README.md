@@ -1,6 +1,6 @@
 # Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) 
 
-![Banner](/assets/banner.png)
+![Banner](/assets/banner_new.png)
 
 This repository is a comprehensive collection of practical examples, tutorials, and recipes for building powerful LLM-powered applications. From simple chatbots to advanced AI agents, these projects serve as a guide for developers working with various AI frameworks and tools.
 
