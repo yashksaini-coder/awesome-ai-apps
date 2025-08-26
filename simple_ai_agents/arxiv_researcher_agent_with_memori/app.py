@@ -1,6 +1,6 @@
 import os
 import asyncio
-
+import base64
 import streamlit as st
 from researcher import Researcher
 
@@ -37,45 +37,115 @@ def main():
             .replace('"', "'")
         )
 
-    gibson_svg_inline = f'<span style="height:80px; width:200px; display:inline-block; vertical-align:middle; margin-left:8px;margin-top:20px;margin-right:8px;">{gibson_svg}</span>'
+    with open("./assets/tavily.png", "rb") as tavily_file:
+        tavily_base64 = base64.b64encode(tavily_file.read()).decode()
+        gibson_svg_inline = f'<span style="height:80px; width:200px; display:inline-block; vertical-align:middle; margin-left:8px;margin-top:20px;margin-right:8px;">{gibson_svg}</span>'
 
-    # Create title with embedded images (SVG and PNG in one line)
-    title_html = f"""
-    <div style='display:flex; align-items:center; width:100%; padding:24px 0;'>
-    <h1 style='margin:0; padding:0; font-size:2.5rem; font-weight:bold; display:flex; align-items:center;'>
-     AI Research Assistant powered by OpenAI Agents, Tavily,  Nebius AI Studio and Memori
-     {gibson_svg_inline}
-    </h1>
-    </div>
-    """
+    
+        title_html = f"""
+        <div style="display: flex;  width: 100%; ">
+            <h1 style="margin: 0; padding: 0; font-size: 2.5rem; font-weight: bold;">
+                <span style="font-size:2.5rem;">🕵🏻‍♂️</span> arXiv Researcher Agent
+                {gibson_svg_inline}
+                <span style="">Memori</span> & 
+                <img src="data:image/png;base64,{tavily_base64}" style="height: 60px; vertical-align: middle; bottom: 5px;"/>
+            </h1>
+        </div>
+        """
 
-    # st.title("")
-    # st.markdown("### AI Research Assistant powered by OpenAI Agents, Memori, Tavily and Nebius AI Studio")
     st.markdown(title_html, unsafe_allow_html=True)
-    st.markdown("🔬Arxiv Research Papers Agent with Persistent Memory ")
+    # st.markdown("🔬Arxiv Research Papers Agent with Persistent Memory ")
 
     # Sidebar with navigation and info
     with st.sidebar:
-        st.header("Navigation")
+        st.image("./assets/nebius.png", width=150)
+        nebius_key = st.text_input("Enter your Nebius API key", value=os.getenv("NEBIUS_API_KEY", ""), type="password")
+        tavily_api_key = st.text_input("Enter your Tavily API key", value=os.getenv("TAVILY_API_KEY", ""), type="password")
+
+        st.divider()
+
         tab_choice = st.radio(
             "Choose Mode:", ["🔬 Research Chat", "🧠 Memory Chat"], key="tab_choice"
         )
 
-        st.header("About This Demo")
-        st.markdown(
-            """
-        This demo showcases:
-        - **Research Agent**: Uses Tavily for arXiv research paper search
-        - **Memori Integration**: Remembers all research sessions
-        - **Memory Chat**: Query your research history
+        st.divider()
 
-        The research agent can:
-        - 🔍 Conduct comprehensive research using arXiv papers
-        - 🧠 Remember all previous research 
-        - 📚 Build upon past research
-        - 💾 Store findings for future reference
-        """
-        )
+        if tab_choice == "🔬 Research Chat":
+
+            st.markdown("### 🔬 Example Research Topics:")
+
+            if st.button("🧠 Brain-Computer Interfaces"):
+                        st.session_state.research_messages.append(
+                            {
+                                "role": "user",
+                                "content": "Research the latest developments in brain-computer interfaces",
+                            }
+                        )
+            # st.rerun()
+
+            if st.button("🔋 Solid-State Batteries"):
+                        st.session_state.research_messages.append(
+                            {
+                                "role": "user",
+                                "content": "Analyze the current state of solid-state batteries",
+                            }
+                        )
+            # st.rerun()
+
+            if st.button("🧬 CRISPR Gene Editing"):
+                st.session_state.research_messages.append(
+                    {
+                        "role": "user",
+                        "content": "Research recent breakthroughs in CRISPR gene editing",
+                    }
+                )
+            # st.rerun()
+
+            if st.button("🚗 Autonomous Vehicles"):
+                    st.session_state.research_messages.append(
+                            {
+                                "role": "user",
+                                "content": "Investigate the development of autonomous vehicles",
+                            }
+                        )
+        # st.rerun()
+
+        elif tab_choice == "🧠 Memory Chat":
+
+            st.markdown("### 🧠 Example Memory Queries:")
+            if st.button("📊 Summarize my research history"):
+                st.session_state.memory_messages.append(
+                    {
+                        "role": "user",
+                        "content": "Can you summarize my research history and main findings?",
+                    }
+                )
+
+            if st.button("🧬 Find my biotech research"):
+                st.session_state.memory_messages.append(
+                    {
+                        "role": "user",
+                        "content": "Find all my research related to biotechnology and gene editing",
+                    }
+                )
+
+            if st.button("📋 What were my last research topics?"):
+                st.session_state.memory_messages.append(
+                    {
+                        "role": "user",
+                        "content": "What were my last research topics?",
+                    }
+                )
+
+            if st.button("🔍 Show my research on AI"):
+                st.session_state.memory_messages.append(
+                    {
+                        "role": "user",
+                        "content": "Show me all my previous research related to artificial intelligence",
+                    }
+                )
+
+
 
         st.header("Research History")
         if st.button("📊 View All Research"):
@@ -109,12 +179,26 @@ def main():
     if "memory_messages" not in st.session_state:
         st.session_state.memory_messages = []
 
+    if not st.session_state.research_messages:
+
+        st.markdown("## About This Demo")
+        st.markdown(
+                        """
+                    This demo showcases:
+                    - **Research Agent**: Uses Tavily for arXiv research paper search
+                    - **Memori Integration**: Remembers all research sessions
+                    - **Memory Chat**: Query your research history
+
+                    The research agent can:
+                    - 🔍 Conduct comprehensive research using arXiv papers
+                    - 🧠 Remember all previous research 
+                    - 📚 Build upon past research
+                    - 💾 Store findings for future reference
+                    """
+                    )
+
     # Research Chat Tab
     if tab_choice == "🔬 Research Chat":
-        st.header("🔬 Research Agent")
-        st.markdown(
-            "*Ask me to research any topic and I'll find relevant arXiv papers while remembering everything!*"
-        )
 
         # Display research chat messages
         for message in st.session_state.research_messages:
@@ -168,56 +252,11 @@ def main():
                         )
 
         # Research example prompts
-        if not st.session_state.research_messages:
-            st.markdown("### 🔬 Example Research Topics:")
-            col1, col2 = st.columns(2)
 
-            with col1:
-                if st.button("🧠 Brain-Computer Interfaces"):
-                    st.session_state.research_messages.append(
-                        {
-                            "role": "user",
-                            "content": "Research the latest developments in brain-computer interfaces",
-                        }
-                    )
-                    st.rerun()
-
-                if st.button("🔋 Solid-State Batteries"):
-                    st.session_state.research_messages.append(
-                        {
-                            "role": "user",
-                            "content": "Analyze the current state of solid-state batteries",
-                        }
-                    )
-                    st.rerun()
-
-            with col2:
-                if st.button("🧬 CRISPR Gene Editing"):
-                    st.session_state.research_messages.append(
-                        {
-                            "role": "user",
-                            "content": "Research recent breakthroughs in CRISPR gene editing",
-                        }
-                    )
-                    st.rerun()
-
-                if st.button("🚗 Autonomous Vehicles"):
-                    st.session_state.research_messages.append(
-                        {
-                            "role": "user",
-                            "content": "Investigate the development of autonomous vehicles",
-                        }
-                    )
-                    st.rerun()
 
     # Memory Chat Tab
     elif tab_choice == "🧠 Memory Chat":
-        st.header("🧠 Research Memory Assistant")
-        st.markdown(
-            "*Ask me about your previous research sessions and I'll help you recall everything!*"
-        )
 
-        # Display memory chat messages
         for message in st.session_state.memory_messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
@@ -269,50 +308,6 @@ def main():
                         st.session_state.memory_messages.append(
                             {"role": "assistant", "content": error_message}
                         )
-
-        # Memory example prompts
-        if not st.session_state.memory_messages:
-            st.markdown("### 🧠 Example Memory Queries:")
-            col1, col2 = st.columns(2)
-
-            with col1:
-                if st.button("📋 What were my last research topics?"):
-                    st.session_state.memory_messages.append(
-                        {
-                            "role": "user",
-                            "content": "What were my last research topics?",
-                        }
-                    )
-                    st.rerun()
-
-                if st.button("🔍 Show my research on AI"):
-                    st.session_state.memory_messages.append(
-                        {
-                            "role": "user",
-                            "content": "Show me all my previous research related to artificial intelligence",
-                        }
-                    )
-                    st.rerun()
-
-            with col2:
-                if st.button("📊 Summarize my research history"):
-                    st.session_state.memory_messages.append(
-                        {
-                            "role": "user",
-                            "content": "Can you summarize my research history and main findings?",
-                        }
-                    )
-                    st.rerun()
-
-                if st.button("🧬 Find my biotech research"):
-                    st.session_state.memory_messages.append(
-                        {
-                            "role": "user",
-                            "content": "Find all my research related to biotechnology and gene editing",
-                        }
-                    )
-                    st.rerun()
-
 
 if __name__ == "__main__":
     # Check for required environment variables
