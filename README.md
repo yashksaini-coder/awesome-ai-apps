@@ -47,6 +47,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
 - [Talk to Your DB](simple_ai_agents/talk_to_db) - Talk to your Database with GibsonAI & Langchain
 - [Blog Writing Agent](simple_ai_agents/blog_writing_agent) - Personalized AI-powered blog writing agent.
+- [arXiv Researcher Agent](simple_ai_agents/arxiv_researcher_agent_with_memori) - AI research assistant built using OpenAI Agents and GibsonAI Memori.
 
 ## 🗂️ MCP Agents
 

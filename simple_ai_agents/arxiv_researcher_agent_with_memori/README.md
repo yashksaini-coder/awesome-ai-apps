@@ -1,6 +1,6 @@
 ![Demo](./assets/image.png)
 
-# Researcher Agent Demo with OpenAI Agents & Memori
+# arXiv Researcher Agent Demo with OpenAI Agents & Memori
 
 An advanced AI research assistant built using OpenAI Agents and Memori memory integration. This demo showcases how to create agents that remember research sessions, build upon previous findings, and provide persistent, organized research support focused on arXiv papers.
 
