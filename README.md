@@ -46,6 +46,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Web Automation Agent](simple_ai_agents/browser_agent) - Simple Browser Agent implementation with Nebius & browser use.
 - [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
 - [Talk to Your DB](simple_ai_agents/talk_to_db) - Talk to your Database with GibsonAI & Langchain
+- [Blog Writing Agent](simple_ai_agents/blog_writing_agent) - Personalized AI-powered blog writing agent.
 
 ## 🗂️ MCP Agents
 
@@ -81,7 +82,6 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Finance Service Agent](advance_ai_agents/finance_service_agent) - FastAPI server for stock data and predictions with Agno.
 - [Price Monitoring Agent](advance_ai_agents/price_monitoring_agent) - Price monitoring and alerting Agent powered by CrewAi, Twilio & Nebius.
 - [Startup Idea Validator Agent](advance_ai_agents/startup_idea_validator_agent) - Agentic Workflow to validate and analyze startup ideas.
-<!-- * [YouTube to Blog](advance_ai_agents/youtube_to_blog_agent) - Auto-blog from YouTube videos. -->
 
 ## 📺 Playlist of Demo Videos & Tutorials
 
