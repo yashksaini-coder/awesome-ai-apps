@@ -8,7 +8,6 @@ from tools.custom_tools import DecisionTool, NotifyTool
 
 PRODUCT_DATA_FILE = "product_data.json"
 
-
 class NebiusLLM:
     def __init__(self, api_key, model="nebius/Qwen/Qwen3-14B"):
         self.api_key = api_key
