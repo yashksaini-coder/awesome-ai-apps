@@ -316,7 +316,12 @@ def main():
 
 if __name__ == "__main__":
     # Check for required environment variables
-    if not os.getenv("OPENAI_API_KEY"):
-        st.error("Please set your OPENAI_API_KEY environment variable")
+    missing = []
+    if not os.getenv("NEBIUS_API_KEY"):
+        missing.append("NEBIUS_API_KEY")
+    if not os.getenv("TAVILY_API_KEY"):
+        missing.append("TAVILY_API_KEY")
+    if missing:
+        st.error(f"Please set required environment variable(s): {', '.join(missing)}")
         st.stop()
     main()
