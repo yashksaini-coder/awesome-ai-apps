@@ -7,8 +7,6 @@ from agents.decision_logic import is_significant_change
 from dotenv import load_dotenv
 load_dotenv("api.env")
 
-
-
 class DecisionTool(BaseTool):
     previous_data: Dict = Field(default_factory=dict)
     name: str = "DecisionTool"

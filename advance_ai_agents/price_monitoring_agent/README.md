@@ -15,6 +15,10 @@ An advanced AI-powered price monitoring and alert system that tracks product pri
 - **Data Persistence**: Product data stored in JSON for historical comparison
 - **User-Friendly Dashboard**: Streamlit interface to add and manage products
 
+# Workflow
+
+![Workflow](./assets/workflow.gif)
+
 ## 🛠️ Tech Stack
 
 - **Python**: Core programming language

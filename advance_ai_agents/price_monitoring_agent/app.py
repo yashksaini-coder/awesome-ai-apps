@@ -15,9 +15,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Header
-# st.markdown('<h1>💲 Price Monitoring Agent with ScrapeGraph & Twilio</h1>', unsafe_allow_html=True)
-
 with open("./assets/scrapegraph.png", "rb") as scrapegraph_file:
     scrapegraph_base64 = base64.b64encode(scrapegraph_file.read()).decode()
 
@@ -43,13 +40,9 @@ with st.sidebar:
 
     st.image("./assets/nebius.png", width=150)
     nebius_key = st.text_input("Enter your Nebius API key", value=os.getenv("NEBIUS_API_KEY", ""), type="password")
-    # st.divider()
-    # st.markdown("#### 🔑 API Keys")
+
     scrapegraph_key = st.text_input("ScrapeGraph Key", type="password", value=os.getenv("SCRAPHGRAPH_API_KEY", ""), help="ScrapeGraph API key")
-    # Twilio_SID = st.text_input("Twilio SID", type="password", value=os.getenv("TWILIO_ACCOUNT_SID",""), help="Twilio Account SID")
-    # Twilio_Token = st.text_input("Twilio Token", type="password", value=os.getenv("TWILIO_AUTH_TOKEN",""), help="Twilio Auth Token")
-    # Twilio_Phone_No = st.text_input("Twilio Phone No", type="password", value=os.getenv("TWILIO_PHONE_NUMBER",""), help="Twilio Phone Number")
-    # Twilio_Whatsapp_No = st.text_input("Twilio WhatsApp No", type="password", value=os.getenv("TWILIO_WHATSAPP_NUMBER",""), help="Twilio WhatsApp Number")
+
     if st.button("Save Keys", use_container_width=True):
         st.session_state["NEBIUS_API_KEY"] = nebius_key
         st.session_state["SCRAPEGRAPH_API_KEY"] = scrapegraph_key
