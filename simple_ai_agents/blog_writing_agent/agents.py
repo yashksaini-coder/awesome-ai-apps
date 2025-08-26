@@ -57,7 +57,7 @@ def initialize_memori():
     """Initialize Memori memory system"""
     try:
         memory_system = Memori(
-            database_connect="sqlite:///newsletter_style_memory.db",
+            database_connect="sqlite:///tmp/newsletter_style_memory.db",
             auto_ingest=True,
             conscious_ingest=True,
             verbose=False,

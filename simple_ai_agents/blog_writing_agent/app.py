@@ -1,5 +1,5 @@
 """
-Newsletter/Blog Writing Agent Streamlit App
+Blog Writing Agent Streamlit App
 
 A Streamlit application featuring two AI agents:
 1. Knowledge Agent: Analyzes uploaded documents to extract writing style, tone, and structure

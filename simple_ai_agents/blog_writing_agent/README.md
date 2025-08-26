@@ -1,4 +1,6 @@
-# AI Blog Writing Agent 🤖
+![demo](./assets/image.png)
+
+# AI Blog Writing Agent with Digital Ocean & Gibson AI Memori
 
 A powerful AI-powered blog writing tool that analyzes your writing style and generates new content using Digital Ocean AI and GibsonAI. This application allows users to upload their previous articles, analyze their unique writing style, and generate new blog posts that sound exactly like them.
 
@@ -136,7 +138,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support 💬
 
 If you encounter any issues or have questions, please open an issue on GitHub.
-
----
-
-**Powered by Digital Ocean AI & GibsonAI** 🚀
