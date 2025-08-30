@@ -1,4 +1,6 @@
-# Social Media Agent 
+![Demo](./assets/demo.png)
+
+# Social Media Agent
 
 A powerful AI-powered social media automation tool that analyzes your Twitter writing style, stores it in Memori, generates new tweets using Nebius AI and posts it using Composio. This application allows users to scrape their existing tweets, analyze their unique tweeting style, and generate new social media content that sounds exactly like them.
 
@@ -25,22 +27,25 @@ A powerful AI-powered social media automation tool that analyzes your Twitter wr
 ## Installation 📥
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/Arindam200/awesome-ai-apps.git
 cd simple_ai_agents/social_media_agent
 ```
 
 2. Install the required dependencies using uv:
+
 ```bash
 uv sync
 ```
 
 3. Create a `.env` file in the project root and add your API credentials:
+
 ```bash
 # Nebius AI Configuration
 NEBIUS_API_KEY=your_nebius_api_key
 
-# ScrapeGraph Configuration  
+# ScrapeGraph Configuration
 SGAI_API_KEY=your_scrapegraph_api_key
 
 # Composio Twitter Integration
@@ -55,6 +60,7 @@ OPENAI_API_KEY=your_openai_api_key
 ## Usage 🚀
 
 1. Start the Streamlit application:
+
 ```bash
 uv run streamlit run app.py
 ```
@@ -66,12 +72,14 @@ uv run streamlit run app.py
 ## How It Works 🔄
 
 ### 1. Style Analysis Agent (Sidebar)
+
 - **Twitter Handle Input**: Enter any Twitter handle (including your own)
 - **Tweet Scraping**: Automatically extracts the most popular 10 tweets using ScrapeGraph
 - **Style Analysis**: Nebius AI analyzes tweeting patterns, tone, and personality
 - **Memory Storage**: Automatically stores your style profile in Memori
 
 ### 2. Tweet Generation Agent (Main Area)
+
 - **Topic Input**: Enter what you want to tweet about using the chat interface
 - **Content Generation**: AI creates tweets using your stored tweeting style
 - **One-Click Posting**: Directly post generated tweets to Twitter via Composio
@@ -101,16 +109,19 @@ The AI analyzes your tweeting patterns across multiple dimensions:
 ## API Configuration 🔑
 
 ### Nebius AI
+
 - **Model**: `zai-org/GLM-4.5-Air` (configurable)
 - **Purpose**: Tweet generation and style analysis
 - **Temperature**: 0.6 for balanced creativity
 
 ### ScrapeGraph (SGAI)
+
 - **Purpose**: Twitter data extraction
 - **Scope**: Latest 10 original tweets (no replies/retweets)
 - **Format**: Structured JSON with tweet metadata
 
 ### Composio Twitter Integration
+
 - **Purpose**: Direct tweet posting to Twitter
 - **Authentication**: OAuth via Composio dashboard
 - **Toolkit**: Full Twitter API access for posting
@@ -118,13 +129,15 @@ The AI analyzes your tweeting patterns across multiple dimensions:
 ## Architecture 🏗️
 
 ### Modular Design
+
 - **UI Layer** (`app.py`): Streamlit interface and user interactions
-- **Agent Layer** (`twitter_agents.py`): AI functions and social media logic  
+- **Agent Layer** (`twitter_agents.py`): AI functions and social media logic
 - **Tool Layer** (`create_tweet.py`): Direct tweet creation utilities
 - **Scraper Layer** (`scrapertool.py`): Web scraping functionality
 - **Memory Layer**: Memori integration for style persistence
 
 ### Key Components
+
 - **Tweet Scraper**: Extracts tweets using ScrapeGraph
 - **Style Analyzer**: Analyzes tweeting patterns using Nebius AI
 - **Tweet Generator**: Creates new content matching your style
@@ -134,18 +147,21 @@ The AI analyzes your tweeting patterns across multiple dimensions:
 ## Example Use Cases 💡
 
 ### Content Creation
+
 - "Write a tweet about the latest AI developments"
 - "Create a thread about productivity tips"
 - "Generate a tweet celebrating a milestone"
 - "Tweet about a new project launch"
 
 ### Style Learning
+
 - Analyze your personal Twitter account to learn your style
 - Study influencer tweeting patterns for inspiration
 - Build comprehensive profiles across different topics
 - Refine your style profile over time with new content
 
 ### Automation Workflows
+
 - Schedule content generation for consistent posting
 - Maintain brand voice across team members
 - Scale social media presence while preserving authenticity
@@ -154,11 +170,13 @@ The AI analyzes your tweeting patterns across multiple dimensions:
 ## Supported Features 📱
 
 ### Tweet Analysis
+
 - ✅ Original tweets (authored content)
 - ✅ Text content and metadata
 - ✅ Timestamp and engagement data
 
 ### Content Generation
+
 - ✅ Style-matched tweet creation
 - ✅ Character limit compliance (<280 chars)
 - ✅ Hashtag and emoji integration
@@ -182,4 +200,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support 💬
 
 If you encounter any issues or have questions, please open an issue on GitHub.
-
