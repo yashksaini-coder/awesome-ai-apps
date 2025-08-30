@@ -1,5 +1,5 @@
 [project]
-name = "text-to-sql"
+name = "talk_to_db"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

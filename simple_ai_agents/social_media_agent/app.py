@@ -117,89 +117,8 @@ with st.sidebar:
     if twitter_handle:
         st.session_state.twitter_handle = twitter_handle
 
-        # Analyze button
-        if st.button("🔍 Analyze Tweeting Style", type="primary"):
-            with st.spinner("Scraping tweets..."):
-                try:
-                    # Scrape tweets
-                    scraped_tweets = scrape_user_tweets(twitter_handle)
-                    st.session_state.scraped_tweets = scraped_tweets
-
-                    if scraped_tweets:
-                        st.success(
-                            f"✅ Successfully scraped {len(scraped_tweets)} tweets for analysis!"
-                        )
-
-                        # Show sample tweets
-                        st.subheader("📝 Sample Tweets")
-                        for i, tweet in enumerate(scraped_tweets[:3], 1):
-                            st.markdown(
-                                f"**Tweet {i}:** {tweet.get('description', 'N/A')}"
-                            )
-
-                        # Analyze style
-                        with st.spinner("Analyzing tweeting style..."):
-                            style_analysis = analyze_tweeting_style(scraped_tweets)
-
-                            if style_analysis:
-                                st.session_state.style_analysis = style_analysis
-
-                                # Display analysis results
-                                st.subheader("🎯 Style Analysis Results")
-
-                                col1, col2 = st.columns(2)
-
-                                with col1:
-                                    st.markdown(
-                                        f"**Tone:** {style_analysis.get('tone', 'N/A')}"
-                                    )
-                                    st.markdown(
-                                        f"**Personality:** {style_analysis.get('personality', 'N/A')}"
-                                    )
-                                    st.markdown(
-                                        f"**Language Style:** {style_analysis.get('language_style', 'N/A')}"
-                                    )
-                                    st.markdown(
-                                        f"**Emoji Usage:** {style_analysis.get('emoji_usage', 'N/A')}"
-                                    )
-
-                                with col2:
-                                    st.markdown(
-                                        f"**Tweet Structure:** {style_analysis.get('tweet_structure', 'N/A')}"
-                                    )
-                                    st.markdown(
-                                        f"**Common Topics:** {', '.join(style_analysis.get('common_topics', [])[:3])}"
-                                    )
-                                    st.markdown(
-                                        f"**Writing Habits:** {', '.join(style_analysis.get('writing_habits', [])[:3])}"
-                                    )
-
-                                # Store in memory
-                                with st.spinner("Storing style in memory..."):
-                                    try:
-                                        formatted_style = (
-                                            store_tweeting_style_in_memori(
-                                                memory_system,
-                                                style_analysis,
-                                                twitter_handle,
-                                            )
-                                        )
-                                        if formatted_style:
-                                            st.success(
-                                                "✅ Style analysis complete & stored in memory!"
-                                            )
-                                            st.rerun()
-                                        else:
-                                            st.error("❌ Failed to store style")
-                                    except Exception as e:
-                                        st.error(f"❌ Error storing style: {e}")
-                            else:
-                                st.error("❌ Failed to analyze style")
-                    else:
-                        st.error("❌ No tweets found")
-
-                except Exception as e:
-                    st.error(f"❌ Error: {e}")
+    # Analyze button
+    analyze_tweeting_style_btn = st.button("🔍 Analyze Tweeting Style", type="primary")
 
     st.markdown("---")
     st.subheader("📊 Current Status")
@@ -248,10 +167,40 @@ def tweet_generation_agent():
                     st.session_state.generated_tweet = tweet_content
                     st.session_state.tweet_topic = topic
 
-                    st.subheader("🐦 Generated Tweet")
 
-                    # Display the tweet
-                    st.markdown(f"**{tweet_content}**")
+                    # st.subheader("🐦 Generated Tweet")
+
+                    # Display the dynamic tweet card
+                    # Try to get profile info from memory
+                    profile_image_url = None
+                    username = None
+                    handle = None
+                    # Try to get from style_analysis (session) first
+                    style_analysis = st.session_state.get("style_analysis")
+                    if style_analysis and "profiles" in style_analysis and style_analysis["profiles"]:
+                        profile = style_analysis["profiles"][0]
+                        profile_image_url = profile.get("profile_image", {}).get("url", None)
+                        username = profile.get("username", None)
+                        handle = profile.get("handle", None)
+                    # Fallback: try to get from memory
+                    if not (profile_image_url and username and handle):
+                        stored_style = get_stored_tweeting_style(memory_tool)
+                        if stored_style and "profiles" in stored_style and stored_style["profiles"]:
+                            profile = stored_style["profiles"][0]
+                            profile_image_url = profile.get("profile_image", {}).get("url", None)
+                            username = profile.get("username", None)
+                            handle = profile.get("handle", None)
+                    # Final fallback
+                    if not profile_image_url:
+                        profile_image_url = "https://pbs.twimg.com/profile_images/1620795664589266944/XBEbRjPN_normal.jpg"
+                    if not username:
+                        username = "Arindam"
+                    if not handle:
+                        handle = "@Arindam_1729"
+
+                    from twitter_agents import render_tweet_card
+                    tweet_card_html = render_tweet_card(username, handle, profile_image_url, tweet_content)
+                    st.markdown(tweet_card_html, unsafe_allow_html=True)
 
                     # Character count
                     char_count = len(tweet_content)
@@ -261,14 +210,10 @@ def tweet_generation_agent():
                         st.success(f"✅ Tweet length: {char_count}/280 characters")
 
                     # Action buttons
-                    col1, col2 = st.columns([1, 2])
+                    col1, col2, col3 = st.columns([1,1,1])
+
 
                     with col1:
-                        # Copy to clipboard
-                        if st.button("📋 Copy Tweet", use_container_width=True):
-                            st.write("Tweet copied to clipboard!")
-
-                    with col2:
                         # Post tweet button
                         if st.button(
                             "🚀 Post Tweet", type="primary", use_container_width=True
@@ -300,6 +245,26 @@ def tweet_generation_agent():
                                         st.error("❌ Failed to post tweet")
                                 except Exception as e:
                                     st.error(f"❌ Error posting tweet: {e}")
+                        
+                    with col2:
+                        # Copy to clipboard
+                        if st.button("📋 Copy Tweet", use_container_width=True):
+                            st.write("Tweet copied to clipboard!")
+
+                    with col3:
+                        # Save to memory
+                        if st.button("💾 Save to Memory", use_container_width=True):
+                            try:
+                                save_generated_tweet(
+                                    memory_system,
+                                    topic,
+                                    tweet_content,
+                                )
+                                st.success("💾 Tweet saved to memory!")
+                            except Exception as e:
+                                st.warning(
+                                    f"Note: Could not save to memory: {e}"
+                                )
                 else:
                     st.error("❌ Failed to generate tweet")
             except Exception as e:
@@ -356,16 +321,24 @@ def tweet_generation_agent():
                         st.error(f"❌ Error posting tweet: {e}")
 
     elif not topic:
-        st.markdown("### About this application")
-        st.markdown("This application uses AI to generate engaging tweets for you!")
-        st.markdown("**Simply type what you want to tweet about in the input above.**")
-        st.markdown("**Features:**")
-        st.markdown("• **Smart Generation**: Creates engaging tweets using AI")
-        st.markdown("• **Direct Posting**: Posts tweets directly to Twitter")
         st.markdown(
-            "• **Style Analysis**: Optional personalization available in the sidebar"
-        )
+            """
 
+            Welcome to the Social Media Agent! This app uses advanced AI to help you craft and post engaging tweets that match your unique style.
+
+            **How to use:**
+            - Type your tweet topic or idea in the input above.
+            - Instantly get a tweet generated in your style.
+            - Optionally, analyze your tweeting style in the sidebar for even more personalization.
+
+            **Key Features:**
+            - ✨ **Smart Generation:** Creates engaging tweets using AI
+            - 🚀 **Direct Posting:** Post tweets directly to Twitter
+            - 🎯 **Style Analysis:** Personalize your tweets by analyzing your own style (see sidebar)
+
+            Ready to tweet smarter? Try it now!
+            """
+        )
 
 def main():
     # Load and process SVG and PNG logos
@@ -378,29 +351,30 @@ def main():
             .replace('"', "'")
         )
 
-    with open("./assets/composio.jpg", "rb") as composio_file:
+    with open("./assets/composio.png", "rb") as composio_file:
         import base64
 
         composio_base64 = base64.b64encode(composio_file.read()).decode()
         composio_data_url = f"data:image/png;base64,{composio_base64}"
 
     # Create inline SVG elements for each logo
-    gibson_svg_inline = f'<span style="height:80px; width:200px; display:inline-block; vertical-align:middle; margin-left:8px;margin-top:20px;margin-right:8px;">{gibson_svg}</span>'
+    gibson_svg_inline = f'<span style="height:80px; width:200px; display:inline-block; vertical-align:middle; margin-left:8px;margin-top:24px;margin-right:8px;">{gibson_svg}</span>'
 
-    composio_svg_inline = f'<span style="height:80px; width:200px; display:inline-block; vertical-align:middle; margin-left:8px;margin-top:20px;margin-right:8px;"><img src="{composio_data_url}" style="height:80px; width:200px; object-fit:contain;"></span>'
+    composio_svg_inline = f'<span style="height:88px; width:240px; display:inline-block; vertical-align:middle;margin-top:10px; margin-left:8px;margin-right:8px;"><img src="{composio_data_url}" style="height:80px; width:200px; object-fit:contain;"></span>'
 
     # Create title with embedded logos
     title_html = f"""
     <div style='display:flex; align-items:center; width:100%; padding:24px 0;'>
       <h1 style='margin:0; padding:0; font-size:2.5rem; font-weight:bold; display:flex; align-items:center;'>
-        Social Media Agent with {gibson_svg_inline} Memori and {composio_svg_inline}
+        Social Media Agent with {gibson_svg_inline} 
+         <span style="color:#c3f624; margin-right:4px;"> Memori </span> and {composio_svg_inline}
       </h1>
     </div>
     """
 
     # Display the styled title
     st.markdown(title_html, unsafe_allow_html=True)
-    st.markdown("**AI-powered tweet generation that sounds exactly like you**")
+    st.markdown("#### AI-powered tweet generation that sounds exactly like you")
 
     # Only show tweet generation on main page
     tweet_generation_agent()

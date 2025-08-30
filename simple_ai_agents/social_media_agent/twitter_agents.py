@@ -59,7 +59,7 @@ def initialize_memori():
     """Initialize Memori memory system for Twitter style"""
     try:
         memory_system = Memori(
-            database_connect="sqlite:///twitter_style_memory.db",
+            database_connect="sqlite:///tmp/twitter_style_memory.db",
             auto_ingest=True,
             conscious_ingest=True,
             verbose=False,
@@ -92,21 +92,70 @@ def scrape_user_tweets(twitter_handle: str) -> List[Dict[str, Any]]:
         result = fresh_scraper_tool.invoke(
             {
                 "website_url": twitter_url,
-                "user_prompt": "Extract the latest 10 tweets from this Twitter handle. Make sure they are the most recent 10 original tweets, not replies, retweets, or quoted tweets—only tweets authored directly by this account.",
+                "user_prompt": (
+                    "Extract the following information for this Twitter handle: "
+                    "- Username (display name)\n"
+                    "- Profile image URL\n"
+                    "- Handle (e.g., @username)\n"
+                    "- The latest 10 top tweets (original tweets only, not replies, retweets, or quotes)\n"
+                    "For each tweet, include: tweet text, timestamp, and any media URLs if available."
+                ),
             }
         )
 
-        # Check for different possible keys in the result
-        if "latest_tweets" in result:
-            return result["latest_tweets"]
-        elif "tweets" in result:
-            return result["tweets"]
-        else:
+        print("result holo",result)
+        # Return all details in a dictionary
+        tweets = result.get("latest_tweets") or result.get("tweets")
+        if tweets is None:
             raise Exception(f"No tweets found in result: {result}")
+        
+        print({
+            "username": result.get("username"),
+            "profile_image_url": result.get("profile_image_url"),
+            "handle": result.get("handle"),
+            "tweets": tweets
+        })
+        return {
+            "username": result.get("username"),
+            "profile_image_url": result.get("profile_image_url"),
+            "handle": result.get("handle"),
+            "tweets": tweets
+        }
 
     except Exception as e:
         raise Exception(f"Error scraping tweets: {e}")
 
+
+def render_tweet_card(username, handle, profile_image_url, tweet_text):
+        """Render a tweet card HTML with dynamic profile, handle, and tweet text."""
+        tweet_card_html = f'''
+        <div
+            style="background:#000;color:#E7E9EA;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:16px 0 16px 0;padding:16px 20px;border:1px solid #2f3336;border-radius:16px;text-align:left;"
+        >
+            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <img
+                        src="{profile_image_url}"
+                        alt="User avatar"
+                        width="48"
+                        height="48"
+                        style="border-radius:9999px; display:block;"
+                    />
+                    <div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <span style="color:#fff; font-weight:700; font-size:18px; line-height:1.2;">{username}</span>
+                            <span aria-label="Verified" title="Verified" style="background:#1d9bf0;color:#fff;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:9999px;font-size:12px;line-height:1;font-weight:700;">✓</span>
+                        </div>
+                        <div style="color:#8b98a5; font-size:14px; margin-top:2px;">{handle}</div>
+                    </div>
+                </div>
+                <button type="button" style="background:#e6ecf0;color:#0f1419;border:0;padding:10px 16px;border-radius:9999px;font-weight:700;font-size:16px;cursor:pointer;">Promote</button>
+            </div>
+            <p style="color:#fff;font-size:26px;font-weight:400;line-height:1.3;margin:14px 0 12px;">{tweet_text}</p>
+
+        </div>
+        '''
+        return tweet_card_html
 
 def analyze_tweeting_style(tweets: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Analyze tweeting style using Nebius LLM"""
@@ -182,7 +231,6 @@ def store_tweeting_style_in_memori(
 ):
     """Store tweeting style analysis in Memori"""
     try:
-        # Safely get hashtag patterns, handling missing data
         hashtag_patterns = style_analysis.get("hashtag_patterns", [])
         hashtag_text = (
             ", ".join(hashtag_patterns[:3]) if hashtag_patterns else "various topics"
