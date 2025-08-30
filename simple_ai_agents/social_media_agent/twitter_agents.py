@@ -227,7 +227,7 @@ def analyze_tweeting_style(tweets: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def store_tweeting_style_in_memori(
-    memory_system, style_analysis: Dict[str, Any], twitter_handle: str
+    memory_system, style_analysis: Dict[str, Any], twitter_handle: str, profile_image_url: str, handle: str, username: str
 ):
     """Store tweeting style analysis in Memori"""
     try:
@@ -251,6 +251,9 @@ def store_tweeting_style_in_memori(
                 "twitter_handle": twitter_handle,
                 "style_data": style_analysis,
                 "analysis_timestamp": "now",
+                "profile_image_url": profile_image_url,
+                "username": username,
+                "handle": handle,
             },
         )
 

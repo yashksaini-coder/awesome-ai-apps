@@ -118,7 +118,59 @@ with st.sidebar:
         st.session_state.twitter_handle = twitter_handle
 
     # Analyze button
-    analyze_tweeting_style_btn = st.button("🔍 Analyze Tweeting Style", type="primary")
+    if st.button("🔍 Analyze Tweeting Style", type="primary"):
+            with st.spinner("Scraping tweets..."):
+                try:
+                    # Scrape tweets
+                    scraped_tweets = scrape_user_tweets(twitter_handle)
+                    st.session_state.scraped_tweets = scraped_tweets
+                    st.session_state.twitter_handle = twitter_handle
+                    st.session_state.profile_image_url = scraped_tweets.get("profile_image_url")
+                    st.session_state.handle = scraped_tweets.get("handle")
+                    st.session_state.username = scraped_tweets.get("username")
+
+                    if scraped_tweets:
+                        st.success(
+                            f"✅ Successfully scraped {len(scraped_tweets)} tweets for analysis!"
+                        )
+
+                        # Analyze style
+                        with st.spinner("Analyzing tweeting style..."):
+                            style_analysis = analyze_tweeting_style(scraped_tweets["tweets"])
+
+                            if style_analysis:
+                                st.session_state.style_analysis = style_analysis
+
+                                # Store in memory
+                                with st.spinner("Storing style in memory..."):
+                                    try:
+                                        formatted_style = (
+                                            store_tweeting_style_in_memori(
+                                                memory_system,
+                                                style_analysis,
+                                                twitter_handle,
+                                                st.session_state.profile_image_url,
+                                                st.session_state.handle,
+                                                st.session_state.username,
+                                            )
+                                        )
+                                        if formatted_style:
+                                            st.success(
+                                                "✅ Style analysis complete & stored in memory!"
+                                            )
+                                            st.rerun()
+                                        else:
+                                            st.error("❌ Failed to store style")
+                                    except Exception as e:
+                                        st.error(f"❌ Error storing style: {e}")
+                            else:
+                                st.error("❌ Failed to analyze style")
+                    else:
+                        st.error("❌ No tweets found")
+
+                except Exception as e:
+                    st.error(f"❌ Error: {e}")
+
 
     st.markdown("---")
     st.subheader("📊 Current Status")
@@ -172,16 +224,18 @@ def tweet_generation_agent():
 
                     # Display the dynamic tweet card
                     # Try to get profile info from memory
-                    profile_image_url = None
-                    username = None
-                    handle = None
-                    # Try to get from style_analysis (session) first
-                    style_analysis = st.session_state.get("style_analysis")
-                    if style_analysis and "profiles" in style_analysis and style_analysis["profiles"]:
-                        profile = style_analysis["profiles"][0]
-                        profile_image_url = profile.get("profile_image", {}).get("url", None)
-                        username = profile.get("username", None)
-                        handle = profile.get("handle", None)
+                    # Prefer scraped profile info from session state
+                    profile_image_url = st.session_state.get("profile_image_url")
+                    username = st.session_state.get("username")
+                    handle = st.session_state.get("handle")
+                    # If not set, fallback to style_analysis (session)
+                    if not (profile_image_url and username and handle):
+                        style_analysis = st.session_state.get("style_analysis")
+                        if style_analysis and "profiles" in style_analysis and style_analysis["profiles"]:
+                            profile = style_analysis["profiles"][0]
+                            profile_image_url = profile.get("profile_image", {}).get("url", None)
+                            username = profile.get("username", None)
+                            handle = profile.get("handle", None)
                     # Fallback: try to get from memory
                     if not (profile_image_url and username and handle):
                         stored_style = get_stored_tweeting_style(memory_tool)
