@@ -103,23 +103,24 @@ def scrape_user_tweets(twitter_handle: str) -> List[Dict[str, Any]]:
             }
         )
 
-        print("result holo",result)
         # Return all details in a dictionary
         tweets = result.get("latest_tweets") or result.get("tweets")
         if tweets is None:
             raise Exception(f"No tweets found in result: {result}")
-        
-        print({
-            "username": result.get("username"),
-            "profile_image_url": result.get("profile_image_url"),
-            "handle": result.get("handle"),
-            "tweets": tweets
-        })
+
+        print(
+            {
+                "username": result.get("username"),
+                "profile_image_url": result.get("profile_image_url"),
+                "handle": result.get("handle"),
+                "tweets": tweets,
+            }
+        )
         return {
             "username": result.get("username"),
             "profile_image_url": result.get("profile_image_url"),
             "handle": result.get("handle"),
-            "tweets": tweets
+            "tweets": tweets,
         }
 
     except Exception as e:
@@ -127,8 +128,8 @@ def scrape_user_tweets(twitter_handle: str) -> List[Dict[str, Any]]:
 
 
 def render_tweet_card(username, handle, profile_image_url, tweet_text):
-        """Render a tweet card HTML with dynamic profile, handle, and tweet text."""
-        tweet_card_html = f'''
+    """Render a tweet card HTML with dynamic profile, handle, and tweet text."""
+    tweet_card_html = f'''
         <div
             style="background:#000;color:#E7E9EA;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:16px 0 16px 0;padding:16px 20px;border:1px solid #2f3336;border-radius:16px;text-align:left;"
         >
@@ -155,7 +156,8 @@ def render_tweet_card(username, handle, profile_image_url, tweet_text):
 
         </div>
         '''
-        return tweet_card_html
+    return tweet_card_html
+
 
 def analyze_tweeting_style(tweets: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Analyze tweeting style using Nebius LLM"""
@@ -227,7 +229,12 @@ def analyze_tweeting_style(tweets: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def store_tweeting_style_in_memori(
-    memory_system, style_analysis: Dict[str, Any], twitter_handle: str, profile_image_url: str, handle: str, username: str
+    memory_system,
+    style_analysis: Dict[str, Any],
+    twitter_handle: str,
+    profile_image_url: str,
+    handle: str,
+    username: str,
 ):
     """Store tweeting style analysis in Memori"""
     try:
