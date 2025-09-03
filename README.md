@@ -1,4 +1,4 @@
-# Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) 
+# Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 ![Banner](/assets/banner_new.png)
 
@@ -17,6 +17,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [<img src="https://avatars.githubusercontent.com/u/209155962?s=200&v=4" alt="AWS Strands Agents logo" width="20" height="20"> AWS Strands Agent](https://strandsagents.com/)
 - [<img src="https://avatars.githubusercontent.com/u/110818415?s=200&v=4" alt="Pydantic AI logo" width="20" height="20"> Pydantic AI](https://ai.pydantic.dev/)
 - [<img src="https://avatars.githubusercontent.com/u/134388954?s=200&v=4" alt="Camel AI logo" width="20" height="20"> CAMEL‑AI](https://www.camel-ai.org/)
+- [<img src="assets/DSPy.png" alt="DSPy logo" width="20" height="20"> DSPy](https://dspy.ai/)
 
 ## 🧩 Starter Agents
 
