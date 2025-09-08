@@ -189,35 +189,72 @@ if st.session_state.agent_id:
 else:
     if not st.session_state.datastore_id:
         st.info("**Step 1:** Create a datastore in the sidebar to get started")
-        st.write("**What is a datastore?**")
-        st.write("- A secure container for your documents")
-        st.write("- Handles parsing, chunking, and indexing automatically")
-        st.write("- Optimized for retrieval and search")
         
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write("**Why Contextual AI Datastores?**")
+            st.write("- **Enterprise-grade parsing** - Handles complex PDFs, tables, charts automatically")
+            st.write("- **No vector database setup** - Managed infrastructure scales for you") 
+            st.write("- **Advanced document processing** - Preserves document structure and hierarchy")
+            st.write("- **Built-in security** - Data isolation and compliance-ready")
+        
+        with col2:
+            st.write("**vs Traditional RAG Approaches:**")
+            st.write("- No need to configure embedding models")
+            st.write("- No chunking strategy decisions") 
+            st.write("- No vector database management")
+            st.write("- No infrastructure scaling concerns")
+            
     elif not st.session_state.uploaded_docs:
         st.info("**Step 2:** Upload documents to your datastore")
-        st.write("**Supported formats:**")
-        st.write("- PDF documents")
-        st.write("- Text files (.txt, .md)")
-        st.write("- Word documents (.doc, .docx)")
-        st.write("- HTML files")
         
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write("**Advanced Document Processing:**")
+            st.write("- **PDFs** - Complex tables, charts, multi-column layouts")
+            st.write("- **Office docs** - Word, PowerPoint with embedded content") 
+            st.write("- **Web content** - HTML with proper structure preservation")
+            st.write("- **Text files** - Markdown, plain text with formatting")
+        
+        with col2:
+            st.write("**What Happens Next:**")
+            st.write("- Documents are parsed with hierarchy awareness")
+            st.write("- Content is automatically chunked optimally")
+            st.write("- Embeddings generated with state-of-the-art models")
+            st.write("- Ready for intelligent retrieval in minutes")
+            
     elif not st.session_state.agent_id:
         st.info("**Step 3:** Create an agent to start chatting")
-        st.write("**What is an agent?**")
-        st.write("- AI assistant connected to your documents")
-        st.write("- Uses Contextual AI's advanced RAG system")
-        st.write("- Provides grounded, accurate responses")
         
-    # Show document preview if available
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write("**Contextual AI Agent Capabilities:**")
+            st.write("- **Grounded responses** - Always cite source documents")
+            st.write("- **Multi-document synthesis** - Compare and analyze across files")
+            st.write("- **Advanced retrieval** - Beyond simple similarity search") 
+            st.write("- **Hallucination prevention** - Built-in accuracy safeguards")
+        
+        with col2:
+            st.write("**Built-in Quality Features:**")
+            st.write("- **Source attribution** - See exactly which pages were referenced")
+            st.write("- **LMUnit evaluation** - Automated quality scoring")
+            st.write("- **Retrieval visualization** - View document excerpts used")
+            st.write("- **Performance analytics** - Track accuracy and relevance")
+            
     if st.session_state.uploaded_docs:
-        st.subheader("Uploaded Documents")
-        cols = st.columns(min(3, len(st.session_state.uploaded_docs)))
-        for i, doc_name in enumerate(st.session_state.uploaded_docs[:3]):
-            with cols[i % 3]:
-                st.info(f"{doc_name}")
+        st.subheader("Document Collection Ready")
+        st.write(f"**{len(st.session_state.uploaded_docs)} documents** processed and indexed:")
         
-        if len(st.session_state.uploaded_docs) > 3:
-            st.write(f"... and {len(st.session_state.uploaded_docs) - 3} more documents")
+        cols = st.columns(min(4, len(st.session_state.uploaded_docs)))
+        for i, doc_name in enumerate(st.session_state.uploaded_docs[:4]):
+            with cols[i % 4]:
+                with st.container():
+                    st.write(f"**{doc_name}**")
+                    st.caption("Processed & Indexed")
+        
+        if len(st.session_state.uploaded_docs) > 4:
+            st.write(f"**Plus {len(st.session_state.uploaded_docs) - 4} more documents** in your knowledge base")
+            
+        st.write("**Next:** Create an agent in the sidebar to start querying these documents")
 
 st.caption("Powered by Contextual AI's Managed RAG Platform")
