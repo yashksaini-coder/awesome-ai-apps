@@ -8,6 +8,7 @@ from contextual import ContextualAI
 load_dotenv()
 
 def init_session_state():
+    """Initialize Streamlit session state variables."""
     if "datastore_id" not in st.session_state:
         st.session_state.datastore_id = ""
     if "agent_id" not in st.session_state:
@@ -18,6 +19,7 @@ def init_session_state():
         st.session_state.uploaded_docs = []
 
 def create_client():
+    """Create and return Contextual AI client with API key."""
     api_key = os.getenv("CONTEXTUAL_API_KEY")
     if not api_key:
         return None
@@ -28,6 +30,7 @@ def create_client():
         return None
 
 def handle_datastore(client, name):
+    """Create datastore or return existing one by name."""
     try:
         datastores = client.datastores.list()
         existing = next((ds for ds in datastores if ds.name == name), None)
@@ -42,6 +45,7 @@ def handle_datastore(client, name):
         return None, None
 
 def handle_agent(client, name, datastore_id):
+    """Create agent or return existing one by name."""
     try:
         agents = client.agents.list()
         existing = next((a for a in agents if a.name == name), None)
@@ -60,11 +64,14 @@ def handle_agent(client, name, datastore_id):
         return None, None
 
 def upload_files(client, datastore_id, files):
+    """Upload multiple files to datastore with progress tracking."""
     progress = st.progress(0)
     for i, file in enumerate(files):
         progress.progress(i / len(files))
         try:
-            client.datastores.documents.ingest(datastore_id, file=file)
+            media_type = getattr(file, "type", None) or "application/octet-stream"
+            payload = (file.name, file.getvalue(), media_type)
+            client.datastores.documents.ingest(datastore_id=datastore_id, file=payload)
             st.session_state.uploaded_docs.append(file.name)
         except Exception as e:
             st.error(f"Upload failed for {file.name}: {e}")
@@ -73,10 +80,12 @@ def upload_files(client, datastore_id, files):
 
 
 def escape_dollars(text):
+    """Escape dollar signs to prevent markdown math mode issues."""
     # Fixes streamlit math mode issues
     return text.replace("$", "\\$") if text else text
 
 def query_response(client, agent_id, query):
+    """Send query to agent and return formatted response."""
     try:
         response = client.agents.query.create(
             agent_id=agent_id,
@@ -92,6 +101,7 @@ def query_response(client, agent_id, query):
         return f"Query error: {e}", None
 
 def show_sources(client, response_obj, agent_id):
+    """Display source document images from query response."""
     try:
         if not (hasattr(response_obj, 'retrieval_contents') and response_obj.retrieval_contents):
             st.info("No sources available")
@@ -107,11 +117,14 @@ def show_sources(client, response_obj, agent_id):
             if hasattr(ret_info, 'content_metadatas') and ret_info.content_metadatas:
                 meta = ret_info.content_metadatas[0]
                 if hasattr(meta, 'page_img') and meta.page_img:
-                    st.image(base64.b64decode(meta.page_img), caption=f"Source {i+1}")
+                    raw = meta.page_img
+                    b64 = raw.split(",", 1)[-1] if "base64," in raw else raw
+                    st.image(base64.b64decode(b64), caption=f"Source {i+1}")
     except Exception as e:
         st.error(f"Source error: {e}")
 
 def evaluate_quality(client, query, response, criteria):
+    """Evaluate response quality using LMUnit scoring."""
     try:
         result = client.lmunit.create(query=query, response=response, unit_test=criteria)
         score = result.score
@@ -130,6 +143,7 @@ def evaluate_quality(client, query, response, criteria):
 
 
 def main():
+    """Main Streamlit application entry point."""
     st.set_page_config(page_title="Contextual AI RAG", layout="wide")
     
     init_session_state()
