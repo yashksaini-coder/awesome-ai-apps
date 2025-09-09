@@ -126,6 +126,7 @@ def evaluate_quality(client, query, response, criteria):
     except Exception as e:
         st.error(f"Evaluation error: {e}")
 
+
 def main():
     st.set_page_config(page_title="Contextual AI RAG", layout="wide")
     
@@ -196,25 +197,24 @@ def main():
     
     st.title("Contextual AI RAG")
     
-    # Show document processing notification
     if st.session_state.uploaded_docs and not st.session_state.agent_id:
         st.info("Documents uploaded! Contextual AI is processing and indexing your files. This may take a few minutes for complex documents. Create an agent in the sidebar when ready.")
     
     if st.session_state.agent_id:
         for msg in st.session_state.chat_history:
             with st.chat_message(msg["role"]):
-                st.markdown(msg["content"])
+                st.text(msg["content"])
 
         if prompt := st.chat_input("Ask about your documents"):
             st.session_state.chat_history.append({"role": "user", "content": prompt})
             
             with st.chat_message("user"):
-                st.markdown(prompt)
+                st.text(prompt)
             
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
                     answer, response_obj = query_response(client, st.session_state.agent_id, prompt)
-                    st.markdown(answer)
+                    st.text(answer)
                     
                     st.session_state.chat_history.append({"role": "assistant", "content": answer})
                     st.session_state["last_response"] = response_obj
@@ -240,7 +240,6 @@ def main():
                                        if m["role"] == "assistant"), None)
                         if last_msg:
                             evaluate_quality(client, st.session_state.last_query, last_msg, criteria)
-    
     else:
         if not st.session_state.datastore_id:
             st.info("Create a datastore to get started")
