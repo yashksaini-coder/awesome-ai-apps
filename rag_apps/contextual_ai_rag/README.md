@@ -1,6 +1,6 @@
 # Contextual AI RAG
 
-![demo](./assets/demo.mov)
+[![demo](./assets/screenshot.png)](./assets/demo.mov)
 
 A Streamlit RAG application powered by Contextual AI's managed platform. Upload documents, create agents, and chat with your data using enterprise-grade retrieval and generation.
 
