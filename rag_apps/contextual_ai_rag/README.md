@@ -27,7 +27,7 @@ A Streamlit RAG application powered by Contextual AI's managed platform. Upload 
 ## Installation
 
 ```bash
-git clone https://github.com/Shubhamsaboo/awesome-ai-apps.git
+git clone https://github.com/Arindam200/awesome-ai-apps.git
 cd awesome-ai-apps/rag_apps/contextual_ai_rag
 ```
 
