@@ -42,7 +42,6 @@ def handle_datastore(client, name):
         return None, None
 
 def handle_agent(client, name, datastore_id):
-    """Create or get existing agent."""
     try:
         agents = client.agents.list()
         existing = next((a for a in agents if a.name == name), None)
@@ -73,6 +72,9 @@ def upload_files(client, datastore_id, files):
     progress.empty()
 
 
+def escape_dollars(text):
+    # Fixes streamlit math mode issues
+    return text.replace("$", "\\$") if text else text
 
 def query_response(client, agent_id, query):
     try:
@@ -85,7 +87,7 @@ def query_response(client, agent_id, query):
         else:
             answer = str(response)
         
-        return answer, response
+        return escape_dollars(answer), response
     except Exception as e:
         return f"Query error: {e}", None
 
@@ -135,12 +137,10 @@ def main():
 
     with st.sidebar:
         st.header("Setup")
-        
         if not client:
             st.error("Missing CONTEXTUAL_API_KEY")
             st.code("CONTEXTUAL_API_KEY=your_key")
             st.stop()
-        
         st.success("Connected")
         st.divider()
         
@@ -203,22 +203,23 @@ def main():
     if st.session_state.agent_id:
         for msg in st.session_state.chat_history:
             with st.chat_message(msg["role"]):
-                st.text(msg["content"])
+                st.markdown(msg["content"])
 
         if prompt := st.chat_input("Ask about your documents"):
-            st.session_state.chat_history.append({"role": "user", "content": prompt})
+            escaped_prompt = escape_dollars(prompt)
+            st.session_state.chat_history.append({"role": "user", "content": escaped_prompt})
             
             with st.chat_message("user"):
-                st.text(prompt)
+                st.markdown(escaped_prompt)
             
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
                     answer, response_obj = query_response(client, st.session_state.agent_id, prompt)
-                    st.text(answer)
+                    st.markdown(answer)
                     
                     st.session_state.chat_history.append({"role": "assistant", "content": answer})
                     st.session_state["last_response"] = response_obj
-                    st.session_state["last_query"] = prompt
+                    st.session_state["last_query"] = escaped_prompt
         
         if "last_response" in st.session_state and st.session_state.last_response:
             with st.expander("Debug Tools"):
