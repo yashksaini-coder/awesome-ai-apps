@@ -43,12 +43,9 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Agno UI Example](simple_ai_agents/agno_ui_agent) - UI for web & finance agents.
 - [Mastra Weather Bot](simple_ai_agents/mastra_ai_weather_agent) - Weather updates with Mastra AI.
 - [Calendar Assistant](simple_ai_agents/cal_scheduling_agent) - Calendar scheduling with Cal.com.
-- [Memory Agent](simple_ai_agents/memory_agent) - Simple Memory Agent implementation with Agno.
 - [Web Automation Agent](simple_ai_agents/browser_agent) - Simple Browser Agent implementation with Nebius & browser use.
 - [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
 - [Talk to Your DB](simple_ai_agents/talk_to_db) - Talk to your Database with GibsonAI & Langchain
-- [Blog Writing Agent](simple_ai_agents/blog_writing_agent) - Personalized AI-powered blog writing agent.
-- [arXiv Researcher Agent](simple_ai_agents/arxiv_researcher_agent_with_memori) - AI research assistant built using OpenAI Agents and GibsonAI Memori.
 
 ## 🗂️ MCP Agents
 
@@ -59,6 +56,17 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [GitHub MCP Agent](mcp_ai_agents/github_mcp_agent) - Repo insights via MCP.
 - [MCP Starter](mcp_ai_agents/mcp_starter) - GitHub repo analyzer starter.
 - [Talk to your Docs](mcp_ai_agents/docs_qna_agent) - Documentation QnA Agent
+
+## 🧠 Memory Agents
+
+**Agents with advanced memory capabilities:**
+
+- [Agno Memory Agent](memory_agents/agno_memory_agent) - Agno-based agent with persistent memory.
+- [arXiv Researcher Agent with Memori](memory_agents/arxiv_researcher_agent_with_memori) - Research assistant using OpenAI Agents and GibsonAI Memori.
+- [AWS Strands Agent with Memori](memory_agents/aws_strands_agent_with_memori) - AWS Strands agent enhanced with Memori memory.
+- [Blog Writing Agent](memory_agents/blog_writing_agent) - Personalized blog writing agent with memory.
+- [Social Media Agent](memory_agents/social_media_agent) - Social media automation agent with memory.
+
 
 ## 📚 RAG Applications
 
