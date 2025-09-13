@@ -92,6 +92,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Finance Service Agent](advance_ai_agents/finance_service_agent) - FastAPI server for stock data and predictions with Agno.
 - [Price Monitoring Agent](advance_ai_agents/price_monitoring_agent) - Price monitoring and alerting Agent powered by CrewAi, Twilio & Nebius.
 - [Startup Idea Validator Agent](advance_ai_agents/startup_idea_validator_agent) - Agentic Workflow to validate and analyze startup ideas.
+- [Meeting Assistant Agent](advance_ai_agents/meeting_assistant_agent) - Agentic Workflow that send meeting notes and creates task based on conversation.
 
 ## 📺 Playlist of Demo Videos & Tutorials
 
