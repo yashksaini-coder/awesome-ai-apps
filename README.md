@@ -56,6 +56,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [GitHub MCP Agent](mcp_ai_agents/github_mcp_agent) - Repo insights via MCP.
 - [MCP Starter](mcp_ai_agents/mcp_starter) - GitHub repo analyzer starter.
 - [Talk to your Docs](mcp_ai_agents/docs_qna_agent) - Documentation QnA Agent
+- [Database MCP Agent](mcp_ai_agents/database_mcp_agent) - A conversational AI agent for managing GibsonAI database projects and schemas.
 
 ## 🧠 Memory Agents
 
@@ -73,6 +74,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 **Retrieve-augmented generation examples:**
 
 - [Agentic RAG](rag_apps/agentic_rag) - Agentic RAG with Agno & GPT 5.
+- [Agentic RAG with Web Search](rag_apps/agentic_rag_with_web_search) - Advanced RAG with CrewAI, Qdrant, and Exa for hybrid search.
 - [Resume Optimizer](rag_apps/resume_optimizer) - Boost resumes with AI.
 - [LlamaIndex RAG Starter](rag_apps/llamaIndex_starter) - LlamaIndex + Nebius RAG starter.
 - [PDF RAG Analyzer](rag_apps/pdf_rag_analyser) - Chat with multiple PDFs.
