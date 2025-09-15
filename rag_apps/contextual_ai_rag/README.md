@@ -13,16 +13,29 @@ A Streamlit RAG application powered by Contextual AI's managed platform. Upload 
 - Source Attribution with Page Images
 - Quality Evaluation with LMUnit Scoring
 - Real-time Processing Feedback
+- **Nebius Enhancement** - Optional AI-powered response enhancement
 
 ## Prerequisites
 - [Contextual AI](https://app.contextual.ai) Account
 - Contextual AI API Key
+- [Nebius AI](https://studio.nebius.ai) Account (Optional - for response enhancement)
 
-### Generate an API Key
+### Generate API Keys
+
+**Contextual AI API Key:**
 1. Log in to your tenant at [app.contextual.ai](https://app.contextual.ai)
 2. Click on "API Keys"
 3. Click on "Create API Key"
 4. Copy the key for use in your `.env` file
+
+**Nebius API Key (Optional):**
+1. Visit [Nebius AI Studio](https://console.nebius.ai/)
+2. Sign up for a free account or log in
+3. Navigate to the AI section and select LLM services
+4. Go to "API Keys" section in your console
+5. Click "Create API Key" and give it a name
+6. Copy the generated API key
+7. Add `NEBIUS_API_KEY=your_key_here` to your `.env` file
 
 ## Installation
 
@@ -39,6 +52,8 @@ pip install -r requirements.txt
 Create `.env` file:
 ```dotenv
 CONTEXTUAL_API_KEY=your_api_key_here
+# Optional: Enable Nebius enhancement
+NEBIUS_API_KEY=your_nebius_api_key_here
 ```
 
 Launch the app:
@@ -52,7 +67,8 @@ streamlit run main.py
 2. **Upload Documents** - Add your files and wait for them to upload  
 3. **Deploy Agent** - Create RAG agent linked to datastore
 4. **Chat** - Ask questions about your documents
-5. **Debug Tools** - View sources and evaluate response quality
+5. **Enhancement** - Toggle Nebius enhancement for enriched responses (if API key provided)
+6. **Debug Tools** - View sources and evaluate response quality
 
 ## Advanced Features
 

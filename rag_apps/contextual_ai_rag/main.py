@@ -4,6 +4,7 @@ import base64
 import re
 from dotenv import load_dotenv
 from contextual import ContextualAI
+from llama_index.llms.nebius import NebiusLLM
 
 load_dotenv()
 
@@ -83,6 +84,31 @@ def escape_dollars(text):
     """Escape dollar signs to prevent markdown math mode issues."""
     # Fixes streamlit math mode issues
     return text.replace("$", "\\$") if text else text
+
+def enhance_with_nebius(original_response, query):
+    """Use Nebius to enhance the Contextual AI response."""
+    try:
+        nebius_api_key = os.getenv("NEBIUS_API_KEY")
+        if not nebius_api_key:
+            return original_response
+        
+        nebius_llm = NebiusLLM(
+            model="Qwen/Qwen3-235B-A22B", 
+            api_key=nebius_api_key
+        )
+        
+        enhancement_prompt = f"""Based on the original query and AI response below, provide a brief enhancement that adds key insights, improves clarity, or suggests relevant follow-up questions. Keep it concise and valuable.
+
+Original Query: {query}
+AI Response: {original_response}
+
+Enhancement:"""
+        
+        enhanced = nebius_llm.complete(enhancement_prompt)
+        return f"{original_response}\n\n**💡 Enhanced Insights:**\n{enhanced}"
+    
+    except Exception as e:
+        return original_response
 
 def query_response(client, agent_id, query):
     """Send query to agent and return formatted response."""
@@ -211,6 +237,13 @@ def main():
     
     st.title("Contextual AI RAG")
     
+    # Enhancement toggle (only show if Nebius API key is available)
+    if os.getenv("NEBIUS_API_KEY"):
+        enhance_enabled = st.toggle("Nebius Enhancement", value=False, 
+                                  help="Use Nebius AI to enhance responses with additional insights")
+    else:
+        enhance_enabled = False
+    
     if st.session_state.uploaded_docs and not st.session_state.agent_id:
         st.info("Documents uploaded! Contextual AI is processing and indexing your files. This may take a few minutes for complex documents. Create an agent in the sidebar when ready.")
     
@@ -229,8 +262,13 @@ def main():
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
                     answer, response_obj = query_response(client, st.session_state.agent_id, prompt)
-                    st.markdown(answer)
                     
+                    # Apply enhancement if enabled
+                    if enhance_enabled:
+                        with st.spinner("Enhancing with Nebius..."):
+                            answer = enhance_with_nebius(answer, prompt)
+                    
+                    st.markdown(answer)
                     st.session_state.chat_history.append({"role": "assistant", "content": answer})
                     st.session_state["last_response"] = response_obj
                     st.session_state["last_query"] = escaped_prompt
@@ -238,7 +276,6 @@ def main():
         if "last_response" in st.session_state and st.session_state.last_response:
             with st.expander("Debug Tools"):
                 col1, col2 = st.columns(2)
-                
                 with col1:
                     if st.button("Show Sources"):
                         show_sources(client, st.session_state.last_response, st.session_state.agent_id)
