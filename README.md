@@ -137,12 +137,9 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Whether you're a beginner or an expert, your examples and tutorials can help others learn and grow. Here's how you can contribute:
+We welcome contributions from the community! If you'd like to contribute, please see our [Contributing Guidelines](CONTRIBUTING.md) for more information on how to get started.
 
-1. Submit a Pull Request with your LLM application example
-2. Add detailed documentation and setup instructions
-3. Include requirements.txt or environment.yml
-4. Share your experience and best practices
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 ## 📜 License
 
