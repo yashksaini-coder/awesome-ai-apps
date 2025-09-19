@@ -38,7 +38,7 @@ This repository is a comprehensive collection of practical examples, tutorials, 
         <span style="white-space:nowrap;">AI Inference Provider</span>
         <br>
         <a href="https://dub.sh/nebius" target="_blank">
-          <img src="https://img.shields.io/badge/Try%20Site-blue?style=flat-square" alt="Visit Nebius AI website">
+          <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="Visit Nebius AI website">
         </a>
       </sub>
     </td>
@@ -51,7 +51,7 @@ This repository is a comprehensive collection of practical examples, tutorials, 
         <span style="white-space:nowrap;">Web Scraping Library</span>
         <br>
         <a href="https://dub.sh/scrapegraphai" target="_blank">
-          <img src="https://img.shields.io/badge/Visit%20Now-blue?style=flat-square" alt="View ScrapeGraphAI on GitHub">
+          <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="View ScrapeGraphAI on GitHub">
         </a>
       </sub>
     </td>
