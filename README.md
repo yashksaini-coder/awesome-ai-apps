@@ -16,7 +16,7 @@ This repository is a comprehensive collection of practical examples, tutorials, 
 
 <table align="center" cellpadding="10" style="width:100%; border-collapse:collapse;">
   <tr align="center">
-    <td width="25%" valign="middle" align="center">
+    <td width="200" valign="middle" align="center">
       <a href="https://dub.sh/brightdata" target="_blank" title="Visit Bright Data">
         <img src="https://mintlify.s3.us-west-1.amazonaws.com/brightdata/logo/light.svg" height="35" style="max-width:180px;" alt="Bright Data - Web Data Platform">
       </a>
@@ -29,7 +29,7 @@ This repository is a comprehensive collection of practical examples, tutorials, 
         </a>
       </sub>
     </td>
-    <td width="25%" valign="middle" align="center">
+    <td width="200" valign="middle" align="center">
       <a href="https://dub.sh/nebius" target="_blank" title="Visit Nebius AI">
         <img src="./assets/nebius.png" height="36" style="max-width:180px;" alt="Nebius AI - AI Platform">
       </a>
@@ -42,7 +42,7 @@ This repository is a comprehensive collection of practical examples, tutorials, 
         </a>
       </sub>
     </td>
-    <td width="25%" valign="middle" align="center">
+    <td width="200" valign="middle" align="center">
       <a href="https://dub.sh/scrapegraphai" target="_blank" title="Visit ScrapeGraphAI on GitHub">
         <img src="https://raw.githubusercontent.com/ScrapeGraphAI/ScrapeGraph-AI/main/docs/assets/scrapegraphai_logo.png" height="44" style="max-width:180px;" alt="ScrapeGraphAI - Web Scraping Library">
       </a>
@@ -55,7 +55,7 @@ This repository is a comprehensive collection of practical examples, tutorials, 
         </a>
       </sub>
     </td>
-    <td width="25%" valign="middle" align="center">
+    <td width="200" valign="middle" align="center">
       <a href="https://dub.sh/gibson" target="_blank" title="Visit GibsonAI">
         <img src="assets/gibson.svg" height="36" style="max-width:180px;" alt="GibsonAI - AI for Databases">
       </a>
