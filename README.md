@@ -1,12 +1,26 @@
-# Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 ![Banner](/assets/banner_new.png)
 
+
+<div align="center">
+
+# Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+
+
+<a href="https://trendshift.io/repositories/14662" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14662" alt="Arindam200%2Fawesome-ai-apps | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+
+</div>
+
+
 This repository is a comprehensive collection of practical examples, tutorials, and recipes for building powerful LLM-powered applications. From simple chatbots to advanced AI agents, these projects serve as a guide for developers working with various AI frameworks and tools.
+
+
 
 ---
 
 <div align="center">
+
+
 
 ## 💎 Sponsors
 
