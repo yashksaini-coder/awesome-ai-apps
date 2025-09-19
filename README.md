@@ -17,14 +17,14 @@ This repository is a comprehensive collection of practical examples, tutorials, 
 <table align="center" cellpadding="10" style="width:100%; border-collapse:collapse;">
   <tr align="center">
     <td width="25%" valign="middle" align="center">
-      <a href="https://brightdata.com/" target="_blank" title="Visit Bright Data">
+      <a href="https://dub.sh/brightdata" target="_blank" title="Visit Bright Data">
         <img src="https://mintlify.s3.us-west-1.amazonaws.com/brightdata/logo/light.svg" height="35" style="max-width:180px;" alt="Bright Data - Web Data Platform">
       </a>
       <br>
       <sub>
         <span style="white-space:nowrap;">Web Data Platform</span>
         <br>
-        <a href="https://brightdata.com/ai?utm_source=brand&utm_campaign=brnd-mkt_github_nirdiamant_logo" target="_blank">
+        <a href="https://dub.sh/brightdata" target="_blank">
           <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="Visit Bright Data website">
         </a>
       </sub>
