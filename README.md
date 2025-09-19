@@ -4,9 +4,78 @@
 
 This repository is a comprehensive collection of practical examples, tutorials, and recipes for building powerful LLM-powered applications. From simple chatbots to advanced AI agents, these projects serve as a guide for developers working with various AI frameworks and tools.
 
-Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform for building and deploying AI applications.
+---
 
-## 🚀 Featured AI Agent Frameworks
+<div align="center">
+
+## 💎 Sponsors
+
+<p align="center">
+  A huge thank you to our sponsors for their generous support!
+</p>
+
+<table align="center" cellpadding="10" style="width:100%; border-collapse:collapse;">
+  <tr align="center" valign="top">
+    <td width="33%" valign="top">
+      <a href="https://brightdata.com/" target="_blank" title="Visit Bright Data">
+        <img src="https://mintlify.s3.us-west-1.amazonaws.com/brightdata/logo/light.svg" height="35" style="max-width:180px;" alt="Bright Data - Web Data Platform">
+      </a>
+      <br>
+      <sub>
+        <span style="white-space:nowrap;">Web Data Platform</span>
+        <br>
+        <a href="https://brightdata.com/ai?utm_source=brand&utm_campaign=brnd-mkt_github_nirdiamant_logo" target="_blank">
+          <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="Visit Bright Data website">
+        </a>
+      </sub>
+    </td>
+    <td width="33%" valign="top">
+      <a href="https://dub.sh/nebius" target="_blank" title="Visit Nebius AI">
+        <img src="./assets/nebius.png" height="36" style="max-width:180px;" alt="Nebius AI - AI Platform">
+      </a>
+      <br>
+      <sub>
+        <span style="white-space:nowrap;">AI Inference Provider</span>
+        <br>
+        <a href="https://dub.sh/nebius" target="_blank">
+          <img src="https://img.shields.io/badge/Try%20Site-blue?style=flat-square" alt="Visit Nebius AI website">
+        </a>
+      </sub>
+    </td>
+    <td width="33%" valign="top">
+      <a href="https://dub.sh/scrapegraphai" target="_blank" title="Visit ScrapeGraphAI on GitHub">
+        <img src="https://raw.githubusercontent.com/ScrapeGraphAI/ScrapeGraph-AI/main/docs/assets/scrapegraphai_logo.png" height="44" style="max-width:180px;" alt="ScrapeGraphAI - Web Scraping Library">
+      </a>
+      <br>
+      <sub>
+        <span style="white-space:nowrap;">Web Scraping Library</span>
+        <br>
+        <a href="https://dub.sh/scrapegraphai" target="_blank">
+          <img src="https://img.shields.io/badge/Visit%20Now-blue?style=flat-square" alt="View ScrapeGraphAI on GitHub">
+        </a>
+      </sub>
+    </td>
+  </tr>
+</table>
+
+### 💎 Become a Sponsor
+
+<p align="center">
+Interested in sponsoring this project? Feel free to reach out!
+<br/>
+<a href="https://dub.sh/arindam-linkedin" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+</a>
+<a href="mailto:arindammajumder2020@gmail.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+</a>
+</p>
+
+</div>
+
+---
+
+<!-- ## 🚀 Featured AI Agent Frameworks
 
 - [<img src="https://raw.githubusercontent.com/google/adk-python/main/assets/agent-development-kit.png" alt="Google ADK logo" width="20" height="20"> Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
 - [<img src="https://avatars.githubusercontent.com/u/14957082?s=200&v=4" alt="OpenAI Agents SDK logo" width="20" height="20"> OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)
@@ -17,9 +86,11 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [<img src="https://avatars.githubusercontent.com/u/209155962?s=200&v=4" alt="AWS Strands Agents logo" width="20" height="20"> AWS Strands Agent](https://strandsagents.com/)
 - [<img src="https://avatars.githubusercontent.com/u/110818415?s=200&v=4" alt="Pydantic AI logo" width="20" height="20"> Pydantic AI](https://ai.pydantic.dev/)
 - [<img src="https://avatars.githubusercontent.com/u/134388954?s=200&v=4" alt="Camel AI logo" width="20" height="20"> CAMEL‑AI](https://www.camel-ai.org/)
-- [<img src="assets/DSPy.png" alt="DSPy logo" width="20" height="20"> DSPy](https://dspy.ai/)
+- [<img src="assets/DSPy.png" alt="DSPy logo" width="20" height="20"> DSPy](https://dspy.ai/) -->
 
-## 🧩 Starter Agents
+## 🚀 Featured AI Apps
+
+### 🧩 Starter Agents
 
 **Quick-start agents for learning and extending:**
 
@@ -32,7 +103,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [AWS Strands Agent Starter](starter_ai_agents/aws_strands_starter) - Weather report Agent.
 - [Camel AI Starter](starter_ai_agents/camel_ai_starter) - Performance benchmarking tool that compares the performance of various AI models.
 
-## 🪶 Simple Agents
+### 🪶 Simple Agents
 
 **Straightforward, practical use-cases:**
 
@@ -47,7 +118,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
 - [Talk to Your DB](simple_ai_agents/talk_to_db) - Talk to your Database with GibsonAI & Langchain
 
-## 🗂️ MCP Agents
+### 🗂️ MCP Agents
 
 **Examples using Model Context Protocol:**
 
@@ -58,7 +129,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Talk to your Docs](mcp_ai_agents/docs_qna_agent) - Documentation QnA Agent
 - [Database MCP Agent](mcp_ai_agents/database_mcp_agent) - A conversational AI agent for managing GibsonAI database projects and schemas.
 
-## 🧠 Memory Agents
+### 🧠 Memory Agents
 
 **Agents with advanced memory capabilities:**
 
@@ -69,7 +140,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Social Media Agent](memory_agents/social_media_agent) - Social media automation agent with memory.
 
 
-## 📚 RAG Applications
+### 📚 RAG Applications
 
 **Retrieve-augmented generation examples:**
 
@@ -83,7 +154,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Gemma3 OCR](rag_apps/gemma_ocr/) - OCR-based document and image processor using Gemma3
 - [Contextual AI RAG](rag_apps/contextual_ai_rag) - Enterprise-level RAG with managed datastores and quality evaluation.
 
-## 🔬 Advanced Agents
+### 🔬 Advanced Agents
 
 **Complex pipelines for end-to-end workflows:**
 
