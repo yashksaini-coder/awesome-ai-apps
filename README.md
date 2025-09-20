@@ -194,6 +194,7 @@ Interested in sponsoring this project? Feel free to reach out!
 - [Price Monitoring Agent](advance_ai_agents/price_monitoring_agent) - Price monitoring and alerting Agent powered by CrewAi, Twilio & Nebius.
 - [Startup Idea Validator Agent](advance_ai_agents/startup_idea_validator_agent) - Agentic Workflow to validate and analyze startup ideas.
 - [Meeting Assistant Agent](advance_ai_agents/meeting_assistant_agent) - Agentic Workflow that send meeting notes and creates task based on conversation.
+- [Ai Hedgefund](advance_ai_agents/ai-hedgefund) - Agentic Workflow for financial analysis
 
 ## 📺 Playlist of Demo Videos & Tutorials
 
