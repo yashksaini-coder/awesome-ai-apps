@@ -62,7 +62,7 @@ This repository is a comprehensive collection of practical examples, tutorials, 
       </a>
       <br>
       <sub>
-        <span style="white-space:nowrap;">Web Scraping Library</span>
+        <span style="white-space:nowrap;">AI Web Scraping framework</span>
         <br>
         <a href="https://dub.sh/scrapegraphai" target="_blank">
           <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="View ScrapeGraphAI on GitHub">
