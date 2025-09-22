@@ -4,12 +4,6 @@ from main import NewsletterGenerator
 from agno.storage.sqlite import SqliteStorage
 import os
 from dotenv import load_dotenv
-import asyncio
-from asyncio import get_event_loop
-import nest_asyncio
-
-# Apply nest_asyncio to allow nested event loops
-nest_asyncio.apply()
 
 # Load environment variables
 load_dotenv()
@@ -78,10 +72,6 @@ with st.sidebar:
     if nebius_api_key:
         os.environ["NEBIUS_API_KEY"] = nebius_api_key
     
-    # st.markdown("---")
-    # st.header("⚙️ Cache Settings")
-    # use_search_cache = st.checkbox("Use Search Cache", value=True, help="Use cached search results if available")
-    # use_cached_report = st.checkbox("Use Cached Newsletter", value=True, help="Use cached newsletter if available")
     
     st.markdown("---")
     st.markdown("### 📚 Example Topics")

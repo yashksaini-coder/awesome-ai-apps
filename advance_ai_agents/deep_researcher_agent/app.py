@@ -2,6 +2,7 @@ import streamlit as st
 from agents import DeepResearcherAgent
 import time
 import base64
+import re
 
 st.set_page_config(
     page_title="Deep Research Agent",
@@ -80,7 +81,9 @@ if user_input:
         for chunk in report_iterator:
             if chunk.content:
                 full_report += chunk.content
-                report_container.markdown(full_report)
+                cleaned_report = re.sub(r"^```(?:[a-zA-Z]*)?\n?", "", full_report)
+                cleaned_report = re.sub(r"\n?```$", "", cleaned_report)
+                report_container.markdown(cleaned_report, unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f"An error occurred: {e}")

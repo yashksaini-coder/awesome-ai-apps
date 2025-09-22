@@ -1,4 +1,4 @@
-![demo](./assets/demo.png)
+![demo](./assets/demo.gif)
 
 # 🏢 Startup Idea Validator Agent
 

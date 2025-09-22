@@ -1,12 +1,108 @@
-# Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) 
 
 ![Banner](/assets/banner_new.png)
 
+
+<div align="center">
+
+# Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+
+
+<a href="https://trendshift.io/repositories/14662" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14662" alt="Arindam200%2Fawesome-ai-apps | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+
+</div>
+
+
 This repository is a comprehensive collection of practical examples, tutorials, and recipes for building powerful LLM-powered applications. From simple chatbots to advanced AI agents, these projects serve as a guide for developers working with various AI frameworks and tools.
 
-Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform for building and deploying AI applications.
 
-## 🚀 Featured AI Agent Frameworks
+
+---
+
+<div align="center">
+
+
+
+## 💎 Sponsors
+
+<p align="center">
+  A huge thank you to our sponsors for their generous support!
+</p>
+
+<table align="center" cellpadding="10" style="width:100%; border-collapse:collapse;">
+  <tr align="center">
+    <td width="200" valign="middle" align="center">
+      <a href="https://dub.sh/brightdata" target="_blank" title="Visit Bright Data">
+        <img src="https://mintlify.s3.us-west-1.amazonaws.com/brightdata/logo/light.svg" height="35" style="max-width:180px;" alt="Bright Data - Web Data Platform">
+      </a>
+      <br>
+      <sub>
+        <span style="white-space:nowrap;">Web Data Platform</span>
+        <br>
+        <a href="https://dub.sh/brightdata" target="_blank">
+          <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="Visit Bright Data website">
+        </a>
+      </sub>
+    </td>
+    <td width="200" valign="middle" align="center">
+      <a href="https://dub.sh/nebius" target="_blank" title="Visit Nebius AI">
+        <img src="./assets/nebius.png" height="36" style="max-width:180px;" alt="Nebius AI - AI Platform">
+      </a>
+      <br>
+      <sub>
+        <span style="white-space:nowrap;">AI Inference Provider</span>
+        <br>
+        <a href="https://dub.sh/nebius" target="_blank">
+          <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="Visit Nebius AI website">
+        </a>
+      </sub>
+    </td>
+    <td width="200" valign="middle" align="center">
+      <a href="https://dub.sh/scrapegraphai" target="_blank" title="Visit ScrapeGraphAI on GitHub">
+        <img src="https://raw.githubusercontent.com/ScrapeGraphAI/ScrapeGraph-AI/main/docs/assets/scrapegraphai_logo.png" height="44" style="max-width:180px;" alt="ScrapeGraphAI - Web Scraping Library">
+      </a>
+      <br>
+      <sub>
+        <span style="white-space:nowrap;">AI Web Scraping framework</span>
+        <br>
+        <a href="https://dub.sh/scrapegraphai" target="_blank">
+          <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="View ScrapeGraphAI on GitHub">
+        </a>
+      </sub>
+    </td>
+    <td width="200" valign="middle" align="center">
+      <a href="https://dub.sh/gibson" target="_blank" title="Visit GibsonAI">
+        <img src="assets/gibson.svg" height="36" style="max-width:180px;" alt="GibsonAI - AI for Databases">
+      </a>
+      <br>
+      <sub>
+        <span style="white-space:nowrap;">AI for Databases</span>
+        <br>
+        <a href="https://dub.sh/gibson" target="_blank">
+          <img src="https://img.shields.io/badge/Visit%20Site-blue?style=flat-square" alt="Visit GibsonAI website">
+        </a>
+      </sub>
+    </td>
+  </tr>
+</table>
+
+### 💎 Become a Sponsor
+
+<p align="center">
+Interested in sponsoring this project? Feel free to reach out!
+<br/>
+<a href="https://dub.sh/arindam-linkedin" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+</a>
+<a href="mailto:arindammajumder2020@gmail.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+</a>
+</p>
+
+</div>
+
+---
+
+<!-- ## 🚀 Featured AI Agent Frameworks
 
 - [<img src="https://raw.githubusercontent.com/google/adk-python/main/assets/agent-development-kit.png" alt="Google ADK logo" width="20" height="20"> Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
 - [<img src="https://avatars.githubusercontent.com/u/14957082?s=200&v=4" alt="OpenAI Agents SDK logo" width="20" height="20"> OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)
@@ -17,8 +113,11 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [<img src="https://avatars.githubusercontent.com/u/209155962?s=200&v=4" alt="AWS Strands Agents logo" width="20" height="20"> AWS Strands Agent](https://strandsagents.com/)
 - [<img src="https://avatars.githubusercontent.com/u/110818415?s=200&v=4" alt="Pydantic AI logo" width="20" height="20"> Pydantic AI](https://ai.pydantic.dev/)
 - [<img src="https://avatars.githubusercontent.com/u/134388954?s=200&v=4" alt="Camel AI logo" width="20" height="20"> CAMEL‑AI](https://www.camel-ai.org/)
+- [<img src="assets/DSPy.png" alt="DSPy logo" width="20" height="20"> DSPy](https://dspy.ai/) -->
 
-## 🧩 Starter Agents
+## 🚀 Featured AI Apps
+
+### 🧩 Starter Agents
 
 **Quick-start agents for learning and extending:**
 
@@ -31,7 +130,7 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [AWS Strands Agent Starter](starter_ai_agents/aws_strands_starter) - Weather report Agent.
 - [Camel AI Starter](starter_ai_agents/camel_ai_starter) - Performance benchmarking tool that compares the performance of various AI models.
 
-## 🪶 Simple Agents
+### 🪶 Simple Agents
 
 **Straightforward, practical use-cases:**
 
@@ -42,14 +141,11 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Agno UI Example](simple_ai_agents/agno_ui_agent) - UI for web & finance agents.
 - [Mastra Weather Bot](simple_ai_agents/mastra_ai_weather_agent) - Weather updates with Mastra AI.
 - [Calendar Assistant](simple_ai_agents/cal_scheduling_agent) - Calendar scheduling with Cal.com.
-- [Memory Agent](simple_ai_agents/memory_agent) - Simple Memory Agent implementation with Agno.
 - [Web Automation Agent](simple_ai_agents/browser_agent) - Simple Browser Agent implementation with Nebius & browser use.
 - [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
 - [Talk to Your DB](simple_ai_agents/talk_to_db) - Talk to your Database with GibsonAI & Langchain
-- [Blog Writing Agent](simple_ai_agents/blog_writing_agent) - Personalized AI-powered blog writing agent.
-- [arXiv Researcher Agent](simple_ai_agents/arxiv_researcher_agent_with_memori) - AI research assistant built using OpenAI Agents and GibsonAI Memori.
 
-## 🗂️ MCP Agents
+### 🗂️ MCP Agents
 
 **Examples using Model Context Protocol:**
 
@@ -58,20 +154,34 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [GitHub MCP Agent](mcp_ai_agents/github_mcp_agent) - Repo insights via MCP.
 - [MCP Starter](mcp_ai_agents/mcp_starter) - GitHub repo analyzer starter.
 - [Talk to your Docs](mcp_ai_agents/docs_qna_agent) - Documentation QnA Agent
+- [Database MCP Agent](mcp_ai_agents/database_mcp_agent) - A conversational AI agent for managing GibsonAI database projects and schemas.
 
-## 📚 RAG Applications
+### 🧠 Memory Agents
+
+**Agents with advanced memory capabilities:**
+
+- [Agno Memory Agent](memory_agents/agno_memory_agent) - Agno-based agent with persistent memory.
+- [arXiv Researcher Agent with Memori](memory_agents/arxiv_researcher_agent_with_memori) - Research assistant using OpenAI Agents and GibsonAI Memori.
+- [AWS Strands Agent with Memori](memory_agents/aws_strands_agent_with_memori) - AWS Strands agent enhanced with Memori memory.
+- [Blog Writing Agent](memory_agents/blog_writing_agent) - Personalized blog writing agent with memory.
+- [Social Media Agent](memory_agents/social_media_agent) - Social media automation agent with memory.
+
+
+### 📚 RAG Applications
 
 **Retrieve-augmented generation examples:**
 
 - [Agentic RAG](rag_apps/agentic_rag) - Agentic RAG with Agno & GPT 5.
+- [Agentic RAG with Web Search](rag_apps/agentic_rag_with_web_search) - Advanced RAG with CrewAI, Qdrant, and Exa for hybrid search.
 - [Resume Optimizer](rag_apps/resume_optimizer) - Boost resumes with AI.
 - [LlamaIndex RAG Starter](rag_apps/llamaIndex_starter) - LlamaIndex + Nebius RAG starter.
 - [PDF RAG Analyzer](rag_apps/pdf_rag_analyser) - Chat with multiple PDFs.
 - [Qwen3 RAG Chat](rag_apps/qwen3_rag) - PDF chatbot with Streamlit.
 - [Chat with Code](rag_apps/chat_with_code) - Conversational code explorer.
 - [Gemma3 OCR](rag_apps/gemma_ocr/) - OCR-based document and image processor using Gemma3
+- [Contextual AI RAG](rag_apps/contextual_ai_rag) - Enterprise-level RAG with managed datastores and quality evaluation.
 
-## 🔬 Advanced Agents
+### 🔬 Advanced Agents
 
 **Complex pipelines for end-to-end workflows:**
 
@@ -83,6 +193,8 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 - [Finance Service Agent](advance_ai_agents/finance_service_agent) - FastAPI server for stock data and predictions with Agno.
 - [Price Monitoring Agent](advance_ai_agents/price_monitoring_agent) - Price monitoring and alerting Agent powered by CrewAi, Twilio & Nebius.
 - [Startup Idea Validator Agent](advance_ai_agents/startup_idea_validator_agent) - Agentic Workflow to validate and analyze startup ideas.
+- [Meeting Assistant Agent](advance_ai_agents/meeting_assistant_agent) - Agentic Workflow that send meeting notes and creates task based on conversation.
+- [Ai Hedgefund](advance_ai_agents/ai-hedgefund) - Agentic Workflow for financial analysis
 
 ## 📺 Playlist of Demo Videos & Tutorials
 
@@ -124,12 +236,9 @@ Powered by [Nebius AI Studio](https://dub.sh/nebius) - your one-stop platform fo
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Whether you're a beginner or an expert, your examples and tutorials can help others learn and grow. Here's how you can contribute:
+We welcome contributions from the community! If you'd like to contribute, please see our [Contributing Guidelines](CONTRIBUTING.md) for more information on how to get started.
 
-1. Submit a Pull Request with your LLM application example
-2. Add detailed documentation and setup instructions
-3. Include requirements.txt or environment.yml
-4. Share your experience and best practices
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 ## 📜 License
 

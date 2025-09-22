@@ -1,5 +1,4 @@
 import json
-from tabnanny import verbose
 from textwrap import dedent
 from typing import Dict, AsyncIterator, Optional, List, Any
 from agno.agent import Agent
@@ -11,7 +10,7 @@ from agno.utils.pprint import pprint_run_response
 from dotenv import load_dotenv
 import asyncio
 from agno.tools.firecrawl import FirecrawlTools
-from agno.tools.reasoning import ReasoningTools
+
 
 # Load environment variables
 load_dotenv()
@@ -137,13 +136,16 @@ newsletter_agent = Agent(
     markdown=True,
     show_tool_calls=True,
     add_datetime_to_instructions=True,
+    # Ensure database directory exists
+    # os.makedirs("tmp", exist_ok=True)
+
     storage=SqliteStorage(
         table_name="newsletter_agent",
         db_file="tmp/newsletter_agent.db",
-    ),
+    )
 )
 
-def NewsletterGenerator(topic: str, search_limit: int = 5, time_range: str = "qdr:w"):
+def NewsletterGenerator(topic: str, search_limit: int = 5, time_range: str = "qdr:w") -> Dict[str, Any]:
     """
     Generate a newsletter based on the given topic and search parameters.
     
@@ -151,21 +153,30 @@ def NewsletterGenerator(topic: str, search_limit: int = 5, time_range: str = "qd
         topic (str): The topic to generate the newsletter about
         search_limit (int): Maximum number of articles to search and analyze
         time_range (str): Time range for article search (e.g., "qdr:w" for past week)
-    """
     
+    Returns:
+        Dict[str, Any]: Processed newsletter content with structured metadata
+    
+    Raises:
+        ValueError: If configuration validation fails
+        RuntimeError: If newsletter generation fails
+    """
     try:
         # Update search parameters
         newsletter_agent.tools[0].search_params.update({
-            "limit": search_limit,
-            "tbs": time_range
+            'limit': search_limit,
+            'tbs': time_range
         })
         
         response = newsletter_agent.run(topic)
+        logger.info('Newsletter generated successfully')
         return response
+    except ValueError as ve:
+        logger.error('Configuration error: %s', ve)
+        raise
     except Exception as e:
-        print(f"Error occurred: {str(e)}")
-        logger.error(f"Error in main: {str(e)}")
-        raise e
+        logger.error('Unexpected error in newsletter generation: %s', e, exc_info=True)
+        raise RuntimeError('Newsletter generation failed: %s' % e) from e
 
 if __name__ == "__main__":
     NewsletterGenerator("Latest developments in AI")
