@@ -1,4 +1,4 @@
-# Multi-Service MCP Server
+# Securing MCP servers with Scalekit
 
 A Model Context Protocol (MCP) server built on [FastAPI](https://fastapi.tiangolo.com/) that provides access to search [Exa AI Search](https://exa.ai/). The server runs as a remote MCP server on top of a FastAPI app, supporting HTTP transport and modern authentication middleware. This enables AI applications to search for news, get trending headlines, and perform intelligent web searches through a standardized interface with robust security.
 
