@@ -1,6 +1,8 @@
-# Securing MCP servers with Scalekit
+# Securing MCP servers with [Scalekit](https://www.scalekit.com/)
 
 A Model Context Protocol (MCP) server built on [FastAPI](https://fastapi.tiangolo.com/) that provides access to search [Exa AI Search](https://exa.ai/). The server runs as a remote MCP server on top of a FastAPI app, supporting HTTP transport and modern authentication middleware. This enables AI applications to search for news, get trending headlines, and perform intelligent web searches through a standardized interface with robust security.
+
+> Watch Full Tutorial on [YouTube](https://www.youtube.com/watch?v=uzeDndX1PWU)
 
 ## Features
 
@@ -26,7 +28,7 @@ A Model Context Protocol (MCP) server built on [FastAPI](https://fastapi.tiangol
   ```
 
 4. **Configure authentication**
-  - The server uses OAuth2 Bearer token authentication via ScaleKit. See `auth.py` for details.
+  - The server uses OAuth2 Bearer token authentication via [ScaleKit](https://www.scalekit.com/). See `auth.py` for details.
   - Set required ScaleKit environment variables in your config (see `config.py`).
 
 ## Usage
