@@ -211,7 +211,7 @@ Interested in sponsoring this project? Feel free to reach out!
 
 Get easy-to-follow weekly tutorials and deep dives on AI, LLMs, and agent frameworks. Perfect for developers who want to learn, build, and stay ahead with new tech. Subscribe our Newsletter!
 
-[![Subscribe to our Newsletter](https://github.com/user-attachments/assets/990d1947-337b-4e87-a7e6-e619ec19dee6)](mranand.substack.com/subscribe)
+[![Subscribe to our Newsletter](https://github.com/user-attachments/assets/990d1947-337b-4e87-a7e6-e619ec19dee6)](https://mranand.substack.com/subscribe)
 
 </div>
 
