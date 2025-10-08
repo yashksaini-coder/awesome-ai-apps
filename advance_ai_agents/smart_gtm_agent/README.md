@@ -70,7 +70,8 @@ Smart GTM Agent/
 └── README.md
 ```
 ## How It Works
-![GTM_agent](https://github.com/user-attachments/assets/643557f9-89e9-4625-90cb-dd80cd12b721)
+![smart_gtm](https://github.com/user-attachments/assets/4bf4cbf2-9d90-445f-9fe0-f6c17e02d414)
+
 
 
 ## 🔑 Setup Instructions
