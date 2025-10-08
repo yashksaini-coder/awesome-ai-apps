@@ -69,6 +69,9 @@ Smart GTM Agent/
 ├── company_data.db
 └── README.md
 ```
+## How It Works
+![GTM_agent](https://github.com/user-attachments/assets/643557f9-89e9-4625-90cb-dd80cd12b721)
+
 
 ## 🔑 Setup Instructions
 
