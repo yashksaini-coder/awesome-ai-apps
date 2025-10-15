@@ -202,6 +202,21 @@ Interested in sponsoring this project? Feel free to reach out!
 - [Build AI Agents](https://www.youtube.com/playlist?list=PLMZM1DAlf0LqixhAG9BDk4O_FjqnaogK8)
 - [AI Agents, MCP and more...](https://www.youtube.com/playlist?list=PL2ambAOfYA6-LDz0KpVKu9vJKAqhv0KKI)
 
+
+---
+
+<div align="center">
+
+## 📥 Stay Updated with Daily AI Insight!
+
+Get easy-to-follow weekly tutorials and deep dives on AI, LLMs, and agent frameworks. Perfect for developers who want to learn, build, and stay ahead with new tech. Subscribe our Newsletter!
+
+[![Subscribe to our Newsletter](https://github.com/user-attachments/assets/990d1947-337b-4e87-a7e6-e619ec19dee6)](https://mranand.substack.com/subscribe)
+
+</div>
+
+---
+
 ## Getting Started
 
 ### Prerequisites
