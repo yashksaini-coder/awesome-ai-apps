@@ -6,7 +6,6 @@ Multi-agent system with Memori for contextual conversations
 import os
 import base64
 import streamlit as st
-from openai import OpenAI
 from memori import Memori
 from agent import create_product_intelligence_team
 from dotenv import load_dotenv
@@ -55,25 +54,25 @@ with st.sidebar:
         help="Your Bright Data API key for web scraping",
     )
 
-    openai_api_key_input = st.text_input(
-        "OpenAI API Key",
-        value=os.getenv("OPENAI_API_KEY", ""),
+    nebius_api_key_input = st.text_input(
+        "Nebius API Key",
+        value=os.getenv("NEBIUS_API_KEY", ""),
         type="password",
-        help="Your OpenAI API key for GPT-4o",
+        help="Your Nebius API key for AI models",
     )
 
     if st.button("Save API Keys"):
-        if openai_api_key_input:
-            os.environ["OPENAI_API_KEY"] = openai_api_key_input
+        if nebius_api_key_input:
+            os.environ["NEBIUS_API_KEY"] = nebius_api_key_input
         if brightdata_api_key_input:
             os.environ["BRIGHTDATA_API_KEY"] = brightdata_api_key_input
-        if openai_api_key_input or brightdata_api_key_input:
+        if nebius_api_key_input or brightdata_api_key_input:
             st.success("✅ API keys saved for this session")
         else:
             st.warning("Please enter at least one API key")
 
     # Quick status
-    both_keys_present = bool(os.getenv("OPENAI_API_KEY")) and bool(
+    both_keys_present = bool(os.getenv("NEBIUS_API_KEY")) and bool(
         os.getenv("BRIGHTDATA_API_KEY")
     )
     if both_keys_present:
@@ -96,7 +95,7 @@ with st.sidebar:
 
 
 # Get API keys from environment
-openai_key = os.getenv("OPENAI_API_KEY", "")
+nebius_key = os.getenv("NEBIUS_API_KEY", "")
 brightdata_key = os.getenv("BRIGHTDATA_API_KEY", "")
 
 # Set Bright Data API key for Agno (convert BRIGHTDATA_API_KEY to BRIGHT_DATA_API_KEY)
@@ -122,7 +121,7 @@ if "memori_initialized" not in st.session_state:
     st.session_state.memori_initialized = False
 
 # Initialize Memori (once)
-if not st.session_state.memori_initialized and openai_key:
+if not st.session_state.memori_initialized and nebius_key:
     try:
         st.session_state.memori = Memori(
             database_connect="mongodb://localhost:27017/memori",
@@ -134,22 +133,15 @@ if not st.session_state.memori_initialized and openai_key:
     except Exception as e:
         st.warning(f"Memori initialization note: {str(e)}")
 
-# Initialize OpenAI client
-if openai_key:
-    try:
-        st.session_state.openai_client = OpenAI(api_key=openai_key)
-    except Exception as e:
-        st.error(f"Failed to initialize OpenAI: {str(e)}")
-
 # Initialize agent team (once)
-if "agent_team" not in st.session_state and openai_key and brightdata_key:
+if "agent_team" not in st.session_state and nebius_key and brightdata_key:
     try:
         st.session_state.agent_team = create_product_intelligence_team()
     except Exception as e:
         st.error(f"Failed to initialize agent team: {str(e)}")
 
 # Check if API keys are set
-if not openai_key or not brightdata_key:
+if not nebius_key or not brightdata_key:
     st.warning("⚠️ Please enter your API keys in the sidebar to start chatting!")
     st.stop()
 
@@ -308,7 +300,7 @@ Example: "I want a Product Launch Analysis for Monday.com"
                             else str(result)
                         )
                     else:
-                        # Use GPT-4o for follow-up questions with context from Memori
+                        # Use Nebius for follow-up questions with context from Memori
                         # First, search Memori for relevant context
                         memori_context = ""
                         if st.session_state.memori_initialized:
@@ -325,26 +317,43 @@ Example: "I want a Product Launch Analysis for Monday.com"
                                 pass  # Silently fail if Memori search doesn't work
 
                         # Build context from recent messages
-                        context_messages = [
-                            {
-                                "role": msg["role"],
-                                "content": msg["content"][:1000],
-                            }  # Limit content length
-                            for msg in st.session_state.messages[-6:]  # Last 6 messages
-                        ]
-                        context_messages.append({"role": "user", "content": prompt})
+                        context_str = ""
+                        for msg in st.session_state.messages[-6:]:  # Last 6 messages
+                            role = msg["role"]
+                            content = msg["content"][:1000]  # Limit content length
+                            context_str += f"{role}: {content}\n\n"
 
-                        response = st.session_state.openai_client.chat.completions.create(
-                            model="gpt-4o",
-                            messages=[
-                                {
-                                    "role": "system",
-                                    "content": f"You are a Product Intelligence Analyst helping {st.session_state.user_description}. ALWAYS search your memory (Memori) first before answering any question. Answer questions based on the previous analysis and conversation context. Be concise and actionable.{memori_context}",
-                                },
-                                *context_messages,
-                            ],
+                        # Use Agno Agent for follow-up
+                        from agno.agent import Agent
+                        from agno.models.nebius import Nebius
+
+                        followup_agent = Agent(
+                            model=Nebius(
+                                id="Qwen/Qwen3-Coder-480B-A35B-Instruct",
+                                api_key=nebius_key,
+                            ),
+                            markdown=True,
                         )
-                        response_content = response.choices[0].message.content
+
+                        full_prompt = f"""You are a Product Intelligence Analyst helping {st.session_state.user_description}. 
+                        
+ALWAYS search your memory (Memori) first before answering any question. 
+Answer questions based on the previous analysis and conversation context. 
+Be concise and actionable.
+
+{memori_context}
+
+Recent conversation context:
+{context_str}
+
+User question: {prompt}"""
+
+                        result = followup_agent.run(full_prompt)
+                        response_content = (
+                            result.content
+                            if hasattr(result, "content")
+                            else str(result)
+                        )
 
                     # Record to Memori (manually, since auto-ingest doesn't work with Agno)
                     if st.session_state.memori_initialized:

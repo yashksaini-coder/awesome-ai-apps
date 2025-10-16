@@ -19,7 +19,7 @@ A powerful AI-powered competitive intelligence tool that analyzes competitor pro
 ## Prerequisites 🛠️
 
 - Python 3.10+
-- OpenAI API key (GPT-4o access)
+- Nebius AI API key ([Get it here](https://studio.nebius.ai/))
 - Bright Data API credentials
 - MongoDB (local or cloud instance)
 - MongoDB Compass (optional, for database visualization)
@@ -44,14 +44,16 @@ pip install -r requirements.txt
 
 4. **Create a `.env` file in the project root and add your API credentials:**
 ```env
-# OpenAI Configuration
-OPENAI_API_KEY=your_openai_api_key
+# Nebius AI Configuration
+NEBIUS_API_KEY=your_nebius_api_key
 
 # Bright Data Configuration
 BRIGHTDATA_API_KEY=your_brightdata_api_key
 BRIGHT_DATA_SERP_ZONE=sdk_serp
 BRIGHT_DATA_UNLOCKER_ZONE=unlocker
 ```
+
+> **Note:** This application uses **Nebius AI** for powering the AI agents. Get your API key from [Nebius AI Studio](https://studio.nebius.ai/).
 
 ## Usage 🚀
 
@@ -70,7 +72,7 @@ streamlit run chat_app.py
 
 4. **Configure your API keys** in the sidebar:
    - Bright Data API Key
-   - OpenAI API Key
+   - Nebius API Key
    - Click "Save API Keys"
 
 ## How It Works 🔄
@@ -159,10 +161,11 @@ The AI agents analyze competitors across multiple dimensions:
 
 ## API Configuration 🔑
 
-### OpenAI
-- **Model**: GPT-4o
+### Nebius AI
+- **Model**: Qwen/Qwen3-Coder-480B-A35B-Instruct (via Nebius AI Studio)
 - **Purpose**: Multi-agent intelligence and conversation handling
 - **Temperature**: Configured per agent for optimal results
+- **Get API Key**: [Nebius AI Studio](https://studio.nebius.ai/)
 
 ### Bright Data
 - **SERP Zone**: `sdk_serp` (for web searches)
@@ -233,20 +236,6 @@ The AI agents analyze competitors across multiple dimensions:
 - "What were their main distribution channels?"
 - "How did they handle negative feedback?"
 
-## Project Structure 📁
-
-```
-ai stuff/
-├── chat_app.py              # Main Streamlit application
-├── agent.py                 # Multi-agent AI system
-├── requirements.txt         # Python dependencies
-├── assets/
-│   ├── brightdata_logo.png  # Bright Data logo
-│   └── gibson.svg           # Gibson/Memori logo
-├── .env                     # API keys (create this)
-└── README.md               # This file
-```
-
 ## Contributing 🤝
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -267,7 +256,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ### API Key Errors
 - Check API keys are correctly entered in sidebar
 - Verify environment variables in `.env` file
-- Ensure both OpenAI and Bright Data keys are valid
+- Ensure both Nebius and Bright Data keys are valid
+- Get Nebius API key from [Nebius AI Studio](https://studio.nebius.ai/)
 
 ### Memori Initialization
 - MongoDB must be running before starting the app
@@ -279,26 +269,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Ensure Bright Data has sufficient credits
 - Check internet connection for web scraping
 
-## Advanced Configuration ⚙️
-
-### Custom MongoDB Connection
-Edit line 134 in `chat_app.py`:
-```python
-database_connect="mongodb://your-custom-host:port/memori"
-```
-
-### Agent Model Configuration
-Edit `agent.py` to change AI models:
-```python
-model=OpenAIChat(id="gpt-4o")  # Change model here
-```
-
-### Bright Data Zones
-Configure zones in your `.env` file:
-```env
-BRIGHT_DATA_SERP_ZONE=your_serp_zone
-BRIGHT_DATA_UNLOCKER_ZONE=your_unlocker_zone
-```
 
 ## License 📄
 

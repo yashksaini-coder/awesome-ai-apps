@@ -6,7 +6,7 @@ Multi-agent system for competitive analysis, market sentiment, and launch metric
 import os
 from agno.agent import Agent
 from agno.team import Team
-from agno.models.openai import OpenAIChat
+from agno.models.nebius import Nebius
 from agno.tools.brightdata import BrightDataTools
 from textwrap import dedent
 
@@ -59,7 +59,10 @@ def create_product_intelligence_team():
             • Only include sources where you actually obtained information from
         """
         ),
-        model=OpenAIChat(id="gpt-4o"),
+        model=Nebius(
+            id="Qwen/Qwen3-Coder-480B-A35B-Instruct",
+            api_key=os.getenv("NEBIUS_API_KEY"),
+        ),
         tools=[
             BrightDataTools(
                 serp_zone=os.getenv("BRIGHT_DATA_SERP_ZONE", "sdk_serp"),
@@ -105,7 +108,10 @@ def create_product_intelligence_team():
             • Only include sources where you actually obtained information from
         """
         ),
-        model=OpenAIChat(id="gpt-4o"),
+        model=Nebius(
+            id="Qwen/Qwen3-Coder-480B-A35B-Instruct",
+            api_key=os.getenv("NEBIUS_API_KEY"),
+        ),
         tools=[
             BrightDataTools(
                 serp_zone=os.getenv("BRIGHT_DATA_SERP_ZONE", "sdk_serp"),
@@ -152,7 +158,10 @@ def create_product_intelligence_team():
             • Only include sources where you actually obtained information from
         """
         ),
-        model=OpenAIChat(id="gpt-4o"),
+        model=Nebius(
+            id="Qwen/Qwen3-Coder-480B-A35B-Instruct",
+            api_key=os.getenv("NEBIUS_API_KEY"),
+        ),
         tools=[
             BrightDataTools(
                 serp_zone=os.getenv("BRIGHT_DATA_SERP_ZONE", "sdk_serp"),
@@ -165,7 +174,10 @@ def create_product_intelligence_team():
     # Create the coordinated team
     product_intelligence_team = Team(
         name="Product Intelligence Team",
-        model=OpenAIChat(id="gpt-4o"),
+        model=Nebius(
+            id="Qwen/Qwen3-Coder-480B-A35B-Instruct",
+            api_key=os.getenv("NEBIUS_API_KEY"),
+        ),
         members=[launch_analyst, sentiment_analyst, metrics_analyst],
         instructions=[
             "Coordinate the analysis based on the user's request type:",
