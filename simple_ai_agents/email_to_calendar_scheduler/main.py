@@ -95,7 +95,7 @@ team = Team(
         "If an Event is to be added, updated or deleted, ensure to provide all necessary details such as event name, date, time, and any other relevant information.",
         "If some details are missing for updating or adding an event, make reasonable assumptions based on the email content.",
         "Collaborate effectively to ensure accurate data extraction and updating.",
-        "Output the final task updates made to the Google Sheet.",
+        "Output the final calendar updates made to Google Calendar.",
     ],
     db=db,
     add_history_to_context=True,
