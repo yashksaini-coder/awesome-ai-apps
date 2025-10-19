@@ -125,8 +125,8 @@ Before running the main application, you need to authenticate once to generate t
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Arindam200/awesome-llm-apps.git
-   cd awesome-llm-apps/smart-scheduler-assistant
+   git clone https://github.com/Arindam200/awesome-ai-apps.git
+   cd awesome-ai-apps/simple_ai_agents/email_to_calendar_scheduler
    ```
 
 2. **Create and activate a virtual environment:**
