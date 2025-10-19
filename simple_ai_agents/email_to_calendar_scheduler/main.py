@@ -14,7 +14,6 @@ import os
 
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
-groq_base_url = os.getenv("GROQ_BASE_URL")
 db = SqliteDb(db_file="tmp/data.db")
 
 
