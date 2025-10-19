@@ -10,10 +10,30 @@ from dotenv import load_dotenv
 from agno.utils.pprint import pprint_run_response
 from agno.db.sqlite import SqliteDb
 import os
+import sys
 
 
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
+
+# Validate required environment variables
+if not groq_api_key:
+    print("❌ Error: GROQ_API_KEY not found in environment.")
+    print("Please set GROQ_API_KEY in your .env file.")
+    sys.exit(1)
+
+# Validate required files
+if not os.path.exists("credentials.json"):
+    print("❌ Error: credentials.json not found.")
+    print("Please download OAuth credentials from Google Cloud Console.")
+    print("See README.md for setup instructions.")
+    sys.exit(1)
+
+if not os.path.exists("token.json"):
+    print("❌ Error: token.json not found.")
+    print("Please run 'python authenticate.py' first to generate the token.")
+    sys.exit(1)
+
 db = SqliteDb(db_file="tmp/data.db")
 
 
