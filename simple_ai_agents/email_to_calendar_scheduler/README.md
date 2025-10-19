@@ -195,7 +195,7 @@ You can customize the assistant's behavior by modifying these variables in `main
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. See the [CONTRIBUTING.md](https://github.com/Arindam200/awesome-llm-apps/blob/main/CONTRIBUTING.md) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request. See the [CONTRIBUTING.md](https://github.com/Arindam200/awesome-ai-apps/blob/main/CONTRIBUTING.md) for more details.
 
 ## 📄 License
 
