@@ -64,7 +64,7 @@ def main():
                 f.write(creds.to_json())
         except Exception as e:
             print(f"❌ Error writing token file: {e}")
-            sys.exit(1
+            sys.exit(1)
 
     print("✅ Authentication complete. Token written to", TOKEN_PATH)
 
