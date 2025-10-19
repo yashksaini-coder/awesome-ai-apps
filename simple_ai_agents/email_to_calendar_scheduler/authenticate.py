@@ -16,10 +16,6 @@ SCOPES = [
 ]
 
 def main():
-    # Remove old token to force re-consent if you changed scopes
-    if os.path.exists(TOKEN_PATH):
-        print("Removing existing token to force re-consent...")
-        os.remove(TOKEN_PATH)
 
     creds = None
     if os.path.exists(TOKEN_PATH):
