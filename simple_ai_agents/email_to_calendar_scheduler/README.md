@@ -173,13 +173,14 @@ Before running the main application, you need to authenticate once to generate t
 ## 📂 Project Structure
 
 ```
-smart-scheduler-assistant/
+email_to_calendar_scheduler/
 ├── tmp/                   # SQLite database storage
 │   └── data.db            # Agent memory and conversation history
 ├── .venv/                 # Virtual environment
 ├── .env                   # Environment variables (API keys)
-├── available_models,json  # All available models provided by Groq Cloud
+├── available_models.json  # All available models provided by Groq Cloud
 ├── credentials.json       # Google OAuth credentials(MUST BE GENERATED FIRST)
+├── authenticate.py        # Authentication script to generate token.json
 ├── LICENSE
 ├── main.py                # Main application entry point
 ├── requirements.txt       # Python dependencies
