@@ -26,9 +26,9 @@ An advanced multi-agent system that automates email management and calendar sche
 
 The Smart Scheduler Assistant operates through a coordinated multi-agent system:
 
-1. **Email Agent** retrieves and reads the latest emails from your Gmail account
-3. **Calendar Agent** processes the filtered emails and updates your Google Calendar accordingly
-4. **Team Coordinator** orchestrates the workflow between all agents to ensure seamless operation
+1. **Email Agent** retrieves and reads the latest emails from your Gmail account, summarizes them and filters out unnecessary emails. 
+2. **Calendar Agent** processes the filtered emails and updates your Google Calendar accordingly
+3. **Team Coordinator** orchestrates the workflow between all agents to ensure seamless operation
 
 The system intelligently extracts event details from emails (dates, times, locations) and automatically schedules them in your calendar, making assumptions where necessary for missing information.
 
