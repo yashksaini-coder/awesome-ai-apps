@@ -199,7 +199,8 @@ Contributions are welcome! Please feel free to submit a Pull Request. See the [C
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/Arindam200/awesome-llm-apps/blob/main/LICENSE) file for details.
++This project is licensed under the MIT License - see the [LICENSE](https://github.com/Arindam200/awesome-ai-apps/blob/main/LICENSE) file for details.
+
 
 ## 🙏 Acknowledgments
 
