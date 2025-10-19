@@ -15,26 +15,31 @@ import sys
 
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
+timezone = os.getenv("TIMEZONE")
 
 # Validate required environment variables
 if not groq_api_key:
     print("❌ Error: GROQ_API_KEY not found in environment.")
     print("Please set GROQ_API_KEY in your .env file.")
     sys.exit(1)
-
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+CREDS_PATH = os.path.join(SCRIPT_DIR, "credentials.json")
+TOKEN_PATH = os.path.join(SCRIPT_DIR, "token.json")
+DB_PATH = os.getenv("DB_PATH", os.path.join(SCRIPT_DIR, "tmp", "data.db"))
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 # Validate required files
-if not os.path.exists("credentials.json"):
+if not os.path.exists(CREDS_PATH):
     print("❌ Error: credentials.json not found.")
     print("Please download OAuth credentials from Google Cloud Console.")
     print("See README.md for setup instructions.")
     sys.exit(1)
 
-if not os.path.exists("token.json"):
+if not os.path.exists(TOKEN_PATH):
     print("❌ Error: token.json not found.")
     print("Please run 'python authenticate.py' first to generate the token.")
     sys.exit(1)
 
-db = SqliteDb(db_file="tmp/data.db")
+db = SqliteDb(db_file=DB_PATH)
 
 
 email_agent = Agent(
@@ -65,7 +70,7 @@ calendar_agent = Agent(
         )
     ],
     instructions=[
-        """
+        f"""
     You are a scheduling assistant.
     You should help users to perform these actions in their Google calendar:
         - get their scheduled events from a certain date and time
@@ -73,7 +78,7 @@ calendar_agent = Agent(
         - update existing events
         - delete events
         - find available time slots for scheduling
-        - all times are in Indian Standard Time (IST)
+        - all times are in {timezone}
     """
     ],
     add_datetime_to_context=True,
