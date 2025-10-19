@@ -193,7 +193,7 @@ You can customize the assistant's behavior by modifying these variables in `main
 
 - Agent instructions and behavior can be customized in their respective definitions
 
-## � Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. See the [CONTRIBUTING.md](https://github.com/Arindam200/awesome-llm-apps/blob/main/CONTRIBUTING.md) for more details.
 
