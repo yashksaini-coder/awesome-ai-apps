@@ -4,8 +4,14 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 
-CLIENT_SECRETS = "credentials.json"  # your OAuth client secret (Desktop app)
-TOKEN_PATH = "token.json"
+import os
+
+# Get the directory containing this script
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+CLIENT_SECRETS = os.path.join(SCRIPT_DIR, "credentials.json")  # your OAuth client secret (Desktop app)
+TOKEN_PATH = os.path.join(SCRIPT_DIR, "token.json")
+
 
 SCOPES = [
     "https://www.googleapis.com/auth/gmail.readonly",
