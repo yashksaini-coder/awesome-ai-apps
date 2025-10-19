@@ -112,7 +112,7 @@ while True:
     if user_input.lower() in ["exit", "quit"]:
         print("Goodbye 👋")
         break
+    run_response = team.run(user_input)
+    print("\nAgent:", run_response.content, "\n")
 
-    response = team.print_response(user_input)
-    print("\nAgent:", response, "\n")
     user_input = input("You: ")
