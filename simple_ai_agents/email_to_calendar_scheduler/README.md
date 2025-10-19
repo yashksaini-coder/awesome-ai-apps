@@ -172,7 +172,7 @@ Before running the main application, you need to authenticate once to generate t
 
 ## 📂 Project Structure
 
-```
+```text
 email_to_calendar_scheduler/
 ├── tmp/                   # SQLite database storage
 │   └── data.db            # Agent memory and conversation history
