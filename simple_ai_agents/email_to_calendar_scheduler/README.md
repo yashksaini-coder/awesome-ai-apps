@@ -17,7 +17,7 @@ An advanced multi-agent system that automates email management and calendar sche
 
 - **Python**: Core programming language
 - **Agno Framework**: For multi-agent AI orchestration
-- **Groq**: For fast LLM inference (Qwen 3 32B model)
+- **Nebius**: For fast LLM inference (Qwen 3 32B model)
 - **Gmail API**: For email reading and management
 - **Google Calendar API**: For calendar event management
 - **SQLite**: For conversation history and agent memory
@@ -39,7 +39,7 @@ The system intelligently extracts event details from emails (dates, times, locat
 - Python 3.9+
 - [uv](https://github.com/astral-sh/uv) or pip for package management
 - API keys and credentials for the following services:
-  - [Groq API](https://console.groq.com/) for LLM access
+  - [NEBIUS API](https://studio.nebius.com/) for LLM access
   - Google Cloud Project with Gmail and Calendar APIs enabled
   - OAuth 2.0 credentials file (`credentials.json`)
 
@@ -48,7 +48,7 @@ The system intelligently extracts event details from emails (dates, times, locat
 Create a `.env` file in the project root and add the following variables:
 
 ```env
-GROQ_API_KEY="your_groq_api_key_here"
+NEBIUS_API_KEY="your_NEBIUS_api_key_here"
 TIMEZONE=<your-timezone-here>  # Use IANA timezone format (e.g., America/New_York, Asia/Kolkata, Europe/London)
 ```
 
@@ -178,7 +178,6 @@ email_to_calendar_scheduler/
 │   └── data.db            # Agent memory and conversation history
 ├── .venv/                 # Virtual environment
 ├── .env                   # Environment variables (API keys)
-├── available_models.json  # All available models provided by Groq Cloud
 ├── credentials.json       # Google OAuth credentials(MUST BE GENERATED FIRST)
 ├── authenticate.py        # Authentication script to generate token.json
 ├── LICENSE
@@ -205,5 +204,5 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 ## 🙏 Acknowledgments
 
 - Shoutout to [Agno Framework](https://github.com/agno-agi/agno) for their powerful multi-agent system.
-- Thanks to [Groq](https://groq.com/) for providing fast LLM inference.
+- Thanks to [Nebius](https://studio.nebius.com/) for providing fast LLM inference.
 - Built with the Qwen 3 32B model for intelligent reasoning and task execution.

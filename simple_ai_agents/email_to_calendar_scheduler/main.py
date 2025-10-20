@@ -1,7 +1,7 @@
 from agno.agent import Agent
 from typing import Iterator
 from agno.team import Team, TeamRunOutputEvent
-from agno.models.groq import Groq
+from agno.models.nebius import Nebius
 from agno.tools.gmail import GmailTools
 from agno.tools.googlesheets import GoogleSheetsTools
 from agno.tools.googlecalendar import GoogleCalendarTools
@@ -14,12 +14,12 @@ import sys
 
 
 load_dotenv()
-groq_api_key = os.getenv("GROQ_API_KEY")
+nebius_api_key = os.getenv("NEBIUS_API_KEY")
 timezone = os.getenv("TIMEZONE")
 # Validate required environment variables
-if not groq_api_key:
-    print("❌ Error: GROQ_API_KEY not found in environment.")
-    print("Please set GROQ_API_KEY in your .env file.")
+if not nebius_api_key:
+    print("❌ Error: NEBIUS_API_KEY not found in environment.")
+    print("Please set NEBIUS_API_KEY in your .env file.")
     sys.exit(1)
 if not timezone:
     print("❌ Error: TIMEZONE not found in environment.")
@@ -46,7 +46,7 @@ db = SqliteDb(db_file=DB_PATH)
 
 
 email_agent = Agent(
-    model=Groq(id="qwen/qwen3-32b", api_key=groq_api_key),
+    model=Nebius(id="Qwen/Qwen3-32b", api_key=nebius_api_key),
     markdown=True,
     tools=[GmailTools(credentials_path=CREDS_PATH, port=8090)],
     description="You are a Gmail reading specialist that can search and read emails.",
@@ -65,7 +65,7 @@ email_agent = Agent(
 
 
 calendar_agent = Agent(
-    model=Groq(id="qwen/qwen3-32b", api_key=groq_api_key),
+    model=Nebius(id="Qwen/Qwen3-32b", api_key=nebius_api_key),
     tools=[
         GoogleCalendarTools(
             credentials_path=CREDS_PATH,
@@ -96,7 +96,7 @@ team = Team(
     name="Productivity Agent",
     members=[email_agent, calendar_agent],
     description="Team to extract emails, filter important emails  and update Google Calendar based on email content.",
-    model=Groq(id="qwen/qwen3-32b", api_key=groq_api_key),
+    model=Nebius(id="Qwen/Qwen3-32b", api_key=nebius_api_key),
     instructions=[
         f"First, use the email agent to find and read the latest emails and extract the important emails with the important details such as sender, subject, and summarized body.",
         "Then, use the calendar agent to update Google Calendar based on the email content.",
