@@ -16,11 +16,14 @@ import sys
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 timezone = os.getenv("TIMEZONE")
-
 # Validate required environment variables
 if not groq_api_key:
     print("❌ Error: GROQ_API_KEY not found in environment.")
     print("Please set GROQ_API_KEY in your .env file.")
+    sys.exit(1)
+if not timezone:
+    print("❌ Error: TIMEZONE not found in environment.")
+    print("Please set TIMEZONE in your .env file (e.g., 'America/New_York').")
     sys.exit(1)
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CREDS_PATH = os.path.join(SCRIPT_DIR, "credentials.json")
@@ -45,7 +48,7 @@ db = SqliteDb(db_file=DB_PATH)
 email_agent = Agent(
     model=Groq(id="qwen/qwen3-32b", api_key=groq_api_key),
     markdown=True,
-    tools=[GmailTools(credentials_path="credentials.json", port=8090)],
+    tools=[GmailTools(credentials_path=CREDS_PATH, port=8090)],
     description="You are a Gmail reading specialist that can search and read emails.",
     instructions=[
         "Use the tools to search and read emails from Gmail.",
@@ -65,7 +68,7 @@ calendar_agent = Agent(
     model=Groq(id="qwen/qwen3-32b", api_key=groq_api_key),
     tools=[
         GoogleCalendarTools(
-            credentials_path="credentials.json",
+            credentials_path=CREDS_PATH,
             allow_update=True,
         )
     ],
@@ -109,15 +112,25 @@ team = Team(
 )
 
 
-prompt = "Hello"
-print("🧠 Smart Scheduler Assistant is running. Type 'exit' to quit.\n")
-user_input = prompt
-while True:
 
+print("🧠 Smart Scheduler Assistant is running. Type 'exit' to quit.\n")
+user_input = input("You: ")
+
+while True:
     if user_input.lower() in ["exit", "quit"]:
         print("Goodbye 👋")
         break
-    run_response = team.run(user_input)
-    print("\nAgent:", run_response.content, "\n")
+    
+    if not user_input.strip():
+        print("⚠️  Please enter a message.\n")
+        user_input = input("You: ")
+        continue
 
+    try:
+        run_response = team.run(user_input)
+        print("\nAgent:", run_response.content, "\n")
+    except Exception as e:
+        print(f"❌ Error: {e}\n")
+    
+    
     user_input = input("You: ")

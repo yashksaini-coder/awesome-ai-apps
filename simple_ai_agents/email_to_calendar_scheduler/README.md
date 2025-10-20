@@ -49,7 +49,7 @@ Create a `.env` file in the project root and add the following variables:
 
 ```env
 GROQ_API_KEY="your_groq_api_key_here"
-GROQ_BASE_URL="https://api.groq.com/openai/v1"
+TIMEZONE=<your-timezone-here>  # Use IANA timezone format (e.g., America/New_York, Asia/Kolkata, Europe/London)
 ```
 
 ### Google API Setup
