@@ -1,26 +1,18 @@
-
 ![Banner](/assets/banner_new.png)
-
 
 <div align="center">
 
 # Awesome AI Apps [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-
 <a href="https://trendshift.io/repositories/14662" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14662" alt="Arindam200%2Fawesome-ai-apps | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 
 </div>
 
-
 This repository is a comprehensive collection of practical examples, tutorials, and recipes for building powerful LLM-powered applications. From simple chatbots to advanced AI agents, these projects serve as a guide for developers working with various AI frameworks and tools.
-
-
 
 ---
 
 <div align="center">
-
-
 
 ## 💎 Sponsors
 
@@ -115,6 +107,16 @@ Interested in sponsoring this project? Feel free to reach out!
 - [<img src="https://avatars.githubusercontent.com/u/134388954?s=200&v=4" alt="Camel AI logo" width="20" height="20"> CAMEL‑AI](https://www.camel-ai.org/)
 - [<img src="assets/DSPy.png" alt="DSPy logo" width="20" height="20"> DSPy](https://dspy.ai/) -->
 
+## 🎓 **NEW: AWS Strands Course for Beginners**
+
+**Comprehensive hands-on course on building AI agents with AWS Strands SDK:**
+
+- [**AWS Strands Course**](course/aws_strands) - Complete 8-lesson course covering agent fundamentals to production patterns
+  - **Foundation**: Basic agents, session management, structured output
+  - **Integration**: MCP agents, human-in-the-loop patterns
+  - **Multi-Agent**: Orchestrator agents, swarm intelligence, graph workflows
+  - **Production**: Observability, safety guardrails, and best practices
+
 ## 🚀 Featured AI Apps
 
 ### 🧩 Starter Agents
@@ -129,6 +131,9 @@ Interested in sponsoring this project? Feel free to reach out!
 - [LangChain-LangGraph Starter](starter_ai_agents/langchain_langgraph_starter) - LangChain + LangGraph starter.
 - [AWS Strands Agent Starter](starter_ai_agents/aws_strands_starter) - Weather report Agent.
 - [Camel AI Starter](starter_ai_agents/camel_ai_starter) - Performance benchmarking tool that compares the performance of various AI models.
+<!-- - [Autogen Starter](starter_ai_agents/autogen_starter) - Microsoft Autogen multi-agent conversation framework. -->
+- [DSPy Starter](starter_ai_agents/dspy_starter) - DSPy framework for building and optimizing AI systems.
+- [Google ADK Starter](starter_ai_agents/google_adk_starter) - Google Agent Development Kit starter.
 
 ### 🪶 Simple Agents
 
@@ -144,6 +149,8 @@ Interested in sponsoring this project? Feel free to reach out!
 - [Web Automation Agent](simple_ai_agents/browser_agent) - Simple Browser Agent implementation with Nebius & browser use.
 - [Nebius Chat](simple_ai_agents/nebius_chat) - Nebius AI Studio Chat interface.
 - [Talk to Your DB](simple_ai_agents/talk_to_db) - Talk to your Database with GibsonAI & Langchain
+<!-- - [YouTube Channel Analyzer](simple_ai_agents/youtube_channel_analyzer) - Analyze YouTube channels and extract insights. -->
+<!-- - [Memory Agent](simple_ai_agents/memory_agent) - Agent with persistent memory capabilities. -->
 
 ### 🗂️ MCP Agents
 
@@ -155,6 +162,10 @@ Interested in sponsoring this project? Feel free to reach out!
 - [MCP Starter](mcp_ai_agents/mcp_starter) - GitHub repo analyzer starter.
 - [Talk to your Docs](mcp_ai_agents/docs_qna_agent) - Documentation QnA Agent
 - [Database MCP Agent](mcp_ai_agents/database_mcp_agent) - A conversational AI agent for managing GibsonAI database projects and schemas.
+- [Hotel Finder Agent](mcp_ai_agents/hotel_finder_agent) - Find and book hotels using MCP integration.
+- [Custom MCP Server](mcp_ai_agents/custom_mcp_server) - Custom MCP server implementation.
+- [Couchbase MCP Server](mcp_ai_agents/couchbase_mcp_server) - Couchbase database integration with MCP.
+- [ScaleKit Exa MCP Security](mcp_ai_agents/scalekit-exa-mcp-security) - Security-focused MCP integration with Exa.
 
 ### 🧠 Memory Agents
 
@@ -165,7 +176,6 @@ Interested in sponsoring this project? Feel free to reach out!
 - [AWS Strands Agent with Memori](memory_agents/aws_strands_agent_with_memori) - AWS Strands agent enhanced with Memori memory.
 - [Blog Writing Agent](memory_agents/blog_writing_agent) - Personalized blog writing agent with memory.
 - [Social Media Agent](memory_agents/social_media_agent) - Social media automation agent with memory.
-
 
 ### 📚 RAG Applications
 
@@ -180,6 +190,9 @@ Interested in sponsoring this project? Feel free to reach out!
 - [Chat with Code](rag_apps/chat_with_code) - Conversational code explorer.
 - [Gemma3 OCR](rag_apps/gemma_ocr/) - OCR-based document and image processor using Gemma3
 - [Contextual AI RAG](rag_apps/contextual_ai_rag) - Enterprise-level RAG with managed datastores and quality evaluation.
+<!-- - [Corrective RAG](rag_apps/corrective_rag) - Self-correcting RAG system with feedback loops.
+- [Self RAG](rag_apps/self_rag) - Self-reflective RAG with quality assessment.
+- [LangExtract Example](rag_apps/langextract-example) - Document extraction and processing with LangExtract. -->
 
 ### 🔬 Advanced Agents
 
@@ -194,14 +207,24 @@ Interested in sponsoring this project? Feel free to reach out!
 - [Price Monitoring Agent](advance_ai_agents/price_monitoring_agent) - Price monitoring and alerting Agent powered by CrewAi, Twilio & Nebius.
 - [Startup Idea Validator Agent](advance_ai_agents/startup_idea_validator_agent) - Agentic Workflow to validate and analyze startup ideas.
 - [Meeting Assistant Agent](advance_ai_agents/meeting_assistant_agent) - Agentic Workflow that send meeting notes and creates task based on conversation.
-- [Ai Hedgefund](advance_ai_agents/ai-hedgefund) - Agentic Workflow for financial analysis
+- [AI Hedgefund](advance_ai_agents/ai-hedgefund) - Agentic Workflow for financial analysis.
+<!-- - [Outreach Agent](advance_ai_agents/outreach_agent) - Automated outreach and communication agent.
+- [Product Recommendation Agent](advance_ai_agents/product_recomendation_agent) - AI-powered product recommendation system.
+- [YouTube to Blog Agent](advance_ai_agents/youtube_to_blog_agent) - Convert YouTube content to blog posts. -->
+- [Smart GTM Agent](advance_ai_agents/smart_gtm_agent) - Go-to-market strategy and analysis agent.
+- [Conference Agnostic CFP Generator](advance_ai_agents/conference_agnositc_cfp_generator) - Generate conference proposals automatically.
 
 ## 📺 Playlist of Demo Videos & Tutorials
 
-- [Build with MCP](https://www.youtube.com/playlist?list=PLMZM1DAlf0Lolxax4L2HS54Me8gn1gkz4)
-- [Build AI Agents](https://www.youtube.com/playlist?list=PLMZM1DAlf0LqixhAG9BDk4O_FjqnaogK8)
-- [AI Agents, MCP and more...](https://www.youtube.com/playlist?list=PL2ambAOfYA6-LDz0KpVKu9vJKAqhv0KKI)
+### 🎓 **Course Playlists**
 
+- [**AWS Strands Course**](https://www.youtube.com/playlist?list=PLMZM1DAlf0Lrc43ZtUXAwYu9DhnqxzRKZ) - Complete 8-lesson course on building AI agents with AWS Strands
+
+### 🔧 **Framework Tutorials**
+
+- [Build with MCP](https://www.youtube.com/playlist?list=PLMZM1DAlf0Lolxax4L2HS54Me8gn1gkz4) - Model Context Protocol tutorials
+- [Build AI Agents](https://www.youtube.com/playlist?list=PLMZM1DAlf0LqixhAG9BDk4O_FjqnaogK8) - General AI agent development
+- [AI Agents, MCP and more...](https://www.youtube.com/playlist?list=PL2ambAOfYA6-LDz0KpVKu9vJKAqhv0KKI) - Mixed tutorials and demos
 
 ---
 
