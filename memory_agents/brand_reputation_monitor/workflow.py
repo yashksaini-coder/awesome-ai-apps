@@ -1,20 +1,24 @@
 from dotenv import load_dotenv
 from brightdata import bdclient
-from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser
+from agno.models.nebius import Nebius
+from agno.agent import Agent
 from pydantic import BaseModel, Field
 from typing import List
 import json
 import os
+import re
 
 # Load environment variables from the .env file
 load_dotenv()
 
 # Initialize the Bright Data SDK client
 brightdata_client = bdclient(api_token=os.getenv("BRIGHTDATA_API_KEY"))
-# Initialize the LangChain ChatOpenAI model
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+
+# Initialize Nebius AI model
+nebius_model = Nebius(
+    id="Qwen/Qwen3-Coder-480B-A35B-Instruct",
+    api_key=os.getenv("NEBIUS_API_KEY"),
+)
 
 
 # Pydantic models
@@ -66,29 +70,68 @@ def scrape_news_pages(news_page_urls):
 
 
 def get_best_news_urls(news_pages, num_news):
-    # Use LangChain to extract the most relevant news URLs
-    parser = PydanticOutputParser(pydantic_object=URLList)
-
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            (
-                "system",
-                f"Extract the {num_news} most relevant news for brand reputation monitoring from the text and return them as a list of URL strings.\n\n{{format_instructions}}",
-            ),
-            ("user", "{news_content}"),
-        ]
+    # Use Nebius AI to extract the most relevant news URLs
+    agent = Agent(
+        name="News URL Extractor",
+        description=f"Extract the {num_news} most relevant news for brand reputation monitoring from the text and return them as a list of URL strings.",
+        model=nebius_model,
+        markdown=True,
     )
 
-    chain = prompt | llm.with_structured_output(URLList)
-
-    response = chain.invoke(
-        {
-            "news_content": "\n\n---------------\n\n".join(news_pages),
-            "format_instructions": parser.get_format_instructions(),
-        }
+    response = agent.run(
+        f"Extract the {num_news} most relevant news URLs for brand reputation monitoring from this content:\n\n"
+        + "\n\n---------------\n\n".join(news_pages)
+        + "\n\nReturn only the URLs as a simple list, one per line. Each URL must start with http:// or https://"
     )
 
-    return response.urls
+    # Convert RunOutput to string - FIX for 'RunOutput' object has no attribute 'split'
+    response_text = (
+        str(response.content) if hasattr(response, "content") else str(response)
+    )
+
+    # Parse URLs from response using regex for better accuracy
+    urls = []
+
+    # Use regex to find all URLs that start with http:// or https://
+    url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
+    found_urls = re.findall(url_pattern, response_text)
+
+    for url in found_urls:
+        # Clean up URL - remove trailing punctuation
+        url = url.rstrip(".,;:!?)]")
+        # Validate it's a proper URL
+        if url.startswith("http://") or url.startswith("https://"):
+            urls.append(url)
+
+    # If regex didn't find enough URLs, try line-by-line parsing as fallback
+    if len(urls) < num_news:
+        for line in response_text.split("\n"):
+            line = line.strip()
+            if line and ("http://" in line or "https://" in line):
+                # Extract URL from line
+                if "https://" in line:
+                    idx = line.find("https://")
+                    url = line[idx:]
+                elif "http://" in line:
+                    idx = line.find("http://")
+                    url = line[idx:]
+                else:
+                    continue
+
+                # Remove everything after first space
+                if " " in url:
+                    url = url.split(" ")[0]
+
+                # Remove trailing punctuation
+                url = url.rstrip(".,;:!?)]")
+
+                # Validate and add if not already in list
+                if (
+                    url.startswith("http://") or url.startswith("https://")
+                ) and url not in urls:
+                    urls.append(url)
+
+    return urls[:num_news]  # Return only the requested number
 
 
 def scrape_news_articles(news_urls):
@@ -114,42 +157,86 @@ def process_news_list(news_list):
     # Where to store the analyzed news articles
     news_analysis_list = []
 
-    # Create parser and prompt for news analysis
-    parser = PydanticOutputParser(pydantic_object=NewsAnalysis)
+    # Create agent for news analysis
+    analysis_agent = Agent(
+        name="News Analysis Agent",
+        description="""Given news content, analyze it for brand reputation monitoring:
+1. Extract the title
+2. Extract the URL
+3. Write a summary in no more than 30 words
+4. Extract the sentiment as "positive", "negative", or "neutral"
+5. Extract 3-5 actionable insights about brand reputation (10-12 words each)
 
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            (
-                "system",
-                """Given the news content:
-1. Extract the title.
-2. Extract the URL.
-3. Write a summary in no more than 30 words.
-4. Extract the sentiment of the news as one of the following: "positive", "negative", or "neutral".
-5. Extract the top 3 to 5 actionable, short insights (no more than 10/12 words) about brand reputation from the news, presenting them in clear, concise, straightforward language.
-
-{{format_instructions}}""",
-            ),
-            ("user", "NEWS URL: {news_url}\n\nNEWS CONTENT: {news_content}"),
-        ]
+Format your response as:
+TITLE: [title]
+URL: [url]
+SUMMARY: [summary]
+SENTIMENT: [positive/negative/neutral]
+INSIGHTS:
+- [insight 1]
+- [insight 2]
+- [insight 3]
+- [insight 4]
+- [insight 5]""",
+        model=nebius_model,
+        markdown=True,
     )
 
-    chain = prompt | llm.with_structured_output(NewsAnalysis)
-
-    # Analyze each news article with LangChain for brand reputation monitoring insights
+    # Analyze each news article with Nebius AI for brand reputation monitoring insights
     for news in news_list:
-        response = chain.invoke(
-            {
-                "news_url": news["url"],
-                "news_content": news["content"],
-                "format_instructions": parser.get_format_instructions(),
-            }
+        response = analysis_agent.run(
+            f"NEWS URL: {news['url']}\n\nNEWS CONTENT: {news['content']}"
         )
 
-        # Get the output analyzed news object and append it to the list
-        news_analysis_list.append(response)
+        # Convert RunOutput to string - FIX for 'RunOutput' object has no attribute 'split'
+        response_text = (
+            str(response.content) if hasattr(response, "content") else str(response)
+        )
+
+        # Parse the response into NewsAnalysis object
+        analysis = parse_news_analysis(response_text, news["url"])
+        news_analysis_list.append(analysis)
 
     return news_analysis_list
+
+
+def parse_news_analysis(response_text, original_url):
+    """Parse the agent response into a NewsAnalysis object"""
+    lines = response_text.split("\n")
+
+    title = ""
+    summary = ""
+    sentiment = "neutral"
+    insights = []
+
+    for line in lines:
+        line = line.strip()
+        if line.startswith("TITLE:"):
+            title = line.replace("TITLE:", "").strip()
+        elif line.startswith("SUMMARY:"):
+            summary = line.replace("SUMMARY:", "").strip()
+        elif line.startswith("SENTIMENT:"):
+            sentiment = line.replace("SENTIMENT:", "").strip().lower()
+        elif line.startswith("- "):
+            insights.append(line.replace("- ", "").strip())
+
+    # Fallback values if parsing fails
+    if not title:
+        title = "News Article"
+    if not summary:
+        summary = "Summary not available"
+    if sentiment not in ["positive", "negative", "neutral"]:
+        sentiment = "neutral"
+    if not insights:
+        insights = ["Analysis in progress"]
+
+    return NewsAnalysis(
+        title=title,
+        url=original_url,
+        summary=summary,
+        sentiment_analysis=sentiment,
+        insights=insights,
+    )
 
 
 def main():

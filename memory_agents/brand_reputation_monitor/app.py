@@ -18,8 +18,8 @@ from workflow import (
     process_news_list,
     Config,
 )
-from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
+from agno.models.nebius import Nebius
+from agno.agent import Agent
 
 # Load environment variables
 load_dotenv()
@@ -65,25 +65,25 @@ with st.sidebar:
         help="Your Bright Data API key for web scraping",
     )
 
-    openai_api_key_input = st.text_input(
-        "OpenAI API Key",
-        value=os.getenv("OPENAI_API_KEY", ""),
+    nebius_api_key_input = st.text_input(
+        "Nebius AI API Key",
+        value=os.getenv("NEBIUS_API_KEY", ""),
         type="password",
-        help="Your OpenAI API key for AI analysis",
+        help="Your Nebius AI API key for AI analysis",
     )
 
     if st.button("Save API Keys"):
-        if openai_api_key_input:
-            os.environ["OPENAI_API_KEY"] = openai_api_key_input
+        if nebius_api_key_input:
+            os.environ["NEBIUS_API_KEY"] = nebius_api_key_input
         if brightdata_api_key_input:
             os.environ["BRIGHTDATA_API_KEY"] = brightdata_api_key_input
-        if openai_api_key_input or brightdata_api_key_input:
+        if nebius_api_key_input or brightdata_api_key_input:
             st.success("✅ API keys saved for this session")
         else:
             st.warning("Please enter at least one API key")
 
     # Quick status
-    both_keys_present = bool(os.getenv("OPENAI_API_KEY")) and bool(
+    both_keys_present = bool(os.getenv("NEBIUS_API_KEY")) and bool(
         os.getenv("BRIGHTDATA_API_KEY")
     )
     if both_keys_present:
@@ -105,7 +105,7 @@ with st.sidebar:
     )
 
 # Get API keys from environment
-openai_key = os.getenv("OPENAI_API_KEY", "")
+nebius_key = os.getenv("NEBIUS_API_KEY", "")
 brightdata_key = os.getenv("BRIGHTDATA_API_KEY", "")
 
 # Initialize session state
@@ -130,7 +130,7 @@ if "memori_initialized" not in st.session_state:
     st.session_state.memori_initialized = False
 
 # Initialize Memori (once)
-if not st.session_state.memori_initialized and openai_key:
+if not st.session_state.memori_initialized and nebius_key:
     try:
         st.session_state.memori = Memori(
             database_connect="sqlite:///memori.db",
@@ -142,15 +142,18 @@ if not st.session_state.memori_initialized and openai_key:
     except Exception as e:
         st.warning(f"Memori initialization note: {str(e)}")
 
-# Initialize LangChain model (once)
-if "llm" not in st.session_state and openai_key:
+# Initialize Nebius AI model (once)
+if "nebius_model" not in st.session_state and nebius_key:
     try:
-        st.session_state.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        st.session_state.nebius_model = Nebius(
+            id="Qwen/Qwen3-Coder-480B-A35B-Instruct",
+            api_key=nebius_key,
+        )
     except Exception as e:
-        st.error(f"Failed to initialize OpenAI model: {str(e)}")
+        st.error(f"Failed to initialize Nebius AI model: {str(e)}")
 
 # Check if API keys are set
-if not openai_key or not brightdata_key:
+if not nebius_key or not brightdata_key:
     st.warning("⚠️ Please enter your API keys in the sidebar to start monitoring!")
     st.stop()
 
@@ -421,17 +424,15 @@ What new keywords would you like me to search for? Please provide search terms s
                             ):
                                 analysis_context += f"{i}. {analysis.title} - {analysis.sentiment_analysis} - {analysis.summary}\n"
 
-                        # Create prompt for follow-up questions
-                        prompt_template = ChatPromptTemplate.from_messages(
-                            [
-                                (
-                                    "system",
-                                    """You are a Brand Reputation Monitor assistant. You help users understand their brand reputation analysis results.
+                        # Create agent for follow-up questions
+                        followup_agent = Agent(
+                            name="Brand Reputation Assistant",
+                            description=f"""You are a Brand Reputation Monitor assistant. You help users understand their brand reputation analysis results.
 
 You have access to:
-- Company name: {company_name}
-- Search keywords used: {search_keywords}
-- Analysis results: {analysis_results}
+- Company name: {st.session_state.user_company}
+- Search keywords used: {', '.join(st.session_state.search_queries) if st.session_state.search_queries else 'Not specified'}
+- Analysis results: {analysis_context}
 
 Answer questions about the analysis, company, keywords, sentiment, insights, etc.
 Be helpful, concise, and reference specific data from the analysis when relevant.
@@ -439,34 +440,18 @@ Be helpful, concise, and reference specific data from the analysis when relevant
 {memori_context}
 
 Recent conversation context:
-{context_str}
-
-User question: {user_question}""",
-                                ),
-                            ]
+{context_str}""",
+                            model=st.session_state.nebius_model,
+                            markdown=True,
                         )
 
-                        chain = prompt_template | st.session_state.llm
+                        response = followup_agent.run(prompt)
 
-                        response_content = chain.invoke(
-                            {
-                                "company_name": st.session_state.user_company,
-                                "search_keywords": (
-                                    ", ".join(st.session_state.search_queries)
-                                    if st.session_state.search_queries
-                                    else "Not specified"
-                                ),
-                                "analysis_results": analysis_context,
-                                "memori_context": memori_context,
-                                "context_str": context_str,
-                                "user_question": prompt,
-                            }
-                        )
-
+                        # FIX: Convert RunOutput to string
                         response_text = (
-                            response_content.content
-                            if hasattr(response_content, "content")
-                            else str(response_content)
+                            str(response.content)
+                            if hasattr(response, "content")
+                            else str(response)
                         )
 
                         # Record to Memori (manually, since auto-ingest doesn't work)
